@@ -14,8 +14,25 @@
   ],
   "headers": [
     {
+      "source": "/galleries/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https:; img-src 'self' data: blob: https:;"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        },
         {
           "key": "Content-Security-Policy",
           "value": "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https:; img-src 'self' data: blob: https:;"
