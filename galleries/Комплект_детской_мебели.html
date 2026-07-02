@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>MEBELSON — Комплект детской мебели</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#f0f2f5;font-family:Arial,sans-serif}
+  .hdr{background:#1a1a2e;color:#fff;padding:14px 24px;
+        display:flex;align-items:center;justify-content:space-between;
+        position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .hdr-left h1{font-size:16px;font-weight:bold}
+  .meta{font-size:11px;color:#aaa;margin-top:4px;line-height:1.8}
+  .xbtn{background:#8e44ad;color:#fff;border:none;padding:9px 18px;
+         border-radius:6px;font-size:13px;cursor:pointer;font-weight:bold}
+  .xbtn:hover{background:#7d3c98}.xbtn:disabled{background:#444;cursor:default}
+  .bar{background:#fff;padding:10px 24px;display:flex;gap:8px;align-items:center;
+        flex-wrap:wrap;border-bottom:1px solid #ddd;position:sticky;top:57px;z-index:99}
+  .tab{padding:5px 12px;border-radius:20px;border:2px solid #ddd;
+        cursor:pointer;font-size:12px;background:#fff;transition:all .15s}
+  .tab[data-g="0"]{color:#555}.tab[data-g="0"].on{background:#555;color:#fff;border-color:#555}
+  .tab[data-g="1"]{color:#e74c3c}.tab[data-g="1"].on{background:#e74c3c;color:#fff;border-color:#e74c3c}
+  .tab[data-g="2"]{color:#27ae60}.tab[data-g="2"].on{background:#27ae60;color:#fff;border-color:#27ae60}
+  .tab[data-g="3"]{color:#2980b9}.tab[data-g="3"].on{background:#2980b9;color:#fff;border-color:#2980b9}
+  .tab[data-g="m"]{color:#e67e22}.tab[data-g="m"].on{background:#e67e22;color:#fff;border-color:#e67e22}
+  .tab[data-g="s"]{color:#8e44ad}.tab[data-g="s"].on{background:#8e44ad;color:#fff;border-color:#8e44ad}
+  .srch{margin-left:auto;padding:5px 10px;border:1px solid #ddd;
+         border-radius:6px;font-size:12px;width:200px}
+  .cnt{font-size:11px;color:#888;white-space:nowrap}
+  .sbdg{background:#8e44ad;color:#fff;border-radius:10px;
+         padding:1px 6px;font-size:11px;margin-left:3px;display:none}
+  .sbdg.v{display:inline}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+         gap:14px;padding:20px 24px}
+  .card{background:#fff;border-radius:10px;border:2px solid transparent;
+         overflow:hidden;cursor:pointer;position:relative;
+         transition:transform .15s,box-shadow .15s,border-color .15s;
+         box-shadow:0 1px 4px rgba(0,0,0,.1)}
+  .card:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(0,0,0,.15)}
+  .card.sel{border-color:#8e44ad;box-shadow:0 0 0 3px rgba(142,68,173,.2)}
+  .card.sel .chk{opacity:1}
+  .chk{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;
+        background:#8e44ad;color:#fff;display:flex;align-items:center;
+        justify-content:center;font-size:13px;opacity:0;transition:opacity .15s;z-index:2}
+  .gtag{position:absolute;top:8px;left:8px;padding:2px 6px;border-radius:8px;
+         font-size:9px;font-weight:bold;color:#fff;z-index:2}
+  .card img{width:100%;height:180px;object-fit:cover;display:block;
+             background:#f5f5f5}
+  .nophoto{width:100%;height:180px;background:#f0f2f5;display:flex;
+            align-items:center;justify-content:center;font-size:40px;color:#ccc}
+  .body{padding:10px}
+  .nm{font-size:12px;font-weight:bold;color:#222;line-height:1.35;
+       max-height:3em;overflow:hidden}
+  .sl{font-size:11px;color:#999;margin-top:2px}
+  .priznak{font-size:9px;color:#2980b9;margin-top:3px;font-style:italic}
+  .row1{display:flex;justify-content:space-between;align-items:center;margin-top:7px}
+  .bdg{font-size:11px;font-weight:bold;color:#fff;padding:2px 6px;border-radius:4px}
+  .dyn{font-size:11px;font-weight:bold}
+  .dyn.up{color:#27ae60}.dyn.dn{color:#e74c3c}.dyn.nt{color:#aaa}
+  .pkg{font-weight:bold;font-size:11px;margin-top:5px;padding:3px 6px;
+        border-radius:4px;display:block}
+  .pkg.ok{color:#27ae60;background:#f0faf4;border-left:3px solid #27ae60}
+  .pkg.no{color:#e74c3c;background:#fef9f9;border-left:3px solid #e74c3c}
+  .pkg.na{color:#aaa;background:#f5f5f5;border-left:3px solid #ddd}
+  .row2{display:flex;justify-content:space-between;margin-top:5px;
+         font-size:11px;color:#aaa}
+  .lnk{color:#3498db;text-decoration:none;font-size:11px}
+  .empty{text-align:center;padding:80px;color:#bbb;font-size:16px}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="hdr-left">
+    <h1>🪑 MEBELSON® — Комплект детской мебели</h1>
+    <div class="meta">
+      📅 Период: 28 дней &nbsp;·&nbsp;
+      📊 Источник: Ozon ЛК + mpstats &nbsp;·&nbsp;
+      📦 Товаров: 30 &nbsp;·&nbsp;
+      ✅ &gt;300 ₽/кг: 12 &nbsp;·&nbsp;
+      🕐 30.06.2026 15:22
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center">
+    <span id="si" style="color:#ccc;font-size:12px"></span>
+    <button class="xbtn" id="xb" onclick="doExport()" disabled>⬇ Скачать отобранные</button>
+  </div>
+</div>
+<div class="bar">
+  <button class="tab on" data-g="0" onclick="setG(0)">Все <span id="c0"></span></button>
+  <button class="tab" data-g="1" onclick="setG(1)">1 — Белые пятна <span id="c1"></span></button>
+  <button class="tab" data-g="2" onclick="setG(2)">2 — Новинки <span id="c2"></span></button>
+  <button class="tab" data-g="3" onclick="setG(3)">3 — Дойные коровы <span id="c3"></span></button>
+  <button class="tab" data-g="m" onclick="setG('m')">✅ &gt;300 ₽/кг <span id="cm"></span></button>
+  <button class="tab" data-g="s" onclick="setG('s')">
+    ✓ Отобранные <span class="sbdg" id="cs">0</span>
+  </button>
+  <input class="srch" id="sq" placeholder="🔍 Поиск..." oninput="render()">
+  <span class="cnt" id="ci"></span>
+</div>
+<div class="grid" id="grid"></div>
+<script>
+const D=([{"thumb": "https://ir.ozone.ru/s3/multimedia-1-d/7672060273.jpg", "name": "Комплект детской мебели", "seller": "yefumaoyi", "brand": "без бренда", "url": "https://www.ozon.ru/product/2373235044", "revenue": "1195т ₽", "price": "5 288 ₽", "formula": "5 288 ₽ ÷ 24.1 кг = 219 ₽/кг", "pkg": "219 ₽/кг", "pkg_val": 219, "margin_ok": false, "days": "361 дн.", "dinamika": "+63%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-d/9076169245.jpg", "name": "Детский столик и 2 стульчика. Комплект детской мебели от 1,5 до 6 лет.", "seller": "Kids-Komfort", "brand": "Kids-Komfort", "url": "https://www.ozon.ru/product/1475685338", "revenue": "1684т ₽", "price": "2 708 ₽", "formula": "2 708 ₽ ÷ 10.1 кг = 269 ₽/кг", "pkg": "269 ₽/кг", "pkg_val": 269, "margin_ok": false, "days": "830 дн.", "dinamika": "+15%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-o/8209632120.jpg", "name": "Комплект детской мебели для творчества/ Растущий стол и стул \"Творческий уголок+", "seller": "КiТ", "brand": "KiT", "url": "https://www.ozon.ru/product/1571064241", "revenue": "569т ₽", "price": "3 113 ₽", "formula": "3 113 ₽ ÷ 5.6 кг = 551 ₽/кг", "pkg": "551 ₽/кг", "pkg_val": 551, "margin_ok": true, "days": "775 дн.", "dinamika": "-23%", "priznak": "", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-i/9190300986.jpg", "name": "Парта для школьника 70х50 см, растущая парта с лампой, подставкой для книг, выдв", "seller": "FunDesk", "brand": "CUBBY", "url": "https://www.ozon.ru/product/184233538", "revenue": "951т ₽", "price": "8 275 ₽", "formula": "8 275 ₽ ÷ 23.9 кг = 346 ₽/кг", "pkg": "346 ₽/кг", "pkg_val": 346, "margin_ok": true, "days": "2152 дн.", "dinamika": "-4%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-g/11025987712.jpg", "name": "Парта для школьника 66*47 см Cubby Olea Серый, детский стол и стул, комплект дет", "seller": "FunDesk", "brand": "CUBBY", "url": "https://www.ozon.ru/product/184267088", "revenue": "890т ₽", "price": "6 268 ₽", "formula": "6 268 ₽ ÷ 23.4 кг = 267 ₽/кг", "pkg": "267 ₽/кг", "pkg_val": 267, "margin_ok": false, "days": "2151 дн.", "dinamika": "-29%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-m/7535504578.jpg", "name": "Парта для школьника 66*47 Sorpresa grey Cubby c выдвижным пеналом, парта и стул ", "seller": "FunDesk", "brand": "CUBBY", "url": "https://www.ozon.ru/product/192486422", "revenue": "1148т ₽", "price": "7 757 ₽", "formula": "7 757 ₽ ÷ 27.2 кг = 286 ₽/кг", "pkg": "286 ₽/кг", "pkg_val": 286, "margin_ok": false, "days": "2118 дн.", "dinamika": "+11%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-0/7353189036.jpg", "name": "Детский стол и стул, набор детской мебели, столик со стульчиком", "seller": "Папа Рядом", "brand": "Папа Рядом", "url": "https://www.ozon.ru/product/722097736", "revenue": "545т ₽", "price": "2 512 ₽", "formula": "2 512 ₽ ÷ 6.9 кг = 365 ₽/кг", "pkg": "365 ₽/кг", "pkg_val": 365, "margin_ok": true, "days": "1372 дн.", "dinamika": "-38%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-x/7831864725.jpg", "name": "Стол и стул детский, детский столик со стульчиком", "seller": "Папа Рядом", "brand": "Папа Рядом", "url": "https://www.ozon.ru/product/791115025", "revenue": "801т ₽", "price": "3 799 ₽", "formula": "3 799 ₽ ÷ 16.5 кг = 231 ₽/кг", "pkg": "231 ₽/кг", "pkg_val": 231, "margin_ok": false, "days": "1317 дн.", "dinamika": "-7%", "priznak": "", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-o/10861843164.jpg", "name": "Детский стол и стул, набор детской мебели, столик со стульчиком", "seller": "Папа Рядом", "brand": "Папа Рядом", "url": "https://www.ozon.ru/product/791115038", "revenue": "437т ₽", "price": "3 773 ₽", "formula": "3 773 ₽ ÷ 16.5 кг = 229 ₽/кг", "pkg": "229 ₽/кг", "pkg_val": 229, "margin_ok": false, "days": "1317 дн.", "dinamika": "+12%", "priznak": "", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-g/7439565724.jpg", "name": "Детский стол и 2 стула, набор детской мебели, столик со стульчиком", "seller": "Папа Рядом", "brand": "Папа Рядом", "url": "https://www.ozon.ru/product/1183650828", "revenue": "507т ₽", "price": "4 832 ₽", "formula": "4 832 ₽ ÷ 16.5 кг = 293 ₽/кг", "pkg": "293 ₽/кг", "pkg_val": 293, "margin_ok": false, "days": "1018 дн.", "dinamika": "-24%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-r/8327840031.jpg", "name": "Happy Baby Комплект детской мебели", "seller": "Happy Baby", "brand": "Happy Baby", "url": "https://www.ozon.ru/product/1213008676", "revenue": "2001т ₽", "price": "5 921 ₽", "formula": "5 921 ₽ ÷ 17.2 кг = 344 ₽/кг", "pkg": "344 ₽/кг", "pkg_val": 344, "margin_ok": true, "days": "1001 дн.", "dinamika": "+2900%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-t/7195291121.jpg", "name": "Onleap растущая парта и стул для школьника, комплект стол и стул детский, школьн", "seller": "ONLEAP", "brand": "Onleap", "url": "https://www.ozon.ru/product/1453762819", "revenue": "897т ₽", "price": "11 661 ₽", "formula": "11 661 ₽ ÷ 41.3 кг = 282 ₽/кг", "pkg": "282 ₽/кг", "pkg_val": 282, "margin_ok": false, "days": "840 дн.", "dinamika": "+18%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-w/7167591212.jpg", "name": "Детский растущий стул и стол мольберт (парта) RuLes", "seller": "RuLes", "brand": "RuLes ", "url": "https://www.ozon.ru/product/1558646347", "revenue": "476т ₽", "price": "2 358 ₽", "formula": "2 358 ₽ ÷ 7.2 кг = 326 ₽/кг", "pkg": "326 ₽/кг", "pkg_val": 326, "margin_ok": true, "days": "790 дн.", "dinamika": "+1%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-1/10324593577.jpg", "name": "Детский стол и стул комплект пластиковый, столик со стульчиком от 1 до 7 лет, на", "seller": "Эффективные Решения", "brand": "без бренда", "url": "https://www.ozon.ru/product/1851453517", "revenue": "424т ₽", "price": "6 331 ₽", "formula": "6 331 ₽ ÷ 23.8 кг = 267 ₽/кг", "pkg": "267 ₽/кг", "pkg_val": 267, "margin_ok": false, "days": "510 дн.", "dinamika": "-9%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-t/11284866929.jpg", "name": "Растущий стол и стул для детей от года Woodmix детский комплект растущий", "seller": "WoodMix", "brand": "Woodmix", "url": "https://www.ozon.ru/product/2059864516", "revenue": "531т ₽", "price": "9 325 ₽", "formula": "9 325 ₽ ÷ 17.8 кг = 523 ₽/кг", "pkg": "523 ₽/кг", "pkg_val": 523, "margin_ok": true, "days": "428 дн.", "dinamika": "+139%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-5/8844488177.jpg", "name": "Nika Комплект детской мебели", "seller": "Ozon", "brand": "Nika", "url": "https://www.ozon.ru/product/2136674396", "revenue": "1034т ₽", "price": "1 772 ₽", "formula": "1 772 ₽ ÷ 12.8 кг = 139 ₽/кг", "pkg": "139 ₽/кг", "pkg_val": 139, "margin_ok": false, "days": "—", "dinamika": "-10%", "priznak": "", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-z/8425766159.jpg", "name": "Nika Комплект детской мебели", "seller": "Ozon", "brand": "Nika", "url": "https://www.ozon.ru/product/2136674504", "revenue": "414т ₽", "price": "1 766 ₽", "formula": "1 766 ₽ ÷ 12.8 кг = 138 ₽/кг", "pkg": "138 ₽/кг", "pkg_val": 138, "margin_ok": false, "days": "—", "dinamika": "+7%", "priznak": "", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-8/7649946692.jpg", "name": "Nika Комплект детской мебели", "seller": "Ozon", "brand": "Nika", "url": "https://www.ozon.ru/product/2136674982", "revenue": "574т ₽", "price": "2 272 ₽", "formula": "2 272 ₽ ÷ 19.8 кг = 114 ₽/кг", "pkg": "114 ₽/кг", "pkg_val": 114, "margin_ok": false, "days": "—", "dinamika": "-3%", "priznak": "", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-y/11401250794.jpg", "name": "Стол садовый детский с лавочками UNIX Kids Garden / Сад комплект детской мебели ", "seller": "UNIXFIT", "brand": "UNIX Kids", "url": "https://www.ozon.ru/product/2153110155", "revenue": "468т ₽", "price": "11 716 ₽", "formula": "11 716 ₽ ÷ 34.9 кг = 336 ₽/кг", "pkg": "336 ₽/кг", "pkg_val": 336, "margin_ok": true, "days": "401 дн.", "dinamika": "-1%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-j/11401300171.jpg", "name": "Стол садовый детский с лавочками и зонтом UNIX Kids Garden / Сад комплект детско", "seller": "UNIXFIT", "brand": "UNIX Kids", "url": "https://www.ozon.ru/product/2153110250", "revenue": "650т ₽", "price": "6 776 ₽", "formula": "6 776 ₽ ÷ 23.8 кг = 285 ₽/кг", "pkg": "285 ₽/кг", "pkg_val": 285, "margin_ok": false, "days": "401 дн.", "dinamika": "+1%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-i/7557416190.jpg", "name": "Развивающий детский стол трансформер 4 в 1 UNIX Kids со стульчиком, для конструк", "seller": "UNIXFIT", "brand": "UNIX Kids", "url": "https://www.ozon.ru/product/2160109868", "revenue": "719т ₽", "price": "10 908 ₽", "formula": "10 908 ₽ ÷ 38.3 кг = 285 ₽/кг", "pkg": "285 ₽/кг", "pkg_val": 285, "margin_ok": false, "days": "399 дн.", "dinamika": "+42%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-z/9115551287.jpg", "name": "Детская растущая парта и стул \"Творческий уголок soft\"/Растущая мебель/с подушка", "seller": "КiТ", "brand": "KiT", "url": "https://www.ozon.ru/product/2213477742", "revenue": "663т ₽", "price": "3 205 ₽", "formula": "3 205 ₽ ÷ 7.0 кг = 458 ₽/кг", "pkg": "458 ₽/кг", "pkg_val": 458, "margin_ok": true, "days": "390 дн.", "dinamika": "+12%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-m/8073641074.jpg", "name": "Комплект детской мебели", "seller": "Mengle", "brand": "без бренда", "url": "https://www.ozon.ru/product/2435958493", "revenue": "535т ₽", "price": "4 617 ₽", "formula": "4 617 ₽ ÷ 15.6 кг = 297 ₽/кг", "pkg": "297 ₽/кг", "pkg_val": 297, "margin_ok": false, "days": "350 дн.", "dinamika": "-13%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-4/8989073752.jpg", "name": "Рабочая зона у окна с письменным столом, стеллажами и тумбами для школьника", "seller": "Nice Mebel", "brand": "NICE MEBEL", "url": "https://www.ozon.ru/product/2622861110", "revenue": "522т ₽", "price": "19 366 ₽", "formula": "19 366 ₽ ÷ 557.4 кг = 35 ₽/кг", "pkg": "35 ₽/кг", "pkg_val": 35, "margin_ok": false, "days": "322 дн.", "dinamika": "+8%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-o/9173752332.jpg", "name": "Детская растущая парта и стул \"Творческий уголок MAX\"/Растущая мебель/с подушкам", "seller": "КiТ", "brand": "KiT", "url": "https://www.ozon.ru/product/2633891952", "revenue": "1514т ₽", "price": "4 038 ₽", "formula": "4 038 ₽ ÷ 6.8 кг = 595 ₽/кг", "pkg": "595 ₽/кг", "pkg_val": 595, "margin_ok": true, "days": "321 дн.", "dinamika": "+21%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-v/7351486519.jpg", "name": "Растущий стол и стул, для детей", "seller": "TODI&co", "brand": "TODI&co", "url": "https://www.ozon.ru/product/2746033091", "revenue": "407т ₽", "price": "3 261 ₽", "formula": "3 261 ₽ ÷ 8.3 кг = 393 ₽/кг", "pkg": "393 ₽/кг", "pkg_val": 393, "margin_ok": true, "days": "303 дн.", "dinamika": "+8%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-a/8150481154.jpg", "name": "Nika Комплект детской мебели", "seller": "Ozon", "brand": "Nika", "url": "https://www.ozon.ru/product/2834319414", "revenue": "614т ₽", "price": "1 669 ₽", "formula": "1 669 ₽ ÷ 12.8 кг = 131 ₽/кг", "pkg": "131 ₽/кг", "pkg_val": 131, "margin_ok": false, "days": "—", "dinamika": "+110%", "priznak": "", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-9/8330924205.jpg", "name": "Nika Комплект детской мебели", "seller": "Ozon", "brand": "Nika", "url": "https://www.ozon.ru/product/2834319482", "revenue": "421т ₽", "price": "1 926 ₽", "formula": "1 926 ₽ ÷ 19.8 кг = 97 ₽/кг", "pkg": "97 ₽/кг", "pkg_val": 97, "margin_ok": false, "days": "—", "dinamika": "+35%", "priznak": "", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-1/8309498113.jpg", "name": "Стол и стул детский комплект", "seller": "Plywood Home", "brand": "WOODYKID", "url": "https://www.ozon.ru/product/2963913506", "revenue": "581т ₽", "price": "2 835 ₽", "formula": "2 835 ₽ ÷ 8.0 кг = 353 ₽/кг", "pkg": "353 ₽/кг", "pkg_val": 353, "margin_ok": true, "days": "254 дн.", "dinamika": "+3%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-x/11331518685.jpg", "name": "GoodWoodGroot Комплект детской мебели", "seller": "GoodWoodGroot", "brand": "GoodWoodGroot", "url": "https://www.ozon.ru/product/3514301402", "revenue": "410т ₽", "price": "3 307 ₽", "formula": "3 307 ₽ ÷ 5.4 кг = 611 ₽/кг", "pkg": "611 ₽/кг", "pkg_val": 611, "margin_ok": true, "days": "136 дн.", "dinamika": "+4180%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}]),sel=new Set();let g=0;
+function setG(v){g=v;document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.g==v));render()}
+function tog(url){sel.has(url)?sel.delete(url):sel.add(url);updSel();render()}
+function updSel(){
+  const n=sel.size;
+  document.getElementById('si').textContent=n?`Отобрано: ${n}`:'';
+  document.getElementById('xb').disabled=!n;
+  const b=document.getElementById('cs');b.textContent=n;b.classList.toggle('v',n>0);
+}
+function dynCls(d){const v=parseFloat(d);return isNaN(v)?'nt':v>0?'up':'dn'}
+function render(){
+  const q=document.getElementById('sq').value.toLowerCase();
+  const gr=document.getElementById('grid');
+  const it=D.filter(d=>{
+    if(g==='s'&&!sel.has(d.url))return false;
+    if(g==='m'&&!d.margin_ok)return false;
+    if(typeof g==='number'&&g>0&&d.group_id!==g)return false;
+    if(q&&!d.name.toLowerCase().includes(q)&&
+       !d.seller.toLowerCase().includes(q)&&
+       !d.brand.toLowerCase().includes(q))return false;
+    return true;
+  });
+  document.getElementById('ci').textContent=`Показано: ${it.length}`;
+  document.getElementById('c0').textContent=D.length;
+  [1,2,3].forEach(i=>{
+    const el=document.getElementById('c'+i);
+    if(el)el.textContent=D.filter(d=>d.group_id===i).length;
+  });
+  const cm=document.getElementById('cm');
+  if(cm)cm.textContent='✅ >300 ₽/кг '+D.filter(d=>d.margin_ok).length;
+  if(!it.length){gr.innerHTML='<div class="empty">Нет товаров</div>';return}
+  gr.innerHTML=it.map(d=>`
+  <div class="card ${sel.has(d.url)?'sel':''}" onclick="tog('${d.url}')">
+    <div class="chk">✓</div>
+    <div class="gtag" style="background:${d.color}">${d.group_label.split('—')[0].trim()}</div>
+    ${d.thumb
+      ?`<img src="${d.thumb}" loading="lazy"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      :''}
+    <div class="nophoto" style="display:${d.thumb?'none':'flex'}">📦</div>
+    <div class="body">
+      <div class="nm">${d.name}</div>
+      <div class="sl">${d.brand} · ${d.seller}</div>
+      ${d.priznak?`<div class="priznak">⭐ ${d.priznak}</div>`:''}
+      <div class="row1">
+        <span class="bdg" style="background:${d.color}">${d.revenue}</span>
+        <span class="dyn ${dynCls(d.dinamika)}">${d.dinamika}</span>
+      </div>
+      <span class="pkg ${d.margin_ok?'ok':d.pkg_val>0?'no':'na'}">${d.formula}</span>
+      <div class="row2">
+        <span>${d.days}</span>
+        <span>${d.price}</span>
+        <span><a class="lnk" href="${d.url}" target="_blank"
+                 onclick="event.stopPropagation()">Ozon ↗</a></span>
+      </div>
+    </div>
+  </div>`).join('');
+}
+function doExport(){
+  const rows=D.filter(d=>sel.has(d.url));
+  if(!rows.length)return;
+  const h=['Название','Продавец','Бренд','Группа','Оборот',
+           'Динамика','Цена','₽/кг','Формула','Дней','Признак','URL'];
+  const lines=[h.join(';'),...rows.map(d=>
+    [d.name,d.seller,d.brand,d.group_label,d.revenue,
+     d.dinamika,d.price,d.pkg,d.formula,d.days,d.priznak,d.url]
+    .map(v=>`"${String(v).replace(/"/g,'""')}"`)
+    .join(';')
+  )];
+  const b=new Blob(['﻿'+lines.join('\n')],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(b);
+  a.download='mebelson_otbor_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+}
+render();
+</script>
+</body></html>

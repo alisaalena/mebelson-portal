@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>MEBELSON — Стол обеденный</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#f0f2f5;font-family:Arial,sans-serif}
+  .hdr{background:#1a1a2e;color:#fff;padding:14px 24px;
+        display:flex;align-items:center;justify-content:space-between;
+        position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .hdr-left h1{font-size:16px;font-weight:bold}
+  .meta{font-size:11px;color:#aaa;margin-top:4px;line-height:1.8}
+  .xbtn{background:#8e44ad;color:#fff;border:none;padding:9px 18px;
+         border-radius:6px;font-size:13px;cursor:pointer;font-weight:bold}
+  .xbtn:hover{background:#7d3c98}.xbtn:disabled{background:#444;cursor:default}
+  .bar{background:#fff;padding:10px 24px;display:flex;gap:8px;align-items:center;
+        flex-wrap:wrap;border-bottom:1px solid #ddd;position:sticky;top:57px;z-index:99}
+  .tab{padding:5px 12px;border-radius:20px;border:2px solid #ddd;
+        cursor:pointer;font-size:12px;background:#fff;transition:all .15s}
+  .tab[data-g="0"]{color:#555}.tab[data-g="0"].on{background:#555;color:#fff;border-color:#555}
+  .tab[data-g="1"]{color:#e74c3c}.tab[data-g="1"].on{background:#e74c3c;color:#fff;border-color:#e74c3c}
+  .tab[data-g="2"]{color:#27ae60}.tab[data-g="2"].on{background:#27ae60;color:#fff;border-color:#27ae60}
+  .tab[data-g="3"]{color:#2980b9}.tab[data-g="3"].on{background:#2980b9;color:#fff;border-color:#2980b9}
+  .tab[data-g="m"]{color:#e67e22}.tab[data-g="m"].on{background:#e67e22;color:#fff;border-color:#e67e22}
+  .tab[data-g="s"]{color:#8e44ad}.tab[data-g="s"].on{background:#8e44ad;color:#fff;border-color:#8e44ad}
+  .srch{margin-left:auto;padding:5px 10px;border:1px solid #ddd;
+         border-radius:6px;font-size:12px;width:200px}
+  .cnt{font-size:11px;color:#888;white-space:nowrap}
+  .sbdg{background:#8e44ad;color:#fff;border-radius:10px;
+         padding:1px 6px;font-size:11px;margin-left:3px;display:none}
+  .sbdg.v{display:inline}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+         gap:14px;padding:20px 24px}
+  .card{background:#fff;border-radius:10px;border:2px solid transparent;
+         overflow:hidden;cursor:pointer;position:relative;
+         transition:transform .15s,box-shadow .15s,border-color .15s;
+         box-shadow:0 1px 4px rgba(0,0,0,.1)}
+  .card:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(0,0,0,.15)}
+  .card.sel{border-color:#8e44ad;box-shadow:0 0 0 3px rgba(142,68,173,.2)}
+  .card.sel .chk{opacity:1}
+  .chk{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;
+        background:#8e44ad;color:#fff;display:flex;align-items:center;
+        justify-content:center;font-size:13px;opacity:0;transition:opacity .15s;z-index:2}
+  .gtag{position:absolute;top:8px;left:8px;padding:2px 6px;border-radius:8px;
+         font-size:9px;font-weight:bold;color:#fff;z-index:2}
+  .card img{width:100%;height:180px;object-fit:cover;display:block;
+             background:#f5f5f5}
+  .nophoto{width:100%;height:180px;background:#f0f2f5;display:flex;
+            align-items:center;justify-content:center;font-size:40px;color:#ccc}
+  .body{padding:10px}
+  .nm{font-size:12px;font-weight:bold;color:#222;line-height:1.35;
+       max-height:3em;overflow:hidden}
+  .sl{font-size:11px;color:#999;margin-top:2px}
+  .priznak{font-size:9px;color:#2980b9;margin-top:3px;font-style:italic}
+  .row1{display:flex;justify-content:space-between;align-items:center;margin-top:7px}
+  .bdg{font-size:11px;font-weight:bold;color:#fff;padding:2px 6px;border-radius:4px}
+  .dyn{font-size:11px;font-weight:bold}
+  .dyn.up{color:#27ae60}.dyn.dn{color:#e74c3c}.dyn.nt{color:#aaa}
+  .pkg{font-weight:bold;font-size:11px;margin-top:5px;padding:3px 6px;
+        border-radius:4px;display:block}
+  .pkg.ok{color:#27ae60;background:#f0faf4;border-left:3px solid #27ae60}
+  .pkg.no{color:#e74c3c;background:#fef9f9;border-left:3px solid #e74c3c}
+  .pkg.na{color:#aaa;background:#f5f5f5;border-left:3px solid #ddd}
+  .row2{display:flex;justify-content:space-between;margin-top:5px;
+         font-size:11px;color:#aaa}
+  .lnk{color:#3498db;text-decoration:none;font-size:11px}
+  .empty{text-align:center;padding:80px;color:#bbb;font-size:16px}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="hdr-left">
+    <h1>🪑 MEBELSON® — Стол обеденный</h1>
+    <div class="meta">
+      📅 Период: 28 дней &nbsp;·&nbsp;
+      📊 Источник: Ozon ЛК + mpstats &nbsp;·&nbsp;
+      📦 Товаров: 51 &nbsp;·&nbsp;
+      ✅ &gt;300 ₽/кг: 39 &nbsp;·&nbsp;
+      🕐 30.06.2026 15:03
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center">
+    <span id="si" style="color:#ccc;font-size:12px"></span>
+    <button class="xbtn" id="xb" onclick="doExport()" disabled>⬇ Скачать отобранные</button>
+  </div>
+</div>
+<div class="bar">
+  <button class="tab on" data-g="0" onclick="setG(0)">Все <span id="c0"></span></button>
+  <button class="tab" data-g="1" onclick="setG(1)">1 — Белые пятна <span id="c1"></span></button>
+  <button class="tab" data-g="2" onclick="setG(2)">2 — Новинки <span id="c2"></span></button>
+  <button class="tab" data-g="3" onclick="setG(3)">3 — Дойные коровы <span id="c3"></span></button>
+  <button class="tab" data-g="m" onclick="setG('m')">✅ &gt;300 ₽/кг <span id="cm"></span></button>
+  <button class="tab" data-g="s" onclick="setG('s')">
+    ✓ Отобранные <span class="sbdg" id="cs">0</span>
+  </button>
+  <input class="srch" id="sq" placeholder="🔍 Поиск..." oninput="render()">
+  <span class="cnt" id="ci"></span>
+</div>
+<div class="grid" id="grid"></div>
+<script>
+const D=([{"thumb": "https://ir.ozone.ru/s3/multimedia-1-s/11681885584.jpg", "name": "Стол кухонный Раздвижной Мрамор Кристалл 100х100х75 см", "seller": "Prostonova", "brand": "Prostonova", "url": "https://www.ozon.ru/product/2963144944", "revenue": "1189т ₽", "price": "12 924 ₽", "formula": "12 924 ₽ ÷ 22.4 кг = 577 ₽/кг", "pkg": "577 ₽/кг", "pkg_val": 577, "margin_ok": true, "days": "254 дн.", "dinamika": "-6%", "priznak": "Топ-10% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-d/9122692153.jpg", "name": "стол обеденный раздвижной керамогранит", "seller": "RooMi", "brand": "ТАБУРЕТ", "url": "https://www.ozon.ru/product/3553411524", "revenue": "872т ₽", "price": "31 169 ₽", "formula": "31 169 ₽ ÷ 87.4 кг = 356 ₽/кг", "pkg": "356 ₽/кг", "pkg_val": 356, "margin_ok": true, "days": "120 дн.", "dinamika": "+389%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-6/8601976050.jpg", "name": "Стол кухонный Раздвижной 100/160 см", "seller": "Prostonova", "brand": "Prostonova", "url": "https://www.ozon.ru/product/3803382822", "revenue": "822т ₽", "price": "13 269 ₽", "formula": "13 269 ₽ ÷ 17.0 кг = 781 ₽/кг", "pkg": "781 ₽/кг", "pkg_val": 781, "margin_ok": true, "days": "85 дн.", "dinamika": "-51%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-u/8272415154.jpg", "name": "Стол 90/120х90 со стеклом раскладной стекло мрамор DL274 бежевый подстолье золот", "seller": "Евростол", "brand": "без бренда", "url": "https://www.ozon.ru/product/3001411360", "revenue": "423т ₽", "price": "16 295 ₽", "formula": "16 295 ₽ ÷ 39.5 кг = 412 ₽/кг", "pkg": "412 ₽/кг", "pkg_val": 412, "margin_ok": true, "days": "246 дн.", "dinamika": "+32%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-4/11147962504.jpg", "name": "Mebel&InterioR Стол обеденный Нераскладной, 140х80х75 см", "seller": "Mebel&InterioR", "brand": "Mebel&InterioR", "url": "https://www.ozon.ru/product/1597686225", "revenue": "1522т ₽", "price": "6 139 ₽", "formula": "6 139 ₽ ÷ 27.2 кг = 226 ₽/кг", "pkg": "226 ₽/кг", "pkg_val": 226, "margin_ok": false, "days": "748 дн.", "dinamika": "+13%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-i/10812685914.jpg", "name": "Стол кухонный раздвижной, круглый, стол обеденный, 120х120 до 160 см", "seller": "Кибер-Оазис", "brand": "без бренда", "url": "https://www.ozon.ru/product/4446961039", "revenue": "723т ₽", "price": "24 946 ₽", "formula": "24 946 ₽ ÷ 62.9 кг = 397 ₽/кг", "pkg": "397 ₽/кг", "pkg_val": 397, "margin_ok": true, "days": "29 дн.", "dinamika": "—", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-o/9465606492.jpg", "name": "стол кухонный раздвижной, обеденный, керамогранит", "seller": "RooMi", "brand": "ТАБУРЕТ", "url": "https://www.ozon.ru/product/3736456787", "revenue": "492т ₽", "price": "32 828 ₽", "formula": "32 828 ₽ ÷ 75.6 кг = 434 ₽/кг", "pkg": "434 ₽/кг", "pkg_val": 434, "margin_ok": true, "days": "92 дн.", "dinamika": "+41%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-i/11330637246.jpg", "name": "Стол кухонный раздвижной, круглый, стол обеденный, 100х100 до 180 см, дуб гладст", "seller": "ТЕКСТУРА", "brand": "Текстура Мебель", "url": "https://www.ozon.ru/product/4452927493", "revenue": "616т ₽", "price": "22 009 ₽", "formula": "22 009 ₽ ÷ 26.2 кг = 841 ₽/кг", "pkg": "841 ₽/кг", "pkg_val": 841, "margin_ok": true, "days": "29 дн.", "dinamika": "—", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-n/11330610359.jpg", "name": "Стол кухонный раздвижной, круглый, стол обеденный, 80х80 до 160 см, дуб гладстоу", "seller": "ТЕКСТУРА", "brand": "Текстура Мебель", "url": "https://www.ozon.ru/product/4452797897", "revenue": "422т ₽", "price": "21 130 ₽", "formula": "21 130 ₽ ÷ 26.2 кг = 808 ₽/кг", "pkg": "808 ₽/кг", "pkg_val": 808, "margin_ok": true, "days": "29 дн.", "dinamika": "—", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-y/11659645870.jpg", "name": "Стол раздвижной Бетон светло-серый 100/160*100*75", "seller": "Prostonova", "brand": "Prostonova", "url": "https://www.ozon.ru/product/2514381968", "revenue": "846т ₽", "price": "12 636 ₽", "formula": "12 636 ₽ ÷ 34.5 кг = 367 ₽/кг", "pkg": "367 ₽/кг", "pkg_val": 367, "margin_ok": true, "days": "338 дн.", "dinamika": "-22%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-f/9465606411.jpg", "name": "стол кухонный раздвижной, обеденный, керамогранит", "seller": "RooMi", "brand": "ТАБУРЕТ", "url": "https://www.ozon.ru/product/3736458181", "revenue": "515т ₽", "price": "32 236 ₽", "formula": "32 236 ₽ ÷ 75.6 кг = 426 ₽/кг", "pkg": "426 ₽/кг", "pkg_val": 426, "margin_ok": true, "days": "92 дн.", "dinamika": "+21%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-2/9073863686.jpg", "name": "Стол кухонный раздвижной, стол обеденный, круглый, 65х65 см + две вкладки по 40 ", "seller": "Stroganini", "brand": "Stroganini", "url": "https://www.ozon.ru/product/1550288340", "revenue": "613т ₽", "price": "8 767 ₽", "formula": "8 767 ₽ ÷ 40.2 кг = 218 ₽/кг", "pkg": "218 ₽/кг", "pkg_val": 218, "margin_ok": false, "days": "797 дн.", "dinamika": "-22%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-0/7695031068.jpg", "name": "Стол кухонный обеденный раздвижной овальный, Белый мрамор, 110-140х70х75 см", "seller": "Стуловъ", "brand": "Стуловъ", "url": "https://www.ozon.ru/product/2450129494", "revenue": "980т ₽", "price": "4 517 ₽", "formula": "4 517 ₽ ÷ 14.8 кг = 305 ₽/кг", "pkg": "305 ₽/кг", "pkg_val": 305, "margin_ok": true, "days": "348 дн.", "dinamika": "+30%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-k/9465606416.jpg", "name": "стол кухонный раздвижной, обеденный, керамогранит", "seller": "RooMi", "brand": "ТАБУРЕТ", "url": "https://www.ozon.ru/product/3736456993", "revenue": "656т ₽", "price": "32 827 ₽", "formula": "32 827 ₽ ÷ 75.6 кг = 434 ₽/кг", "pkg": "434 ₽/кг", "pkg_val": 434, "margin_ok": true, "days": "92 дн.", "dinamika": "+477%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-w/7947101012.jpg", "name": "CUBE, Стол для кухни барный 91,4х54х76 см, дуб", "seller": "CUBE", "brand": "без бренда", "url": "https://www.ozon.ru/product/1554492352", "revenue": "512т ₽", "price": "1 920 ₽", "formula": "1 920 ₽ ÷ 12.6 кг = 152 ₽/кг", "pkg": "152 ₽/кг", "pkg_val": 152, "margin_ok": false, "days": "793 дн.", "dinamika": "+18%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-h/11098597157.jpg", "name": "Mebel&InterioR Стол обеденный Нераскладной, 120х80х75 см", "seller": "Mebel&InterioR", "brand": "Mebel&InterioR", "url": "https://www.ozon.ru/product/2160091236", "revenue": "418т ₽", "price": "5 733 ₽", "formula": "5 733 ₽ ÷ 16.5 кг = 348 ₽/кг", "pkg": "348 ₽/кг", "pkg_val": 348, "margin_ok": true, "days": "399 дн.", "dinamika": "+69%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-p/11659360957.jpg", "name": "Стол кухонный Раздвижной Сланец Скиваро 100х100х75 см", "seller": "Prostonova", "brand": "Prostonova", "url": "https://www.ozon.ru/product/2621426370", "revenue": "1051т ₽", "price": "12 667 ₽", "formula": "12 667 ₽ ÷ 17.0 кг = 745 ₽/кг", "pkg": "745 ₽/кг", "pkg_val": 745, "margin_ok": true, "days": "322 дн.", "dinamika": "-28%", "priznak": "Топ-10% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-4/7414779316.jpg", "name": "EVOLUXWOOD Стол обеденный Нераскладной, 200х100х75 см", "seller": "КАВЕКС", "brand": "EVOLUXWOOD", "url": "https://www.ozon.ru/product/1970465290", "revenue": "712т ₽", "price": "54 779 ₽", "formula": "54 779 ₽ ÷ 61.1 кг = 896 ₽/кг", "pkg": "896 ₽/кг", "pkg_val": 896, "margin_ok": true, "days": "456 дн.", "dinamika": "+356%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-v/6985534063.jpg", "name": "Стол кухонный обеденный раздвижной Грант, 108(138)х68см", "seller": "Фабрика кухонной мебели \"АСТОЛА\"", "brand": "АСТОЛА фабрика кухонной мебели", "url": "https://www.ozon.ru/product/1525287813", "revenue": "1440т ₽", "price": "8 949 ₽", "formula": "8 949 ₽ ÷ 34.0 кг = 264 ₽/кг", "pkg": "264 ₽/кг", "pkg_val": 264, "margin_ok": false, "days": "812 дн.", "dinamika": "+40%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-p/11614830037.jpg", "name": "Стол кухонный Дуб Вотан 140х70х75 см ModeRn", "seller": "СТОЛЪ", "brand": "MebelFactory", "url": "https://www.ozon.ru/product/1988365015", "revenue": "711т ₽", "price": "6 590 ₽", "formula": "6 590 ₽ ÷ 18.1 кг = 364 ₽/кг", "pkg": "364 ₽/кг", "pkg_val": 364, "margin_ok": true, "days": "450 дн.", "dinamika": "+7%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-9/11407835601.jpg", "name": "Mebel&InterioR Стол обеденный Нераскладной, 120х80х75 см", "seller": "Mebel&InterioR", "brand": "Mebel&InterioR", "url": "https://www.ozon.ru/product/744484757", "revenue": "646т ₽", "price": "5 986 ₽", "formula": "5 986 ₽ ÷ 15.5 кг = 387 ₽/кг", "pkg": "387 ₽/кг", "pkg_val": 387, "margin_ok": true, "days": "1350 дн.", "dinamika": "+14%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-i/11680095942.jpg", "name": "Стол кухонный Раздвижной Дуб Давос 100х100х75 см", "seller": "Prostonova", "brand": "Prostonova", "url": "https://www.ozon.ru/product/2963136467", "revenue": "847т ₽", "price": "11 938 ₽", "formula": "11 938 ₽ ÷ 76.7 кг = 156 ₽/кг", "pkg": "156 ₽/кг", "pkg_val": 156, "margin_ok": false, "days": "254 дн.", "dinamika": "+1%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-x/10668500529.jpg", "name": "Стол кухонный обеденный круглый, цвет белый, 90 см", "seller": "Официальный магазин GASTRORAG & GEMLUX", "brand": "Gemlux", "url": "https://www.ozon.ru/product/1997086977", "revenue": "529т ₽", "price": "3 865 ₽", "formula": "3 865 ₽ ÷ 17.1 кг = 227 ₽/кг", "pkg": "227 ₽/кг", "pkg_val": 227, "margin_ok": false, "days": "447 дн.", "dinamika": "+142%", "priznak": "", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-j/8951743567.jpg", "name": "LAREN MEBEL Стол обеденный Раскладной, 90х90х75 см", "seller": "LAREN", "brand": "LAREN MEBEL", "url": "https://www.ozon.ru/product/1163483876", "revenue": "544т ₽", "price": "10 091 ₽", "formula": "10 091 ₽ ÷ 19.8 кг = 510 ₽/кг", "pkg": "510 ₽/кг", "pkg_val": 510, "margin_ok": true, "days": "1028 дн.", "dinamika": "-24%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-9/7430404761.jpg", "name": "Стол кухонный Дуб Вотан120х70х75 см ModeRn", "seller": "СТОЛЪ", "brand": "MebelFactory", "url": "https://www.ozon.ru/product/1988366768", "revenue": "447т ₽", "price": "6 126 ₽", "formula": "6 126 ₽ ÷ 14.6 кг = 421 ₽/кг", "pkg": "421 ₽/кг", "pkg_val": 421, "margin_ok": true, "days": "450 дн.", "dinamika": "-25%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-i/8279589546.jpg", "name": "Стол трансформер, журнальный, раздвижной, обеденный, кухонный, раскладной, Галан", "seller": "Магазин столов-трансформеров", "brand": "Фабрика столов-трансформеров", "url": "https://www.ozon.ru/product/1851671548", "revenue": "779т ₽", "price": "26 893 ₽", "formula": "26 893 ₽ ÷ 119.3 кг = 225 ₽/кг", "pkg": "225 ₽/кг", "pkg_val": 225, "margin_ok": false, "days": "510 дн.", "dinamika": "-26%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-w/11693596604.jpg", "name": "Стол кухонный ИЛКОМ, раздвижной, обеденный, круглый, стеклянный, 100 см, 130 см.", "seller": "Мебельная фабрика ИЛКОМ", "brand": "ИЛКОМ", "url": "https://www.ozon.ru/product/2567553704", "revenue": "452т ₽", "price": "23 826 ₽", "formula": "23 826 ₽ ÷ 64.4 кг = 370 ₽/кг", "pkg": "370 ₽/кг", "pkg_val": 370, "margin_ok": true, "days": "330 дн.", "dinamika": "+2%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-x/10498127289.jpg", "name": "Стол кухонный раздвижной круглый 100 см. Дуб Каселла коричневый", "seller": "Добрый стол", "brand": "без бренда", "url": "https://www.ozon.ru/product/3132330423", "revenue": "1491т ₽", "price": "25 284 ₽", "formula": "25 284 ₽ ÷ 36.7 кг = 689 ₽/кг", "pkg": "689 ₽/кг", "pkg_val": 689, "margin_ok": true, "days": "216 дн.", "dinamika": "+79%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-t/9465606533.jpg", "name": "стол кухонный раздвижной, обеденный, керамогранит", "seller": "RooMi", "brand": "ТАБУРЕТ", "url": "https://www.ozon.ru/product/3736456742", "revenue": "518т ₽", "price": "32 437 ₽", "formula": "32 437 ₽ ÷ 75.6 кг = 429 ₽/кг", "pkg": "429 ₽/кг", "pkg_val": 429, "margin_ok": true, "days": "92 дн.", "dinamika": "+91%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-u/7712507082.jpg", "name": "Стол обеденный раздвижной 120х80", "seller": "TALMER GROUP", "brand": "Талмер", "url": "https://www.ozon.ru/product/2491022695", "revenue": "558т ₽", "price": "34 878 ₽", "formula": "34 878 ₽ ÷ 80.8 кг = 431 ₽/кг", "pkg": "431 ₽/кг", "pkg_val": 431, "margin_ok": true, "days": "342 дн.", "dinamika": "+97%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-m/10581832642.jpg", "name": "Стол консоль трансформер, стол обеденный раздвижной Giant D97", "seller": "Мебельная фабрика Левмар", "brand": "Levmar", "url": "https://www.ozon.ru/product/4293726448", "revenue": "618т ₽", "price": "26 896 ₽", "formula": "26 896 ₽ ÷ 96.2 кг = 280 ₽/кг", "pkg": "280 ₽/кг", "pkg_val": 280, "margin_ok": false, "days": "42 дн.", "dinamika": "+240%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-e/9070443230.jpg", "name": "Стол кухонный 180х80 см прямоугольный Millwood Сеул, ЛДСП дуб золотой крафт, чер", "seller": "Millwood", "brand": "Millwood", "url": "https://www.ozon.ru/product/1940506175", "revenue": "498т ₽", "price": "13 845 ₽", "formula": "13 845 ₽ ÷ 32.5 кг = 426 ₽/кг", "pkg": "426 ₽/кг", "pkg_val": 426, "margin_ok": true, "days": "467 дн.", "dinamika": "-35%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-e/9782645378.jpg", "name": "Стол кухонный раздвижной Европейский Cабия 110-140х70х75 см", "seller": "Zастолье", "brand": "Zастолье", "url": "https://www.ozon.ru/product/3932195350", "revenue": "1071т ₽", "price": "4 936 ₽", "formula": "4 936 ₽ ÷ 14.8 кг = 333 ₽/кг", "pkg": "333 ₽/кг", "pkg_val": 333, "margin_ok": true, "days": "72 дн.", "dinamika": "+67%", "priznak": "Топ-10% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-n/8552193539.jpg", "name": "LAREN MEBEL Стол обеденный Раскладной, 90х90х75 см", "seller": "LAREN", "brand": "LAREN MEBEL", "url": "https://www.ozon.ru/product/1163477483", "revenue": "1155т ₽", "price": "9 553 ₽", "formula": "9 553 ₽ ÷ 20.6 кг = 464 ₽/кг", "pkg": "464 ₽/кг", "pkg_val": 464, "margin_ok": true, "days": "1028 дн.", "dinamika": "+24%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-h/8552162033.jpg", "name": "LAREN MEBEL Стол обеденный Раскладной, 90х90х75 см", "seller": "LAREN", "brand": "LAREN MEBEL", "url": "https://www.ozon.ru/product/1163490330", "revenue": "538т ₽", "price": "10 562 ₽", "formula": "10 562 ₽ ÷ 20.6 кг = 513 ₽/кг", "pkg": "513 ₽/кг", "pkg_val": 513, "margin_ok": true, "days": "1028 дн.", "dinamika": "-27%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-3/7615291539.jpg", "name": "CUBE, Стол обеденный кухонный раскладной, 112х75х75.6 см", "seller": "CUBE", "brand": "без бренда", "url": "https://www.ozon.ru/product/1620654128", "revenue": "996т ₽", "price": "2 097 ₽", "formula": "2 097 ₽ ÷ 10.8 кг = 194 ₽/кг", "pkg": "194 ₽/кг", "pkg_val": 194, "margin_ok": false, "days": "720 дн.", "dinamika": "+216%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-3/7633965099.jpg", "name": "Стол обеденный раздвижной 140х80", "seller": "TALMER GROUP", "brand": "Талмер", "url": "https://www.ozon.ru/product/2513675195", "revenue": "1058т ₽", "price": "39 220 ₽", "formula": "39 220 ₽ ÷ 93.8 кг = 418 ₽/кг", "pkg": "418 ₽/кг", "pkg_val": 418, "margin_ok": true, "days": "338 дн.", "dinamika": "+55%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-z/8057927159.jpg", "name": "Стол кухонный раздвижной Овальный, Дуб Вотан 110-140х70х75 см", "seller": "Zастолье", "brand": "Zастолье", "url": "https://www.ozon.ru/product/2099696188", "revenue": "428т ₽", "price": "5 353 ₽", "formula": "5 353 ₽ ÷ 14.8 кг = 361 ₽/кг", "pkg": "361 ₽/кг", "pkg_val": 361, "margin_ok": true, "days": "415 дн.", "dinamika": "-37%", "priznak": "Топ-10% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-q/9945399842.jpg", "name": "Стол кухонный раздвижной круглый 100 см, американский орех", "seller": "Добрый стол", "brand": "без бренда", "url": "https://www.ozon.ru/product/1947166824", "revenue": "449т ₽", "price": "34 592 ₽", "formula": "34 592 ₽ ÷ 36.7 кг = 942 ₽/кг", "pkg": "942 ₽/кг", "pkg_val": 942, "margin_ok": true, "days": "464 дн.", "dinamika": "+43%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-d/10497457921.jpg", "name": "Стол кухонный раздвижной круглый 80 см. Дуб Каселла коричневый", "seller": "Добрый стол", "brand": "без бренда", "url": "https://www.ozon.ru/product/3128724585", "revenue": "930т ₽", "price": "22 163 ₽", "formula": "22 163 ₽ ÷ 24.6 кг = 900 ₽/кг", "pkg": "900 ₽/кг", "pkg_val": 900, "margin_ok": true, "days": "217 дн.", "dinamika": "+115%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-m/7978670734.jpg", "name": "Стол кухонный \"Орфей 23\", прямоугольный раздвижной, дуб самдал, чёрные ноги", "seller": "ЗаСтолье. Современные столы для кухни.", "brand": "без бренда", "url": "https://www.ozon.ru/product/2795816040", "revenue": "770т ₽", "price": "21 393 ₽", "formula": "21 393 ₽ ÷ 124.9 кг = 171 ₽/кг", "pkg": "171 ₽/кг", "pkg_val": 171, "margin_ok": false, "days": "295 дн.", "dinamika": "+47%", "priznak": "Топ-10% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-o/9100739184.jpg", "name": "Стол кухонный раздвижной прямоугольный белый 110-140х70х75 обеденный", "seller": "СТУЛОВЪ", "brand": "Стуловъ", "url": "https://www.ozon.ru/product/3543431795", "revenue": "531т ₽", "price": "4 926 ₽", "formula": "4 926 ₽ ÷ 14.8 кг = 332 ₽/кг", "pkg": "332 ₽/кг", "pkg_val": 332, "margin_ok": true, "days": "125 дн.", "dinamika": "+305%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-0/7056324972.jpg", "name": "Стол кухонный обеденный раздвижной Грант, 108(138)х68см", "seller": "Фабрика кухонной мебели \"АСТОЛА\"", "brand": "АСТОЛА фабрика кухонной мебели", "url": "https://www.ozon.ru/product/1608217942", "revenue": "571т ₽", "price": "8 934 ₽", "formula": "8 934 ₽ ÷ 38.1 кг = 234 ₽/кг", "pkg": "234 ₽/кг", "pkg_val": 234, "margin_ok": false, "days": "735 дн.", "dinamika": "+15%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-q/10003151186.jpg", "name": "Стол обеденный Раздвижной, 100х100х76 см", "seller": "VWOOD", "brand": "без бренда", "url": "https://www.ozon.ru/product/4059635849", "revenue": "422т ₽", "price": "13 645 ₽", "formula": "13 645 ₽ ÷ 35.3 кг = 387 ₽/кг", "pkg": "387 ₽/кг", "pkg_val": 387, "margin_ok": true, "days": "62 дн.", "dinamika": "+8%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-6/8601976050.jpg", "name": "Стол кухонный Раздвижной 100/160 см", "seller": "Prostonova", "brand": "Prostonova", "url": "https://www.ozon.ru/product/3803382822", "revenue": "822т ₽", "price": "13 269 ₽", "formula": "13 269 ₽ ÷ 17.0 кг = 781 ₽/кг", "pkg": "781 ₽/кг", "pkg_val": 781, "margin_ok": true, "days": "85 дн.", "dinamika": "-51%", "priznak": "Топ-50% по продажам", "group_id": 2, "group_label": "2 — Новинки", "color": "#27ae60"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-i/10812685914.jpg", "name": "Стол кухонный раздвижной, круглый, стол обеденный, 120х120 до 160 см", "seller": "Кибер-Оазис", "brand": "без бренда", "url": "https://www.ozon.ru/product/4446961039", "revenue": "723т ₽", "price": "24 946 ₽", "formula": "24 946 ₽ ÷ 62.9 кг = 397 ₽/кг", "pkg": "397 ₽/кг", "pkg_val": 397, "margin_ok": true, "days": "29 дн.", "dinamika": "—", "priznak": "Топ-50% по продажам", "group_id": 2, "group_label": "2 — Новинки", "color": "#27ae60"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-i/11330637246.jpg", "name": "Стол кухонный раздвижной, круглый, стол обеденный, 100х100 до 180 см, дуб гладст", "seller": "ТЕКСТУРА", "brand": "Текстура Мебель", "url": "https://www.ozon.ru/product/4452927493", "revenue": "616т ₽", "price": "22 009 ₽", "formula": "22 009 ₽ ÷ 26.2 кг = 841 ₽/кг", "pkg": "841 ₽/кг", "pkg_val": 841, "margin_ok": true, "days": "29 дн.", "dinamika": "—", "priznak": "Топ-50% по продажам", "group_id": 2, "group_label": "2 — Новинки", "color": "#27ae60"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-n/11330610359.jpg", "name": "Стол кухонный раздвижной, круглый, стол обеденный, 80х80 до 160 см, дуб гладстоу", "seller": "ТЕКСТУРА", "brand": "Текстура Мебель", "url": "https://www.ozon.ru/product/4452797897", "revenue": "422т ₽", "price": "21 130 ₽", "formula": "21 130 ₽ ÷ 26.2 кг = 808 ₽/кг", "pkg": "808 ₽/кг", "pkg_val": 808, "margin_ok": true, "days": "29 дн.", "dinamika": "—", "priznak": "Топ-50% по продажам", "group_id": 2, "group_label": "2 — Новинки", "color": "#27ae60"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-m/10581832642.jpg", "name": "Стол консоль трансформер, стол обеденный раздвижной Giant D97", "seller": "Мебельная фабрика Левмар", "brand": "Levmar", "url": "https://www.ozon.ru/product/4293726448", "revenue": "618т ₽", "price": "26 896 ₽", "formula": "26 896 ₽ ÷ 96.2 кг = 280 ₽/кг", "pkg": "280 ₽/кг", "pkg_val": 280, "margin_ok": false, "days": "42 дн.", "dinamika": "+240%", "priznak": "Топ-50% по продажам", "group_id": 2, "group_label": "2 — Новинки", "color": "#27ae60"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-e/9782645378.jpg", "name": "Стол кухонный раздвижной Европейский Cабия 110-140х70х75 см", "seller": "Zастолье", "brand": "Zастолье", "url": "https://www.ozon.ru/product/3932195350", "revenue": "1071т ₽", "price": "4 936 ₽", "formula": "4 936 ₽ ÷ 14.8 кг = 333 ₽/кг", "pkg": "333 ₽/кг", "pkg_val": 333, "margin_ok": true, "days": "72 дн.", "dinamika": "+67%", "priznak": "Топ-10% по продажам", "group_id": 2, "group_label": "2 — Новинки", "color": "#27ae60"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-q/10003151186.jpg", "name": "Стол обеденный Раздвижной, 100х100х76 см", "seller": "VWOOD", "brand": "без бренда", "url": "https://www.ozon.ru/product/4059635849", "revenue": "422т ₽", "price": "13 645 ₽", "formula": "13 645 ₽ ÷ 35.3 кг = 387 ₽/кг", "pkg": "387 ₽/кг", "pkg_val": 387, "margin_ok": true, "days": "62 дн.", "dinamika": "+8%", "priznak": "Топ-50% по продажам", "group_id": 2, "group_label": "2 — Новинки", "color": "#27ae60"}]),sel=new Set();let g=0;
+function setG(v){g=v;document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.g==v));render()}
+function tog(url){sel.has(url)?sel.delete(url):sel.add(url);updSel();render()}
+function updSel(){
+  const n=sel.size;
+  document.getElementById('si').textContent=n?`Отобрано: ${n}`:'';
+  document.getElementById('xb').disabled=!n;
+  const b=document.getElementById('cs');b.textContent=n;b.classList.toggle('v',n>0);
+}
+function dynCls(d){const v=parseFloat(d);return isNaN(v)?'nt':v>0?'up':'dn'}
+function render(){
+  const q=document.getElementById('sq').value.toLowerCase();
+  const gr=document.getElementById('grid');
+  const it=D.filter(d=>{
+    if(g==='s'&&!sel.has(d.url))return false;
+    if(g==='m'&&!d.margin_ok)return false;
+    if(typeof g==='number'&&g>0&&d.group_id!==g)return false;
+    if(q&&!d.name.toLowerCase().includes(q)&&
+       !d.seller.toLowerCase().includes(q)&&
+       !d.brand.toLowerCase().includes(q))return false;
+    return true;
+  });
+  document.getElementById('ci').textContent=`Показано: ${it.length}`;
+  document.getElementById('c0').textContent=D.length;
+  [1,2,3].forEach(i=>{
+    const el=document.getElementById('c'+i);
+    if(el)el.textContent=D.filter(d=>d.group_id===i).length;
+  });
+  const cm=document.getElementById('cm');
+  if(cm)cm.textContent='✅ >300 ₽/кг '+D.filter(d=>d.margin_ok).length;
+  if(!it.length){gr.innerHTML='<div class="empty">Нет товаров</div>';return}
+  gr.innerHTML=it.map(d=>`
+  <div class="card ${sel.has(d.url)?'sel':''}" onclick="tog('${d.url}')">
+    <div class="chk">✓</div>
+    <div class="gtag" style="background:${d.color}">${d.group_label.split('—')[0].trim()}</div>
+    ${d.thumb
+      ?`<img src="${d.thumb}" loading="lazy"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      :''}
+    <div class="nophoto" style="display:${d.thumb?'none':'flex'}">📦</div>
+    <div class="body">
+      <div class="nm">${d.name}</div>
+      <div class="sl">${d.brand} · ${d.seller}</div>
+      ${d.priznak?`<div class="priznak">⭐ ${d.priznak}</div>`:''}
+      <div class="row1">
+        <span class="bdg" style="background:${d.color}">${d.revenue}</span>
+        <span class="dyn ${dynCls(d.dinamika)}">${d.dinamika}</span>
+      </div>
+      <span class="pkg ${d.margin_ok?'ok':d.pkg_val>0?'no':'na'}">${d.formula}</span>
+      <div class="row2">
+        <span>${d.days}</span>
+        <span>${d.price}</span>
+        <span><a class="lnk" href="${d.url}" target="_blank"
+                 onclick="event.stopPropagation()">Ozon ↗</a></span>
+      </div>
+    </div>
+  </div>`).join('');
+}
+function doExport(){
+  const rows=D.filter(d=>sel.has(d.url));
+  if(!rows.length)return;
+  const h=['Название','Продавец','Бренд','Группа','Оборот',
+           'Динамика','Цена','₽/кг','Формула','Дней','Признак','URL'];
+  const lines=[h.join(';'),...rows.map(d=>
+    [d.name,d.seller,d.brand,d.group_label,d.revenue,
+     d.dinamika,d.price,d.pkg,d.formula,d.days,d.priznak,d.url]
+    .map(v=>`"${String(v).replace(/"/g,'""')}"`)
+    .join(';')
+  )];
+  const b=new Blob(['﻿'+lines.join('\n')],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(b);
+  a.download='mebelson_otbor_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+}
+render();
+</script>
+</body></html>

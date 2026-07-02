@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>MEBELSON — Комплект мебели для прихожей</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#f0f2f5;font-family:Arial,sans-serif}
+  .hdr{background:#1a1a2e;color:#fff;padding:14px 24px;
+        display:flex;align-items:center;justify-content:space-between;
+        position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .hdr-left h1{font-size:16px;font-weight:bold}
+  .meta{font-size:11px;color:#aaa;margin-top:4px;line-height:1.8}
+  .xbtn{background:#8e44ad;color:#fff;border:none;padding:9px 18px;
+         border-radius:6px;font-size:13px;cursor:pointer;font-weight:bold}
+  .xbtn:hover{background:#7d3c98}.xbtn:disabled{background:#444;cursor:default}
+  .bar{background:#fff;padding:10px 24px;display:flex;gap:8px;align-items:center;
+        flex-wrap:wrap;border-bottom:1px solid #ddd;position:sticky;top:57px;z-index:99}
+  .tab{padding:5px 12px;border-radius:20px;border:2px solid #ddd;
+        cursor:pointer;font-size:12px;background:#fff;transition:all .15s}
+  .tab[data-g="0"]{color:#555}.tab[data-g="0"].on{background:#555;color:#fff;border-color:#555}
+  .tab[data-g="1"]{color:#e74c3c}.tab[data-g="1"].on{background:#e74c3c;color:#fff;border-color:#e74c3c}
+  .tab[data-g="2"]{color:#27ae60}.tab[data-g="2"].on{background:#27ae60;color:#fff;border-color:#27ae60}
+  .tab[data-g="3"]{color:#2980b9}.tab[data-g="3"].on{background:#2980b9;color:#fff;border-color:#2980b9}
+  .tab[data-g="m"]{color:#e67e22}.tab[data-g="m"].on{background:#e67e22;color:#fff;border-color:#e67e22}
+  .tab[data-g="s"]{color:#8e44ad}.tab[data-g="s"].on{background:#8e44ad;color:#fff;border-color:#8e44ad}
+  .srch{margin-left:auto;padding:5px 10px;border:1px solid #ddd;
+         border-radius:6px;font-size:12px;width:200px}
+  .cnt{font-size:11px;color:#888;white-space:nowrap}
+  .sbdg{background:#8e44ad;color:#fff;border-radius:10px;
+         padding:1px 6px;font-size:11px;margin-left:3px;display:none}
+  .sbdg.v{display:inline}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+         gap:14px;padding:20px 24px}
+  .card{background:#fff;border-radius:10px;border:2px solid transparent;
+         overflow:hidden;cursor:pointer;position:relative;
+         transition:transform .15s,box-shadow .15s,border-color .15s;
+         box-shadow:0 1px 4px rgba(0,0,0,.1)}
+  .card:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(0,0,0,.15)}
+  .card.sel{border-color:#8e44ad;box-shadow:0 0 0 3px rgba(142,68,173,.2)}
+  .card.sel .chk{opacity:1}
+  .chk{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;
+        background:#8e44ad;color:#fff;display:flex;align-items:center;
+        justify-content:center;font-size:13px;opacity:0;transition:opacity .15s;z-index:2}
+  .gtag{position:absolute;top:8px;left:8px;padding:2px 6px;border-radius:8px;
+         font-size:9px;font-weight:bold;color:#fff;z-index:2}
+  .card img{width:100%;height:180px;object-fit:cover;display:block;
+             background:#f5f5f5}
+  .nophoto{width:100%;height:180px;background:#f0f2f5;display:flex;
+            align-items:center;justify-content:center;font-size:40px;color:#ccc}
+  .body{padding:10px}
+  .nm{font-size:12px;font-weight:bold;color:#222;line-height:1.35;
+       max-height:3em;overflow:hidden}
+  .sl{font-size:11px;color:#999;margin-top:2px}
+  .priznak{font-size:9px;color:#2980b9;margin-top:3px;font-style:italic}
+  .row1{display:flex;justify-content:space-between;align-items:center;margin-top:7px}
+  .bdg{font-size:11px;font-weight:bold;color:#fff;padding:2px 6px;border-radius:4px}
+  .dyn{font-size:11px;font-weight:bold}
+  .dyn.up{color:#27ae60}.dyn.dn{color:#e74c3c}.dyn.nt{color:#aaa}
+  .pkg{font-weight:bold;font-size:11px;margin-top:5px;padding:3px 6px;
+        border-radius:4px;display:block}
+  .pkg.ok{color:#27ae60;background:#f0faf4;border-left:3px solid #27ae60}
+  .pkg.no{color:#e74c3c;background:#fef9f9;border-left:3px solid #e74c3c}
+  .pkg.na{color:#aaa;background:#f5f5f5;border-left:3px solid #ddd}
+  .row2{display:flex;justify-content:space-between;margin-top:5px;
+         font-size:11px;color:#aaa}
+  .lnk{color:#3498db;text-decoration:none;font-size:11px}
+  .empty{text-align:center;padding:80px;color:#bbb;font-size:16px}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="hdr-left">
+    <h1>🪑 MEBELSON® — Комплект мебели для прихожей</h1>
+    <div class="meta">
+      📅 Период: 28 дней &nbsp;·&nbsp;
+      📊 Источник: Ozon ЛК + mpstats &nbsp;·&nbsp;
+      📦 Товаров: 45 &nbsp;·&nbsp;
+      ✅ &gt;300 ₽/кг: 7 &nbsp;·&nbsp;
+      🕐 30.06.2026 15:05
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center">
+    <span id="si" style="color:#ccc;font-size:12px"></span>
+    <button class="xbtn" id="xb" onclick="doExport()" disabled>⬇ Скачать отобранные</button>
+  </div>
+</div>
+<div class="bar">
+  <button class="tab on" data-g="0" onclick="setG(0)">Все <span id="c0"></span></button>
+  <button class="tab" data-g="1" onclick="setG(1)">1 — Белые пятна <span id="c1"></span></button>
+  <button class="tab" data-g="2" onclick="setG(2)">2 — Новинки <span id="c2"></span></button>
+  <button class="tab" data-g="3" onclick="setG(3)">3 — Дойные коровы <span id="c3"></span></button>
+  <button class="tab" data-g="m" onclick="setG('m')">✅ &gt;300 ₽/кг <span id="cm"></span></button>
+  <button class="tab" data-g="s" onclick="setG('s')">
+    ✓ Отобранные <span class="sbdg" id="cs">0</span>
+  </button>
+  <input class="srch" id="sq" placeholder="🔍 Поиск..." oninput="render()">
+  <span class="cnt" id="ci"></span>
+</div>
+<div class="grid" id="grid"></div>
+<script>
+const D=([{"thumb": "https://ir.ozone.ru/s3/multimedia-1-d/9816627505.jpg", "name": "Прихожая с зеркалом и шкафом \"Шик\" , 136х230х35 см", "seller": "Семья Мебелони", "brand": "Семья Мебелони", "url": "https://www.ozon.ru/product/3001724207", "revenue": "1155т ₽", "price": "17 243 ₽", "formula": "17 243 ₽ ÷ 69.0 кг = 250 ₽/кг", "pkg": "250 ₽/кг", "pkg_val": 250, "margin_ok": false, "days": "246 дн.", "dinamika": "-65%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-2/6694538042.jpg", "name": "Шкаф в прихожую, комплект мебели, Вита Лофт 4, дуб крафт золотой", "seller": "НЕМДА - мебель", "brand": "БеруВсем!", "url": "https://www.ozon.ru/product/1428452311", "revenue": "841т ₽", "price": "10 655 ₽", "formula": "10 655 ₽ ÷ 37.1 кг = 287 ₽/кг", "pkg": "287 ₽/кг", "pkg_val": 287, "margin_ok": false, "days": "855 дн.", "dinamika": "+37%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-o/8315511432.jpg", "name": "НОНТОН Комплект мебели для прихожей, белый, зеркальный", "seller": "НОНТОН.РФ", "brand": "НОНТОН", "url": "https://www.ozon.ru/product/1099860168", "revenue": "573т ₽", "price": "4 445 ₽", "formula": "4 445 ₽ ÷ 18.1 кг = 246 ₽/кг", "pkg": "246 ₽/кг", "pkg_val": 246, "margin_ok": false, "days": "1064 дн.", "dinamika": "-52%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-3/9947429031.jpg", "name": "ВосторгМебель Комплект мебели для прихожей, серый", "seller": "ВосторгМебель", "brand": "ВосторгМебель", "url": "https://www.ozon.ru/product/4029925404", "revenue": "518т ₽", "price": "4 709 ₽", "formula": "4 709 ₽ ÷ 15.3 кг = 308 ₽/кг", "pkg": "308 ₽/кг", "pkg_val": 308, "margin_ok": true, "days": "64 дн.", "dinamika": "+52%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-h/9378411641.jpg", "name": "МОДЕРИУМ Модульная система мебели для прихожей с зеркалом 190х42х208 см", "seller": "МОДЕРИУМ", "brand": "Модериум", "url": "https://www.ozon.ru/product/3116400209", "revenue": "709т ₽", "price": "19 719 ₽", "formula": "19 719 ₽ ÷ 93.0 кг = 212 ₽/кг", "pkg": "212 ₽/кг", "pkg_val": 212, "margin_ok": false, "days": "219 дн.", "dinamika": "-15%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-p/9378517453.jpg", "name": "МОДЕРИУМ Комплект мебели для прихожей напольный 100х42х208 см", "seller": "МОДЕРИУМ", "brand": "Модериум", "url": "https://www.ozon.ru/product/3116396266", "revenue": "433т ₽", "price": "9 861 ₽", "formula": "9 861 ₽ ÷ 39.1 кг = 252 ₽/кг", "pkg": "252 ₽/кг", "pkg_val": 252, "margin_ok": false, "days": "219 дн.", "dinamika": "+18%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-1/8108240473.jpg", "name": "ВосторгМебель Комплект мебели для прихожей, темно-серый, серый", "seller": "ВосторгМебель", "brand": "ВосторгМебель", "url": "https://www.ozon.ru/product/2390764640", "revenue": "790т ₽", "price": "4 394 ₽", "formula": "4 394 ₽ ÷ 18.7 кг = 235 ₽/кг", "pkg": "235 ₽/кг", "pkg_val": 235, "margin_ok": false, "days": "358 дн.", "dinamika": "+18%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-6/9378411666.jpg", "name": "МОДЕРИУМ Модульная система мебели для прихожей с зеркалом 190х42х208 см", "seller": "МОДЕРИУМ", "brand": "Модериум", "url": "https://www.ozon.ru/product/3116397527", "revenue": "790т ₽", "price": "19 282 ₽", "formula": "19 282 ₽ ÷ 93.0 кг = 207 ₽/кг", "pkg": "207 ₽/кг", "pkg_val": 207, "margin_ok": false, "days": "219 дн.", "dinamika": "+142%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-o/7302887880.jpg", "name": "Прихожая в стиле Лофт \"Urban\" 180х118х35 см. Дуб Крафт Золотой", "seller": "WOOD&STEEL", "brand": "WOODSTEEL", "url": "https://www.ozon.ru/product/1855316660", "revenue": "476т ₽", "price": "10 369 ₽", "formula": "10 369 ₽ ÷ 26.9 кг = 386 ₽/кг", "pkg": "386 ₽/кг", "pkg_val": 386, "margin_ok": true, "days": "506 дн.", "dinamika": "+78%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-b/7977780011.jpg", "name": "Прихожая с зеркалом \"Твист\" белый, графит, 120х202х37 см", "seller": "Семья Мебелони", "brand": "Семья Мебелони", "url": "https://www.ozon.ru/product/2810030595", "revenue": "915т ₽", "price": "11 160 ₽", "formula": "11 160 ₽ ÷ 33.6 кг = 332 ₽/кг", "pkg": "332 ₽/кг", "pkg_val": 332, "margin_ok": true, "days": "292 дн.", "dinamika": "+122%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-7/9378370591.jpg", "name": "МОДЕРИУМ Комплект мебели для прихожей с зеркалом 120х42х208 см", "seller": "МОДЕРИУМ", "brand": "Модериум", "url": "https://www.ozon.ru/product/3337394590", "revenue": "626т ₽", "price": "15 674 ₽", "formula": "15 674 ₽ ÷ 53.4 кг = 293 ₽/кг", "pkg": "293 ₽/кг", "pkg_val": 293, "margin_ok": false, "days": "169 дн.", "dinamika": "+172%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-p/8313725293.jpg", "name": "НОНТОН Комплект мебели для прихожей, серый", "seller": "НОНТОН.РФ", "brand": "НОНТОН", "url": "https://www.ozon.ru/product/1492826348", "revenue": "1132т ₽", "price": "4 273 ₽", "formula": "4 273 ₽ ÷ 16.4 кг = 261 ₽/кг", "pkg": "261 ₽/кг", "pkg_val": 261, "margin_ok": false, "days": "824 дн.", "dinamika": "-34%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-y/9402672634.jpg", "name": "НОНТОН Комплект мебели для прихожей, бежевый, белый", "seller": "НОНТОН.РФ", "brand": "НОНТОН", "url": "https://www.ozon.ru/product/693113631", "revenue": "661т ₽", "price": "7 694 ₽", "formula": "7 694 ₽ ÷ 65.8 кг = 117 ₽/кг", "pkg": "117 ₽/кг", "pkg_val": 117, "margin_ok": false, "days": "1395 дн.", "dinamika": "-5%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-p/8963027665.jpg", "name": "НОНТОН Комплект мебели для прихожей, бежевый, серый", "seller": "НОНТОН.РФ", "brand": "НОНТОН", "url": "https://www.ozon.ru/product/857921954", "revenue": "1923т ₽", "price": "7 915 ₽", "formula": "7 915 ₽ ÷ 67.1 кг = 118 ₽/кг", "pkg": "118 ₽/кг", "pkg_val": 118, "margin_ok": false, "days": "1232 дн.", "dinamika": "-10%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-s/6949981756.jpg", "name": "НОНТОН Комплект мебели для прихожей, белый", "seller": "НОНТОН.РФ", "brand": "НОНТОН", "url": "https://www.ozon.ru/product/1123171499", "revenue": "565т ₽", "price": "28 259 ₽", "formula": "28 259 ₽ ÷ 169.1 кг = 167 ₽/кг", "pkg": "167 ₽/кг", "pkg_val": 167, "margin_ok": false, "days": "1052 дн.", "dinamika": "+103%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-u/7399569630.jpg", "name": "УЮТНАЯ ЛОГИКА Комплект мебели для прихожей, белый", "seller": "ООО \"УЮТНАЯ ЛОГИКА\"", "brand": "УЮТНАЯ ЛОГИКА", "url": "https://www.ozon.ru/product/1125275889", "revenue": "1844т ₽", "price": "7 718 ₽", "formula": "7 718 ₽ ÷ 37.5 кг = 206 ₽/кг", "pkg": "206 ₽/кг", "pkg_val": 206, "margin_ok": false, "days": "1051 дн.", "dinamika": "-22%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-v/7399578451.jpg", "name": "УЮТНАЯ ЛОГИКА Комплект мебели для прихожей, белый", "seller": "ООО \"УЮТНАЯ ЛОГИКА\"", "brand": "УЮТНАЯ ЛОГИКА", "url": "https://www.ozon.ru/product/1126010687", "revenue": "2714т ₽", "price": "12 063 ₽", "formula": "12 063 ₽ ÷ 153.0 кг = 79 ₽/кг", "pkg": "79 ₽/кг", "pkg_val": 79, "margin_ok": false, "days": "1050 дн.", "dinamika": "-28%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-0/7399595952.jpg", "name": "УЮТНАЯ ЛОГИКА Комплект мебели для прихожей, белый", "seller": "ООО \"УЮТНАЯ ЛОГИКА\"", "brand": "УЮТНАЯ ЛОГИКА", "url": "https://www.ozon.ru/product/1126014872", "revenue": "3261т ₽", "price": "18 322 ₽", "formula": "18 322 ₽ ÷ 183.6 кг = 100 ₽/кг", "pkg": "100 ₽/кг", "pkg_val": 100, "margin_ok": false, "days": "1050 дн.", "dinamika": "-37%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-u/7399586478.jpg", "name": "УЮТНАЯ ЛОГИКА Комплект мебели для прихожей, белый", "seller": "ООО \"УЮТНАЯ ЛОГИКА\"", "brand": "УЮТНАЯ ЛОГИКА", "url": "https://www.ozon.ru/product/1130171931", "revenue": "1941т ₽", "price": "14 169 ₽", "formula": "14 169 ₽ ÷ 153.0 кг = 93 ₽/кг", "pkg": "93 ₽/кг", "pkg_val": 93, "margin_ok": false, "days": "1048 дн.", "dinamika": "-44%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-f/9060070191.jpg", "name": "Прихожая комплект Трамп с вешалкой, со шкафом, с сиденьем, с обувницей, с зеркал", "seller": "Правила мебели", "brand": "Правила мебели", "url": "https://www.ozon.ru/product/1170875684", "revenue": "894т ₽", "price": "9 936 ₽", "formula": "9 936 ₽ ÷ 65.3 кг = 152 ₽/кг", "pkg": "152 ₽/кг", "pkg_val": 152, "margin_ok": false, "days": "1024 дн.", "dinamika": "+83%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-7/8448497287.jpg", "name": "Прихожая комплект Роби Практик с вешалкой, со шкафами, с зеркалом, с обувницей, ", "seller": "Правила мебели", "brand": "Правила мебели", "url": "https://www.ozon.ru/product/1170895115", "revenue": "775т ₽", "price": "18 464 ₽", "formula": "18 464 ₽ ÷ 65.8 кг = 280 ₽/кг", "pkg": "280 ₽/кг", "pkg_val": 280, "margin_ok": false, "days": "1024 дн.", "dinamika": "+14%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-b/8448529403.jpg", "name": "Прихожая комплект Роби Макси с вешалкой, со шкафами, с обувницей, с зеркалом, 20", "seller": "Правила мебели", "brand": "Правила мебели", "url": "https://www.ozon.ru/product/1170895415", "revenue": "719т ₽", "price": "23 998 ₽", "formula": "23 998 ₽ ÷ 107.3 кг = 224 ₽/кг", "pkg": "224 ₽/кг", "pkg_val": 224, "margin_ok": false, "days": "1024 дн.", "dinamika": "+43%", "priznak": "", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-1/8448611221.jpg", "name": "Прихожая комплект Роби Практик с вешалкой, со шкафами, с зеркалом, с обувницей, ", "seller": "Правила мебели", "brand": "Правила мебели", "url": "https://www.ozon.ru/product/1170895509", "revenue": "1232т ₽", "price": "19 264 ₽", "formula": "19 264 ₽ ÷ 65.8 кг = 293 ₽/кг", "pkg": "293 ₽/кг", "pkg_val": 293, "margin_ok": false, "days": "1024 дн.", "dinamika": "+17%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-f/9060088767.jpg", "name": "Прихожая комплект Трамп с вешалкой, со шкафом, с сиденьем, с обувницей, с зеркал", "seller": "Правила мебели", "brand": "Правила мебели", "url": "https://www.ozon.ru/product/1170912167", "revenue": "433т ₽", "price": "10 075 ₽", "formula": "10 075 ₽ ÷ 65.3 кг = 154 ₽/кг", "pkg": "154 ₽/кг", "pkg_val": 154, "margin_ok": false, "days": "1024 дн.", "dinamika": "+175%", "priznak": "", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-p/7346389273.jpg", "name": "Прихожая комплект Вита Лофт 1 с вешалкой, со шкафом, с сиденьем, с обувницей, с ", "seller": "НЕМДА - мебель", "brand": "БеруВсем!", "url": "https://www.ozon.ru/product/1428452283", "revenue": "410т ₽", "price": "10 016 ₽", "formula": "10 016 ₽ ÷ 41.8 кг = 240 ₽/кг", "pkg": "240 ₽/кг", "pkg_val": 240, "margin_ok": false, "days": "855 дн.", "dinamika": "+70%", "priznak": "", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-7/8749005883.jpg", "name": "Прихожая комплект Тайлер, со шкафом, с зеркалом, с полками, с вешалками, с обувн", "seller": "Правила мебели", "brand": "Правила мебели", "url": "https://www.ozon.ru/product/1429896450", "revenue": "1040т ₽", "price": "9 211 ₽", "formula": "9 211 ₽ ÷ 96.5 кг = 95 ₽/кг", "pkg": "95 ₽/кг", "pkg_val": 95, "margin_ok": false, "days": "854 дн.", "dinamika": "+113%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-c/9054698196.jpg", "name": "НОНТОН Комплект мебели для прихожей, серый, зеркальный", "seller": "НОНТОН.РФ", "brand": "НОНТОН", "url": "https://www.ozon.ru/product/1539424617", "revenue": "1626т ₽", "price": "9 401 ₽", "formula": "9 401 ₽ ÷ 100.9 кг = 93 ₽/кг", "pkg": "93 ₽/кг", "pkg_val": 93, "margin_ok": false, "days": "806 дн.", "dinamika": "-28%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-2/9002122238.jpg", "name": "НОНТОН Комплект мебели для прихожей, бежевый, серый", "seller": "НОНТОН.РФ", "brand": "НОНТОН", "url": "https://www.ozon.ru/product/1638838269", "revenue": "927т ₽", "price": "25 074 ₽", "formula": "25 074 ₽ ÷ 300.9 кг = 83 ₽/кг", "pkg": "83 ₽/кг", "pkg_val": 83, "margin_ok": false, "days": "699 дн.", "dinamika": "+130%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-g/8448586144.jpg", "name": "Прихожая комплект Роби Миди с вешалкой, с зеркалом, с обувницей, со шкафом, 120х", "seller": "Правила мебели", "brand": "Правила мебели", "url": "https://www.ozon.ru/product/1703315841", "revenue": "461т ₽", "price": "14 876 ₽", "formula": "14 876 ₽ ÷ 63.4 кг = 235 ₽/кг", "pkg": "235 ₽/кг", "pkg_val": 235, "margin_ok": false, "days": "638 дн.", "dinamika": "+46%", "priznak": "", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-k/7388357528.jpg", "name": "Прихожая в коридор с зеркалом \"Твист\" графит , 202х120х37 см", "seller": "Семья Мебелони", "brand": "Семья Мебелони", "url": "https://www.ozon.ru/product/1739841314", "revenue": "1000т ₽", "price": "11 113 ₽", "formula": "11 113 ₽ ÷ 33.6 кг = 331 ₽/кг", "pkg": "331 ₽/кг", "pkg_val": 331, "margin_ok": true, "days": "608 дн.", "dinamika": "+132%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-k/9135463304.jpg", "name": "НОНТОН Комплект мебели для прихожей, белый, бежевый", "seller": "НОНТОН.РФ", "brand": "НОНТОН", "url": "https://www.ozon.ru/product/1768882426", "revenue": "817т ₽", "price": "14 605 ₽", "formula": "14 605 ₽ ÷ 206.1 кг = 71 ₽/кг", "pkg": "71 ₽/кг", "pkg_val": 71, "margin_ok": false, "days": "574 дн.", "dinamika": "-28%", "priznak": "", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-g/9135452356.jpg", "name": "НОНТОН Комплект мебели для прихожей, белый, бежевый", "seller": "НОНТОН.РФ", "brand": "НОНТОН", "url": "https://www.ozon.ru/product/1768882506", "revenue": "1291т ₽", "price": "13 883 ₽", "formula": "13 883 ₽ ÷ 191.4 кг = 73 ₽/кг", "pkg": "73 ₽/кг", "pkg_val": 73, "margin_ok": false, "days": "574 дн.", "dinamika": "-18%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-7/9136072195.jpg", "name": "НОНТОН Комплект мебели для прихожей, белый, бежевый", "seller": "НОНТОН.РФ", "brand": "НОНТОН", "url": "https://www.ozon.ru/product/1768882520", "revenue": "1189т ₽", "price": "27 674 ₽", "formula": "27 674 ₽ ÷ 338.5 кг = 82 ₽/кг", "pkg": "82 ₽/кг", "pkg_val": 82, "margin_ok": false, "days": "574 дн.", "dinamika": "-13%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-h/9096170417.jpg", "name": "НОНТОН Комплект мебели для прихожей, светло-серый, серый", "seller": "НОНТОН.РФ", "brand": "НОНТОН", "url": "https://www.ozon.ru/product/1770019012", "revenue": "442т ₽", "price": "34 036 ₽", "formula": "34 036 ₽ ÷ 152.6 кг = 223 ₽/кг", "pkg": "223 ₽/кг", "pkg_val": 223, "margin_ok": false, "days": "573 дн.", "dinamika": "-12%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-y/9096178210.jpg", "name": "НОНТОН Комплект мебели для прихожей, белый, бежевый", "seller": "НОНТОН.РФ", "brand": "НОНТОН", "url": "https://www.ozon.ru/product/1770047769", "revenue": "450т ₽", "price": "34 632 ₽", "formula": "34 632 ₽ ÷ 152.6 кг = 227 ₽/кг", "pkg": "227 ₽/кг", "pkg_val": 227, "margin_ok": false, "days": "573 дн.", "dinamika": "+68%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-m/9096185290.jpg", "name": "НОНТОН Комплект мебели для прихожей, серый, бежевый", "seller": "НОНТОН.РФ", "brand": "НОНТОН", "url": "https://www.ozon.ru/product/1770088606", "revenue": "739т ₽", "price": "33 621 ₽", "formula": "33 621 ₽ ÷ 152.6 кг = 220 ₽/кг", "pkg": "220 ₽/кг", "pkg_val": 220, "margin_ok": false, "days": "573 дн.", "dinamika": "+9%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-6/7655899866.jpg", "name": "Прихожая в коридор с зеркалом \"София\" , 210х80х33 см", "seller": "Семья Мебелони", "brand": "Семья Мебелони", "url": "https://www.ozon.ru/product/1856735748", "revenue": "1350т ₽", "price": "10 232 ₽", "formula": "10 232 ₽ ÷ 10.2 кг = 1003 ₽/кг", "pkg": "1003 ₽/кг", "pkg_val": 1003, "margin_ok": true, "days": "505 дн.", "dinamika": "+126%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-a/7442641126.jpg", "name": "Прихожая комплект Бохо Мини с антресолью, с полками, с сиденьем, с обувницей, 10", "seller": "Правила мебели", "brand": "Правила мебели", "url": "https://www.ozon.ru/product/2000870933", "revenue": "627т ₽", "price": "12 066 ₽", "formula": "12 066 ₽ ÷ 51.6 кг = 234 ₽/кг", "pkg": "234 ₽/кг", "pkg_val": 234, "margin_ok": false, "days": "445 дн.", "dinamika": "+25%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-9/10595075589.jpg", "name": "Прихожая Норд + Норд Шкаф 3-х ств. (Кашемир/Золото) (МИФ)", "seller": "RM-Mebel", "brand": "Мебельная компания «МиФ»", "url": "https://www.ozon.ru/product/2302766402", "revenue": "514т ₽", "price": "25 722 ₽", "formula": "25 722 ₽ ÷ 250.1 кг = 103 ₽/кг", "pkg": "103 ₽/кг", "pkg_val": 103, "margin_ok": false, "days": "373 дн.", "dinamika": "+14%", "priznak": "Топ-10% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-o/7750327488.jpg", "name": "НОНТОН Комплект мебели для прихожей, светло-бежевый", "seller": "НОНТОН.РФ", "brand": "НОНТОН", "url": "https://www.ozon.ru/product/2309357051", "revenue": "1080т ₽", "price": "18 622 ₽", "formula": "18 622 ₽ ÷ 61.4 кг = 303 ₽/кг", "pkg": "303 ₽/кг", "pkg_val": 303, "margin_ok": true, "days": "372 дн.", "dinamika": "+28%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-y/7686522682.jpg", "name": "НОНТОН Комплект мебели для прихожей, светло-бежевый, бежевый", "seller": "НОНТОН.РФ", "brand": "НОНТОН", "url": "https://www.ozon.ru/product/2343733729", "revenue": "657т ₽", "price": "12 652 ₽", "formula": "12 652 ₽ ÷ 51.6 кг = 245 ₽/кг", "pkg": "245 ₽/кг", "pkg_val": 245, "margin_ok": false, "days": "366 дн.", "dinamika": "+19%", "priznak": "Топ-50% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-b/8449919651.jpg", "name": "НОНТОН Комплект мебели для прихожей, белый, бежевый", "seller": "НОНТОН.РФ", "brand": "НОНТОН", "url": "https://www.ozon.ru/product/2389033433", "revenue": "901т ₽", "price": "5 634 ₽", "formula": "5 634 ₽ ÷ 63.9 кг = 88 ₽/кг", "pkg": "88 ₽/кг", "pkg_val": 88, "margin_ok": false, "days": "358 дн.", "dinamika": "+64%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-3/8962944555.jpg", "name": "НОНТОН Комплект мебели для прихожей, белый, светло-коричневый", "seller": "НОНТОН.РФ", "brand": "НОНТОН", "url": "https://www.ozon.ru/product/2402200618", "revenue": "2057т ₽", "price": "11 689 ₽", "formula": "11 689 ₽ ÷ 180.0 кг = 65 ₽/кг", "pkg": "65 ₽/кг", "pkg_val": 65, "margin_ok": false, "days": "356 дн.", "dinamika": "-19%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-e/8614082786.jpg", "name": "Прихожая комплект Лайф с вешалкой, со шкафом, с сиденьем, с зеркалом, с обувнице", "seller": "Пора Спать", "brand": "Пора Спать", "url": "https://www.ozon.ru/product/2640714947", "revenue": "870т ₽", "price": "15 833 ₽", "formula": "15 833 ₽ ÷ 336.6 кг = 47 ₽/кг", "pkg": "47 ₽/кг", "pkg_val": 47, "margin_ok": false, "days": "320 дн.", "dinamika": "-8%", "priznak": "Топ-10% по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "https://ir.ozone.ru/s3/multimedia-1-3/9947429031.jpg", "name": "ВосторгМебель Комплект мебели для прихожей, серый", "seller": "ВосторгМебель", "brand": "ВосторгМебель", "url": "https://www.ozon.ru/product/4029925404", "revenue": "518т ₽", "price": "4 709 ₽", "formula": "4 709 ₽ ÷ 15.3 кг = 308 ₽/кг", "pkg": "308 ₽/кг", "pkg_val": 308, "margin_ok": true, "days": "64 дн.", "dinamika": "+52%", "priznak": "Топ-50% по продажам", "group_id": 2, "group_label": "2 — Новинки", "color": "#27ae60"}]),sel=new Set();let g=0;
+function setG(v){g=v;document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.g==v));render()}
+function tog(url){sel.has(url)?sel.delete(url):sel.add(url);updSel();render()}
+function updSel(){
+  const n=sel.size;
+  document.getElementById('si').textContent=n?`Отобрано: ${n}`:'';
+  document.getElementById('xb').disabled=!n;
+  const b=document.getElementById('cs');b.textContent=n;b.classList.toggle('v',n>0);
+}
+function dynCls(d){const v=parseFloat(d);return isNaN(v)?'nt':v>0?'up':'dn'}
+function render(){
+  const q=document.getElementById('sq').value.toLowerCase();
+  const gr=document.getElementById('grid');
+  const it=D.filter(d=>{
+    if(g==='s'&&!sel.has(d.url))return false;
+    if(g==='m'&&!d.margin_ok)return false;
+    if(typeof g==='number'&&g>0&&d.group_id!==g)return false;
+    if(q&&!d.name.toLowerCase().includes(q)&&
+       !d.seller.toLowerCase().includes(q)&&
+       !d.brand.toLowerCase().includes(q))return false;
+    return true;
+  });
+  document.getElementById('ci').textContent=`Показано: ${it.length}`;
+  document.getElementById('c0').textContent=D.length;
+  [1,2,3].forEach(i=>{
+    const el=document.getElementById('c'+i);
+    if(el)el.textContent=D.filter(d=>d.group_id===i).length;
+  });
+  const cm=document.getElementById('cm');
+  if(cm)cm.textContent='✅ >300 ₽/кг '+D.filter(d=>d.margin_ok).length;
+  if(!it.length){gr.innerHTML='<div class="empty">Нет товаров</div>';return}
+  gr.innerHTML=it.map(d=>`
+  <div class="card ${sel.has(d.url)?'sel':''}" onclick="tog('${d.url}')">
+    <div class="chk">✓</div>
+    <div class="gtag" style="background:${d.color}">${d.group_label.split('—')[0].trim()}</div>
+    ${d.thumb
+      ?`<img src="${d.thumb}" loading="lazy"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      :''}
+    <div class="nophoto" style="display:${d.thumb?'none':'flex'}">📦</div>
+    <div class="body">
+      <div class="nm">${d.name}</div>
+      <div class="sl">${d.brand} · ${d.seller}</div>
+      ${d.priznak?`<div class="priznak">⭐ ${d.priznak}</div>`:''}
+      <div class="row1">
+        <span class="bdg" style="background:${d.color}">${d.revenue}</span>
+        <span class="dyn ${dynCls(d.dinamika)}">${d.dinamika}</span>
+      </div>
+      <span class="pkg ${d.margin_ok?'ok':d.pkg_val>0?'no':'na'}">${d.formula}</span>
+      <div class="row2">
+        <span>${d.days}</span>
+        <span>${d.price}</span>
+        <span><a class="lnk" href="${d.url}" target="_blank"
+                 onclick="event.stopPropagation()">Ozon ↗</a></span>
+      </div>
+    </div>
+  </div>`).join('');
+}
+function doExport(){
+  const rows=D.filter(d=>sel.has(d.url));
+  if(!rows.length)return;
+  const h=['Название','Продавец','Бренд','Группа','Оборот',
+           'Динамика','Цена','₽/кг','Формула','Дней','Признак','URL'];
+  const lines=[h.join(';'),...rows.map(d=>
+    [d.name,d.seller,d.brand,d.group_label,d.revenue,
+     d.dinamika,d.price,d.pkg,d.formula,d.days,d.priznak,d.url]
+    .map(v=>`"${String(v).replace(/"/g,'""')}"`)
+    .join(';')
+  )];
+  const b=new Blob(['﻿'+lines.join('\n')],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(b);
+  a.download='mebelson_otbor_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+}
+render();
+</script>
+</body></html>

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEBELSON® — Конкурентный анализ Ozon</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:Arial,sans-serif;background:#f0f2f5;display:flex}
+
+  /* ── САЙДБАР ── */
+  .sidebar{
+    width:260px;min-width:260px;height:100vh;
+    background:#1a1a2e;color:#fff;
+    display:flex;flex-direction:column;
+    overflow-y:auto;flex-shrink:0;
+  }
+  .sb-head{padding:20px 18px 14px;border-bottom:1px solid #2a2a40}
+  .sb-head .logo{font-size:15px;font-weight:bold;letter-spacing:.3px}
+  .sb-head .sub{font-size:11px;color:#888;margin-top:4px}
+  .sb-head .gen{font-size:10px;color:#555;margin-top:8px}
+
+  .sb-section{
+    padding:12px 18px 6px;font-size:10px;color:#666;
+    text-transform:uppercase;letter-spacing:.6px;
+    border-top:1px solid #2a2a40;margin-top:4px;
+  }
+  .sb-section:first-of-type{border-top:none;margin-top:0}
+
+  /* Слой-кнопка */
+  .layer-btn{
+    display:flex;align-items:center;gap:8px;
+    padding:8px 18px;font-size:11px;color:#8e44ad;
+    font-weight:bold;letter-spacing:.3px;cursor:default;
+  }
+  .layer-dot{
+    width:7px;height:7px;border-radius:50%;
+    background:#8e44ad;flex-shrink:0;
+  }
+  .layer-dot.green{background:#27ae60}
+
+  .sb-item{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:8px 18px 8px 28px;cursor:pointer;font-size:12px;color:#bbb;
+    border-left:3px solid transparent;transition:background .15s;
+  }
+  .sb-item:hover{background:#22223a;color:#fff}
+  .sb-item.active{background:#22223a;border-left-color:#8e44ad;color:#fff;font-weight:bold}
+  .sb-item.active.green{border-left-color:#27ae60}
+  .sb-item .badge{
+    font-size:10px;background:#2a2a45;color:#888;
+    padding:2px 6px;border-radius:10px;min-width:20px;text-align:center;flex-shrink:0;
+  }
+  .sb-item.active .badge{background:#8e44ad;color:#fff}
+  .sb-item.active.green .badge{background:#27ae60;color:#fff}
+
+  /* Плашка "скоро" */
+  .sb-item .soon{
+    font-size:9px;color:#555;background:#1e1e35;
+    padding:1px 5px;border-radius:4px;
+  }
+
+  /* ── MAIN ── */
+  .main{flex:1;height:100vh;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+
+  .topbar{
+    background:#fff;border-bottom:1px solid #ddd;
+    padding:12px 24px;display:flex;justify-content:space-between;
+    align-items:center;flex-shrink:0;
+  }
+  .topbar h1{font-size:15px;color:#222;font-weight:bold}
+  .topbar .meta{font-size:11px;color:#999;margin-top:2px}
+  .topbar .stats{display:flex;gap:14px;flex-shrink:0}
+  .stat{text-align:center}
+  .stat .v{font-size:17px;font-weight:bold;color:#1a1a2e}
+  .stat .l{font-size:10px;color:#999;margin-top:1px}
+
+  /* Лейбл слоя в топбаре */
+  .layer-tag{display:inline-block;margin-top:3px;
+    font-size:10px;padding:3px 8px;border-radius:10px;
+    font-weight:bold;margin-left:8px;vertical-align:middle;
+    display:inline-block;
+  }
+  .layer-tag.l1{background:#ede9fe;color:#6d28d9}
+  .layer-tag.l2{background:#d1fae5;color:#065f46}
+
+  /* Контент */
+  .content-wrap{flex:1;overflow-y:auto;background:#f0f2f5;position:relative}
+
+  /* Лоадер */
+  .loader{
+    display:none;position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);text-align:center;z-index:10;
+  }
+  .loader.active{display:block}
+  .spinner{
+    width:36px;height:36px;border:3px solid #ddd;
+    border-top-color:#8e44ad;border-radius:50%;
+    animation:spin .8s linear infinite;margin:0 auto 10px;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .loader p{font-size:12px;color:#999}
+
+  /* Панель */
+  #panelContent{display:none}
+  #panelContent.active{display:block}
+
+  /* ── ПРИВЕТСТВИЕ ── */
+  .welcome{
+    min-height:100%;display:flex;justify-content:center;
+    padding:40px 24px;
+  }
+  .welcome-inner{max-width:660px;width:100%}
+  .welcome-inner h2{font-size:22px;color:#1a1a2e;margin-bottom:12px}
+  .welcome-inner .lead{font-size:13px;color:#555;line-height:1.6;margin-bottom:28px}
+  .w-section{margin-bottom:24px}
+  .w-h{font-size:10px;color:#999;text-transform:uppercase;
+    letter-spacing:.7px;margin-bottom:10px;font-weight:bold}
+  .w-text{font-size:13px;color:#444;line-height:1.7;
+    background:#fff;border-radius:8px;padding:14px 16px;border:1px solid #e3e3e3}
+  .w-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .w-card{background:#fff;border-radius:8px;padding:14px;
+    border:1px solid #e3e3e3;border-left-width:4px}
+  .w-card.l1{border-left-color:#8e44ad}
+  .w-card.l2{border-left-color:#27ae60}
+  .w-card-t{font-size:13px;font-weight:bold;color:#222;margin-bottom:4px}
+  .w-card-d{font-size:11px;color:#777;line-height:1.5}
+  .w-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+  .w-card3{background:#fff;border-radius:8px;padding:12px;
+    border-left:4px solid #ccc;border:1px solid #e3e3e3;border-left-width:4px}
+  .w-card3.g1{border-left-color:#e74c3c}
+  .w-card3.g2{border-left-color:#27ae60}
+  .w-card3.g3{border-left-color:#2980b9}
+  .w-card3-t{font-size:12px;font-weight:bold;color:#222;margin-bottom:3px}
+  .w-card3-d{font-size:11px;color:#777;line-height:1.4}
+  .w-cta{font-size:13px;color:#8e44ad;font-weight:bold;margin-top:12px}
+
+  /* Мобильный */
+  .menu-btn{display:none;background:none;border:none;font-size:20px;
+    cursor:pointer;color:#333;margin-right:10px}
+  @media(max-width:860px){
+    .sidebar{position:fixed;left:-260px;z-index:50;transition:left .2s}
+    .sidebar.open{left:0}
+    .main{width:100%}
+    .menu-btn{display:inline-block}
+    .w-grid,.w-grid3{grid-template-columns:1fr}
+  }
+
+  /* Welcome обновлённый */
+  .w-hero{margin-bottom:28px}
+  .w-hero-badge{font-size:11px;color:#8e44ad;font-weight:bold;
+    text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+  .welcome-inner h2{font-size:24px;color:#1a1a2e;margin-bottom:10px}
+  .lead{font-size:14px;color:#444;line-height:1.65;margin-bottom:0}
+  .lead strong{color:#1a1a2e}
+
+  .w-steps{display:flex;flex-direction:column;gap:14px}
+  .w-step{display:flex;gap:14px;align-items:flex-start;
+    background:#fff;border:1px solid #e3e3e3;border-radius:10px;padding:16px}
+  .w-step-num{width:28px;height:28px;border-radius:50%;
+    background:#1a1a2e;color:#fff;font-size:13px;font-weight:bold;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+  .w-step-t{font-size:14px;font-weight:bold;color:#1a1a2e;margin-bottom:4px}
+  .w-step-d{font-size:12px;color:#555;line-height:1.55}
+  .tag-l1{background:#ede9fe;color:#6d28d9;padding:1px 6px;
+    border-radius:4px;font-size:11px;font-weight:bold}
+  .tag-l2{background:#d1fae5;color:#065f46;padding:1px 6px;
+    border-radius:4px;font-size:11px;font-weight:bold}
+
+  .w-source{font-size:11px;color:#aaa;margin-top:20px;
+    padding-top:16px;border-top:1px solid #eee}
+</style>
+</head>
+<body>
+
+<div class="sidebar" id="sidebar">
+  <div class="sb-head">
+    <div class="logo">MEBELSON®</div>
+    <div class="sub">Конкурентный анализ Ozon</div>
+    <div class="gen" id="genTime"></div>
+  </div>
+
+  <!-- Первый слой -->
+  <div class="sb-section">Первый слой — скрининг</div>
+  <div class="layer-btn"><div class="layer-dot"></div>Галереи товаров</div>
+  <div id="catList1"></div>
+
+  <!-- Второй слой -->
+  <div class="sb-section">Второй слой — анализ</div>
+  <div class="layer-btn"><div class="layer-dot green"></div>Управленческие панели</div>
+  <div id="catList2"></div>
+</div>
+
+<div class="main">
+  <div class="topbar">
+    <div style="display:flex;align-items:center">
+      <button class="menu-btn" id="menuBtn">☰</button>
+      <div>
+        <h1 id="catTitle">MEBELSON® — портал аналитики</h1>
+        <span class="layer-tag l1" id="layerTag" style="display:none">Слой 1</span>
+        <div class="meta" id="catMeta">Конкурентный анализ Ozon по всем категориям</div>
+      </div>
+    </div>
+    <div class="stats" id="catStats"></div>
+  </div>
+
+  <div class="content-wrap" id="contentWrap">
+    <div class="loader" id="loader">
+      <div class="spinner"></div>
+      <p id="loaderText">Загружаю...</p>
+    </div>
+    <div id="panelContent"></div>
+    <div class="welcome" id="welcomeState">
+      <div class="welcome-inner">
+
+        <div class="w-hero">
+          <div class="w-hero-badge">MEBELSON® · Аналитика Ozon</div>
+          <h2>Портал конкурентного анализа</h2>
+          <p class="lead">Здесь собрана информация о том, <strong>что продают конкуренты и чего не хватает в нашем ассортименте</strong>. Данные обновляются ежемесячно по всем категориям, в которых работает MEBELSON®.</p>
+        </div>
+
+        <div class="w-section">
+          <div class="w-h">Как пользоваться — два шага</div>
+          <div class="w-steps">
+            <div class="w-step">
+              <div class="w-step-num">1</div>
+              <div class="w-step-body">
+                <div class="w-step-t">Выберите категорию слева</div>
+                <div class="w-step-d">В разделе <span class="tag-l1">Первый слой — скрининг</span> откроется галерея товаров конкурентов. Смотрите что продаётся, сравнивайте с нашим ассортиментом. Зелёная плашка на товаре = хорошая маржинальность.</div>
+              </div>
+            </div>
+            <div class="w-step">
+              <div class="w-step-num">2</div>
+              <div class="w-step-body">
+                <div class="w-step-t">Откройте управленческий анализ</div>
+                <div class="w-step-d">В разделе <span class="tag-l2">Второй слой — анализ</span> находятся готовые выводы по приоритетным категориям: что конкретно запускать, какие ниши свободны, что думают покупатели о конкурентах.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-section">
+          <div class="w-h">На что смотреть в галерее (первый слой)</div>
+          <div class="w-grid3">
+            <div class="w-card3 g1">
+              <div class="w-card3-t">🔴 Белые пятна</div>
+              <div class="w-card3-d">Товары конкурентов с хорошим оборотом, которых <strong>нет у нас</strong>. Главный раздел — здесь дыры в ассортименте.</div>
+            </div>
+            <div class="w-card3 g2">
+              <div class="w-card3-t">🟢 Новинки</div>
+              <div class="w-card3-d">Товары младше 90 дней, которые <strong>уже хорошо продаются</strong>. Сигнал тренда — что конкуренты запускают прямо сейчас.</div>
+            </div>
+            <div class="w-card3 g3">
+              <div class="w-card3-t">🔵 Дойные коровы</div>
+              <div class="w-card3-d">Товары, которые <strong>стабильно продаются годами</strong> без перебоев в наличии. Проверенный устойчивый спрос.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-section">
+          <div class="w-h">На что смотреть в управленческом анализе (второй слой)</div>
+          <div class="w-grid">
+            <div class="w-card l2">
+              <div class="w-card-t">📊 KPI рынка</div>
+              <div class="w-card-d">Оборот категории, динамика роста, позиция MEBELSON среди конкурентов. Контекст: насколько рынок большой и куда движется.</div>
+            </div>
+            <div class="w-card l2">
+              <div class="w-card-t">🏆 Топ-10 конкурентов</div>
+              <div class="w-card-d">Фото и характеристики лидеров. Смотрите что именно они показывают покупателю на главном фото и в описании.</div>
+            </div>
+            <div class="w-card l2">
+              <div class="w-card-t">💬 Боли покупателей</div>
+              <div class="w-card-d">Что пишут в отзывах на товары конкурентов. Где у них слабые места — там наши возможности.</div>
+            </div>
+            <div class="w-card l2">
+              <div class="w-card-t">💡 Продуктовые гипотезы</div>
+              <div class="w-card-d">Конкретные идеи что запустить или улучшить, с обоснованием. Приоритет A — проверять в первую очередь.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-source">
+          Источники: Ozon ЛК (оборот, аналитика) · mpstats (фото товаров) · отзывы покупателей
+        </div>
+
+        <div class="w-cta">← Начните с любой категории в меню слева</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+// ── Конфиг второго слоя ─────────────────────────────────────
+// Добавляй сюда новые панели по мере готовности
+const LAYER2 = [
+  {
+    slug: 'analysis_tumba',
+    label: 'Тумба',
+    file: 'galleries/Тумба_панель_2026-07-01.html',
+    date: '01.07.2026',
+    ready: true
+  },
+  {
+    slug: 'analysis_krovaty',
+    label: 'Двуспальная кровать',
+    file: 'galleries/krovaty_analysis.html',
+    date: '01.07.2026',
+    ready: true
+  },
+  {
+    slug: 'analysis_ks',
+    label: 'Компьютерный стол',
+    file: 'galleries/КС_панель_2026-07-01.html',
+    date: '01.07.2026',
+    ready: true
+  },
+  {
+    slug: 'analysis_komod',
+    label: 'Комод',
+    file: '',
+    date: '',
+    ready: false
+  },
+  {
+    slug: 'analysis_zerkalo',
+    label: 'Зеркало интерьерное',
+    file: '',
+    date: '',
+    ready: false
+  },
+];
+
+// ── Состояние ────────────────────────────────────────────────
+let DATA = {categories:[]};
+let currentKey = null;
+const cache = {};
+
+// ── Загрузка данных ──────────────────────────────────────────
+async function loadData(){
+  try{
+    const res = await fetch('categories.json');
+    DATA = await res.json();
+  }catch(e){
+    showError('Не удалось загрузить categories.json');
+    return;
+  }
+  renderSidebar();
+
+  const hash = location.hash.replace('#','');
+  if(hash){
+    // Ищем в обоих слоях
+    const idx1 = DATA.categories.findIndex(c => c.slug === hash);
+    if(idx1 >= 0){ openLayer1(idx1); return; }
+    const idx2 = LAYER2.findIndex(c => c.slug === hash);
+    if(idx2 >= 0){ openLayer2(idx2); return; }
+  }
+}
+
+// ── Рендер сайдбара ──────────────────────────────────────────
+function renderSidebar(){
+  document.getElementById('genTime').textContent =
+    DATA.generated ? 'Обновлено: '+DATA.generated : '';
+
+  // Первый слой
+  document.getElementById('catList1').innerHTML =
+    DATA.categories.map((c,i) =>
+      '<div class="sb-item" id="l1_'+i+'" onclick="openLayer1('+i+')">' +
+      '<span>'+c.label+'</span>' +
+      '<span class="badge">'+c.total+'</span>' +
+      '</div>'
+    ).join('');
+
+  // Второй слой
+  document.getElementById('catList2').innerHTML =
+    LAYER2.map((c,i) => {
+      if(c.ready){
+        return '<div class="sb-item green" id="l2_'+i+'" onclick="openLayer2('+i+')">' +
+          '<span>'+c.label+'</span>' +
+          '<span class="badge">📊</span>' +
+          '</div>';
+      } else {
+        return '<div class="sb-item" style="opacity:.45;cursor:default" id="l2_'+i+'">' +
+          '<span>'+c.label+'</span>' +
+          '<span class="soon">скоро</span>' +
+          '</div>';
+      }
+    }).join('');
+}
+
+// ── Открыть категорию первого слоя ───────────────────────────
+function openLayer1(i){
+  const c = DATA.categories[i];
+  if(!c) return;
+  const key = 'l1_'+c.slug;
+  if(currentKey === key) return;
+  currentKey = key;
+
+  clearActive();
+  document.getElementById('l1_'+i)?.classList.add('active');
+
+  document.getElementById('catTitle').textContent = c.label;
+  document.getElementById('catMeta').textContent = 'Обновлено: '+c.date+' · Источник: Ozon ЛК';
+
+  const tag = document.getElementById('layerTag');
+  if(tag){ tag.textContent = 'Слой 1 — скрининг'; tag.className = 'layer-tag l1'; tag.style.display = 'inline-block'; }
+
+  const passPct = c.total ? Math.round(c.passed/c.total*100) : 0;
+  document.getElementById('catStats').innerHTML =
+    stat(c.g1,'Белые пятна') + stat(c.g2,'Новинки') +
+    stat(c.g3,'Дойные коровы') + stat(passPct+'%','≥300 ₽/кг');
+
+  history.replaceState(null,'','#'+c.slug);
+
+  // Первый слой — iframe, изолированный контекст
+  const ws = document.getElementById('welcomeState'); if(ws) ws.style.display = 'none';
+  document.getElementById('panelContent').classList.remove('active');
+  document.getElementById('panelContent').innerHTML = '';
+
+  // Удаляем старый iframe и создаём новый — гарантированная чистая загрузка
+  const oldFrame = document.getElementById('galleryFrame');
+  if(oldFrame) oldFrame.remove();
+
+  const frame = document.createElement('iframe');
+  frame.id = 'galleryFrame';
+  frame.style.cssText = 'width:100%;height:100%;border:none;display:block;min-height:calc(100vh - 60px)';
+  frame.src = c.file;
+  document.getElementById('contentWrap').appendChild(frame);
+
+  closeSidebar();
+}
+
+// ── Открыть панель второго слоя ──────────────────────────────
+function openLayer2(i){
+  const c = LAYER2[i];
+  if(!c || !c.ready) return;
+
+  // Второй слой открываем в новой вкладке — надёжнее без конфликтов скриптов
+  window.open(c.file, '_blank');
+}
+
+// ── Загрузить и показать панель ───────────────────────────────
+async function loadPanel(file, label){
+  const ws = document.getElementById('welcomeState'); if(ws) ws.style.display = 'none';
+  const panel = document.getElementById('panelContent');
+  panel.classList.remove('active');
+  panel.innerHTML = '';
+  document.getElementById('contentWrap').scrollTop = 0;
+
+  if(cache[file]){
+    insertPanel(cache[file]);
+    return;
+  }
+
+  const loader = document.getElementById('loader');
+  const lt = document.getElementById('loaderText'); if(lt) lt.textContent = 'Загружаю «'+label+'»...';
+  loader.classList.add('active');
+
+  try{
+    const res = await fetch(file);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const html = await res.text();
+    const extracted = extractContent(html);
+    cache[file] = extracted;
+    loader.classList.remove('active');
+    insertPanel(extracted);
+  }catch(e){
+    loader.classList.remove('active');
+    panel.innerHTML = '<div style="padding:40px;color:#c00;font-size:13px">' +
+      'Не удалось загрузить: '+file+'<br>'+
+      'Ошибка: '+e.message+'<br><br>' +
+      '<span style="color:#999">Убедись что файл загружен в папку galleries/ на Vercel.</span></div>';
+    panel.classList.add('active');
+  }
+}
+
+// ── Утилиты ──────────────────────────────────────────────────
+function extractContent(html){
+  const styles = (html.match(/<style[^>]*>[\s\S]*?<\/style>/gi)||[]).join('\n');
+  const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+  return styles + (bodyMatch ? bodyMatch[1] : html);
+}
+
+function insertPanel(content){
+  const panel = document.getElementById('panelContent');
+  panel.innerHTML = content;
+  panel.querySelectorAll('img').forEach(img => {
+    if(!img.hasAttribute('loading')) img.setAttribute('loading','lazy');
+  });
+  panel.querySelectorAll('script').forEach(old => {
+    const s = document.createElement('script');
+    s.textContent = old.textContent;
+    document.body.appendChild(s);
+    old.remove();
+  });
+  panel.classList.add('active');
+}
+
+function stat(v, l){
+  return '<div class="stat"><div class="v">'+v+'</div><div class="l">'+l+'</div></div>';
+}
+
+function clearActive(){
+  document.querySelectorAll('.sb-item').forEach(el => {
+    el.classList.remove('active','green');
+  });
+}
+
+function closeSidebar(){
+  if(window.innerWidth <= 860)
+    document.getElementById('sidebar').classList.remove('open');
+}
+
+function showError(msg){
+  document.getElementById('welcomeState').innerHTML =
+    '<div style="padding:40px;color:#c00;font-size:13px">'+msg+'</div>';
+}
+
+document.getElementById('menuBtn').addEventListener('click',() => {
+  document.getElementById('sidebar').classList.toggle('open');
+});
+
+loadData();
+</script>
+</body>
+</html>
