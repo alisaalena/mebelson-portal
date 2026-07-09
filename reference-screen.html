@@ -18,6 +18,9 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);
   font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;
   font-variant-numeric:tabular-nums}
 .screen{max-width:860px;margin:0 auto;padding:40px 40px 72px}
+.backnav{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-2);
+  text-decoration:none;font-weight:500;margin-bottom:18px;transition:color .15s}
+.backnav:hover{color:var(--accent)}
 
 /* контекст-строка */
 .ctx{display:flex;justify-content:space-between;align-items:baseline;
@@ -72,6 +75,9 @@ details.conf-more[open]>summary::before{content:"▾ почему"}
 .act .n{font-size:13px;font-weight:700;color:var(--text-3);font-variant-numeric:tabular-nums}
 .act .t{font-size:14px;color:var(--text)}
 .act .when{font-size:12px;color:var(--text-3);white-space:nowrap}
+.lead-refs{font-size:12px;color:var(--text-3)}
+.lead-refs a{color:var(--accent);text-decoration:none;font-weight:500}
+.lead-refs a:hover{text-decoration:underline}
 
 /* CTA — следующий шаг исследования, не UI-кнопка */
 .cta{margin-top:28px}
@@ -146,6 +152,8 @@ details.conf-more[open]>summary::before{content:"▾ почему"}
 <body>
 <div class="screen">
 
+  <a class="backnav" href="index2.html">← Все категории</a>
+
   <div class="ctx">
     <span class="brand">MEBELSON® · Ассортиментные решения</span>
     <span>Обновлено 08.07 · рынок 28 дней</span>
@@ -187,11 +195,11 @@ details.conf-more[open]>summary::before{content:"▾ почему"}
 
   <div class="sect-h">Что делать</div>
   <div class="acts">
-    <div class="act"><span class="n">1</span><span class="t">Держать сток хит-SKU и зайти в «нет в наличии» — стол с ящиками и угловой</span><span class="when">1 мес</span></div>
-    <div class="act"><span class="n">2</span><span class="t">Размножить наш 120×120 в цветах — занять несколько строк выдачи</span><span class="when">1 мес</span></div>
-    <div class="act"><span class="n">3</span><span class="t">Ввести компактную SKU с ₽/кг ≥ 300 в довесок к объёмному хиту</span><span class="when">2–3 мес</span></div>
-    <div class="act"><span class="n">4</span><span class="t">Прочная столешница (18 мм, ≥ 50 кг) как УТП рабочего/игрового стола</span><span class="when">2–3 мес</span></div>
-    <div class="act"><span class="n">5</span><span class="t">Стол с надстройкой/полками под малые квартиры и школьников</span><span class="when">3 мес</span></div>
+    <div class="act"><span class="n">1</span><span class="t">Держать сток хит-SKU и зайти в «нет в наличии» — стол с ящиками и угловой <span class="lead-refs">· лидеры: <a href="pismennyy_stol_galereya.html#lead4">Кастор</a>, <a href="pismennyy_stol_galereya.html#lead10">ГРИНВУД</a></span></span><span class="when">1 мес</span></div>
+    <div class="act"><span class="n">2</span><span class="t">Размножить наш 120×120 в цветах — занять несколько строк выдачи <span class="lead-refs">· пример: <a href="pismennyy_stol_galereya.html#lead1">Кео</a>, <a href="pismennyy_stol_galereya.html#lead2">Аскетик</a></span></span><span class="when">1 мес</span></div>
+    <div class="act"><span class="n">3</span><span class="t">Ввести компактную SKU с ₽/кг ≥ 300 в довесок к объёмному хиту <span class="lead-refs">· маржа в белых пятнах, не в ТОП-10</span></span><span class="when">2–3 мес</span></div>
+    <div class="act"><span class="n">4</span><span class="t">Прочная столешница (18 мм, ≥ 50 кг) как УТП рабочего/игрового стола <span class="lead-refs">· пример: <a href="pismennyy_stol_galereya.html#lead3">Neo Loft — 150 кг</a></span></span><span class="when">2–3 мес</span></div>
+    <div class="act"><span class="n">5</span><span class="t">Стол с надстройкой/полками под малые квартиры и школьников <span class="lead-refs">· лидер: <a href="pismennyy_stol_galereya.html#lead1">Кео</a></span></span><span class="when">3 мес</span></div>
   </div>
 
   <div class="cta">
