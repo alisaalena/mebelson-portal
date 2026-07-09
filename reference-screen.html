@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MEBELSON® — Письменный стол · Анализ категории</title>
+<style>
+:root{
+  --bg:#FAFAFA;--surface:#FFFFFF;--surface-2:#F4F5F7;
+  --text:#111827;--text-2:#6B7280;--text-3:#9CA3AF;
+  --border:#ECEEF2;--accent:#5B5CEB;--accent-hover:#4B4CD6;--oak:#BE8A5A;
+  --sage:#5E7A5B;--amber:#B0812E;
+  --font:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --sh-sm:0 1px 2px rgba(15,23,42,.04);--sh:0 2px 8px rgba(15,23,42,.05);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums}
+.screen{max-width:860px;margin:0 auto;padding:40px 40px 72px}
+
+/* контекст-строка */
+.ctx{display:flex;justify-content:space-between;align-items:baseline;
+  font-size:12px;color:var(--text-3);padding-bottom:24px;border-bottom:1px solid var(--border)}
+.ctx .brand{letter-spacing:.5px;text-transform:uppercase;font-weight:600;color:var(--text-2)}
+
+/* заголовок + вердикт */
+.head{margin-top:32px}
+.cat{font-size:13px;color:var(--text-3);letter-spacing:.3px}
+.head h1{font-size:32px;font-weight:700;letter-spacing:-.02em;margin:4px 0 14px}
+.verdict{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;color:var(--text)}
+.verdict .dot{width:9px;height:9px;border-radius:50%;background:var(--sage)}
+.verdict .sep{color:var(--border)}
+.verdict .prio{color:var(--text-2);font-weight:500}
+
+/* ГЕРОЙ — одно доминирующее число */
+.hero{margin-top:32px}
+.hero-num{font-size:clamp(52px,9vw,76px);font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--text)}
+.hero-num .u{font-size:.32em;font-weight:600;color:var(--text-3);letter-spacing:0}
+.hero-num .up{font-size:.34em;font-weight:700;color:var(--sage);letter-spacing:0;margin-left:8px}
+.oak-line{width:72px;height:3px;background:var(--oak);border:none;border-radius:3px;margin:20px 0 18px}
+.decision{font-size:17px;color:var(--text);max-width:560px;line-height:1.5}
+.decision b{font-weight:600}
+
+/* метрики поддержки — тише героя, табличные */
+.metrics{display:flex;flex-wrap:wrap;gap:36px;margin-top:28px}
+.metric .mv{font-size:26px;font-weight:700;letter-spacing:-.01em;line-height:1}
+.metric .mv .u{font-size:.5em;font-weight:600;color:var(--text-3);margin-left:3px}
+.metric .ml{font-size:12px;color:var(--text-2);margin-top:7px;letter-spacing:.2px}
+
+/* доверие — сдержанно, с раскрытием рядом */
+.conf{margin-top:28px;padding:16px 18px;background:var(--surface);box-shadow:var(--sh-sm);border-radius:12px}
+.conf-top{display:flex;align-items:center;gap:10px}
+.conf-badge{font-size:13px;font-weight:700;color:var(--text);display:inline-flex;align-items:center;gap:8px}
+.conf-badge .tick{width:3px;height:14px;background:var(--oak);border-radius:2px;display:inline-block}
+.conf-label{font-size:13px;color:var(--text-2)}
+details.conf-more{margin-top:0}
+details.conf-more>summary{cursor:pointer;list-style:none;font-size:12px;color:var(--accent);font-weight:600;margin-left:auto}
+details.conf-more>summary::-webkit-details-marker{display:none}
+details.conf-more>summary::before{content:"▸ почему"}
+details.conf-more[open]>summary::before{content:"▾ почему"}
+.conf-body{font-size:13px;color:var(--text-2);line-height:1.8;margin-top:12px}
+.conf-body .ok{color:var(--sage);font-weight:600}
+.conf-body .wait{color:var(--amber);font-weight:600}
+
+/* действия */
+.sect-h{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-3);
+  font-weight:700;margin:44px 0 16px}
+.acts{display:flex;flex-direction:column;gap:8px}
+.act{display:grid;grid-template-columns:24px 1fr auto;gap:14px;align-items:center;
+  background:var(--surface);box-shadow:var(--sh-sm);border-radius:10px;padding:14px 16px}
+.act .n{font-size:13px;font-weight:700;color:var(--text-3);font-variant-numeric:tabular-nums}
+.act .t{font-size:14px;color:var(--text)}
+.act .when{font-size:12px;color:var(--text-3);white-space:nowrap}
+
+/* CTA — следующий шаг исследования, не UI-кнопка */
+.cta{margin-top:28px}
+.cta-link{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;
+  color:var(--accent);text-decoration:none;padding:4px 0;border-bottom:2px solid transparent;
+  transition:border-color .15s}
+.cta-link:hover{border-bottom-color:var(--accent)}
+.cta-link .arw{transition:transform .15s}
+.cta-link:hover .arw{transform:translateX(3px)}
+.hero-label{font-size:12px;letter-spacing:.4px;color:var(--text-2);margin-bottom:10px}
+
+/* доказательная база — тихо, прогрессивное раскрытие */
+.evid{margin-top:44px;padding-top:24px;border-top:1px solid var(--border)}
+.evid-row{display:flex;flex-wrap:wrap;gap:10px}
+.evid-item{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--text-2);
+  background:var(--surface);box-shadow:var(--sh-sm);border-radius:999px;padding:8px 14px}
+.evid-item b{color:var(--text);font-weight:600}
+.evid-note{font-size:12px;color:var(--text-3);margin-top:12px}
+
+.foot{margin-top:48px;padding-top:20px;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-3)}
+.wordmark{font-weight:700;position:relative;padding-bottom:5px;color:var(--text)}
+.wordmark::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--oak);border-radius:2px}
+@media(max-width:560px){.screen{padding:28px 20px 56px}.metrics{gap:24px}}
+
+/* — Второй слой: исследование ниже решения — */
+.sec{margin-top:48px}
+.pain{display:grid;grid-template-columns:auto 1fr;gap:12px;background:var(--surface);
+  box-shadow:var(--sh-sm);border-radius:10px;padding:14px 16px;margin-bottom:8px}
+.pain .pdot{width:9px;height:9px;border-radius:50%;margin-top:6px}
+.pain .ph{font-size:14px;font-weight:600;color:var(--text)}
+.pain .pp{font-size:13px;color:var(--text-2);margin-top:3px}
+.pain details{margin-top:8px}
+.pain summary{cursor:pointer;list-style:none;font-size:12px;color:var(--accent);font-weight:600}
+.pain summary::-webkit-details-marker{display:none}
+.pain summary::before{content:"▸ подробнее"}
+.pain details[open] summary::before{content:"▾ свернуть"}
+.pain .pmore{font-size:13px;color:var(--text-2);line-height:1.6;margin-top:8px}
+.pain-note{font-size:12px;color:var(--text-3);margin-top:10px;font-style:italic}
+.cj-step{display:grid;grid-template-columns:26px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+.cj-step:last-child{border-bottom:none}
+.cj-n{font-size:12px;font-weight:700;color:var(--text-3)}
+.cj-t{font-size:14px;font-weight:600;color:var(--text)}
+.cj-d{font-size:13px;color:var(--text-2);margin-top:3px}
+.cj-d b{color:var(--text);font-weight:600}
+.hyp{background:var(--surface);box-shadow:var(--sh-sm);border-radius:10px;padding:15px 16px;margin-bottom:8px}
+.hyp-top{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.hyp-n{font-size:13px;font-weight:700;color:var(--text-3)}
+.hyp-t{font-size:14px;font-weight:600;color:var(--text);flex:1}
+.hyp-p{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+.hyp-p.a{background:var(--accent-weak);color:var(--accent-hover)}
+.hyp-p.b{background:var(--surface-2);color:var(--text-2)}
+.hyp-d{font-size:13px;color:var(--text-2);line-height:1.55}
+.hyp-d b{color:var(--text)}
+.gallery-link{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;
+  color:var(--accent);text-decoration:none;border-bottom:2px solid transparent;padding:4px 0}
+.gallery-link:hover{border-bottom-color:var(--accent)}
+.gallery-link .arw{transition:transform .15s}
+.gallery-link:hover .arw{transform:translateX(3px)}
+.jrnl{margin-top:16px}
+.jrnl>summary{cursor:pointer;list-style:none;font-size:13px;font-weight:600;color:var(--text-2)}
+.jrnl>summary::-webkit-details-marker{display:none}
+.jrnl>summary::before{content:"▸ "}
+.jrnl[open]>summary::before{content:"▾ "}
+.dtbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.dtbl th{text-align:left;font-size:10px;letter-spacing:.4px;text-transform:uppercase;color:var(--text-2);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--border)}
+.dtbl td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--text-2);vertical-align:top}
+.dtbl td:first-child{color:var(--text)}
+
+</style>
+</head>
+<body>
+<div class="screen">
+
+  <div class="ctx">
+    <span class="brand">MEBELSON® · Ассортиментные решения</span>
+    <span>Обновлено 08.07 · рынок 28 дней</span>
+  </div>
+
+  <div class="head">
+    <div class="cat">Решение по категории</div>
+    <h1>Письменные столы</h1>
+    <span class="verdict"><span class="dot"></span> Расти <span class="sep">·</span> <span class="prio">приоритет A</span></span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-label">Рынок категории</div>
+    <div class="hero-num">497,5<span class="u"> млн ₽</span><span class="up">+22%</span></div>
+    <hr class="oak-line">
+    <div class="decision">Самая растущая категория из топ-10. Наша доля ≈2,1% — есть куда расти. <b>Заходим в рост, но не демпингом</b>: маржинальные ниши и доступность, не цена.</div>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><div class="mv">10,29<span class="u">млн ₽</span></div><div class="ml">наш оборот · июнь</div></div>
+    <div class="metric"><div class="mv">2,1<span class="u">%</span></div><div class="ml">наша доля рынка</div></div>
+    <div class="metric"><div class="mv">221<span class="u">₽/кг</span></div><div class="ml">маржа · порог 300</div></div>
+    <div class="metric"><div class="mv">2<span class="u">/10</span></div><div class="ml">хит-SKU нет в наличии</div></div>
+  </div>
+
+  <div class="conf">
+    <div class="conf-top">
+      <span class="conf-badge"><span class="tick"></span> Уровень доверия B</span>
+      <span class="conf-label">— сильная база</span>
+    </div>
+    <details class="conf-more" style="margin-top:10px">
+      <summary style="margin-left:0"></summary>
+      <div class="conf-body">
+        <span class="ok">✓ Рынок</span> — Ozon ЛК, 28 дн · <span class="ok">✓ Наш оборот</span> — свод 4 акк, сверен · <span class="ok">✓ Маржа / K = 0,376</span> — валидирован · <span class="wait">⧗ Отзывы</span> — CSV mpstats не загружен.
+        3 из 4 источников подтверждены → B. После загрузки отзывов → A.
+      </div>
+    </details>
+  </div>
+
+  <div class="sect-h">Что делать</div>
+  <div class="acts">
+    <div class="act"><span class="n">1</span><span class="t">Держать сток хит-SKU и зайти в «нет в наличии» — стол с ящиками и угловой</span><span class="when">1 мес</span></div>
+    <div class="act"><span class="n">2</span><span class="t">Размножить наш 120×120 в цветах — занять несколько строк выдачи</span><span class="when">1 мес</span></div>
+    <div class="act"><span class="n">3</span><span class="t">Ввести компактную SKU с ₽/кг ≥ 300 в довесок к объёмному хиту</span><span class="when">2–3 мес</span></div>
+    <div class="act"><span class="n">4</span><span class="t">Прочная столешница (18 мм, ≥ 50 кг) как УТП рабочего/игрового стола</span><span class="when">2–3 мес</span></div>
+    <div class="act"><span class="n">5</span><span class="t">Стол с надстройкой/полками под малые квартиры и школьников</span><span class="when">3 мес</span></div>
+  </div>
+
+  <div class="cta">
+    <a class="cta-link" href="#issledovanie">Посмотреть исследование <span class="arw">→</span></a>
+  </div>
+
+  <div class="sec" id="issledovanie">
+    <div class="sect-h">Боли рынка · из отзывов и карточек ТОП-10</div>
+
+    <div class="pain"><span class="pdot" style="background:var(--err)"></span><div>
+      <div class="ph">Топ-SKU «нет в наличии»</div>
+      <div class="pp">2 из 10 лидеров нельзя купить прямо сейчас.</div>
+      <details><summary></summary><div class="pmore">ГУД ЛАКК «Кастор» (стол с ящиками) и ГРИНВУД (угловой) — «Узнать о поступлении». Спрос сформирован, товара нет → держать сток и присутствовать в этих под-нишах.</div></details>
+    </div></div>
+
+    <div class="pain"><span class="pdot" style="background:var(--err)"></span><div>
+      <div class="ph">Слабая столешница у части лидеров</div>
+      <div class="pp">Макс. нагрузка 15–20 кг — мало для монитора и техники.</div>
+      <details><summary></summary><div class="pmore">Кастор и CUBE — 15 кг, Сага — 20 кг. Neo Loft держит 150 кг и в топе. Прочная столешница (18 мм, ≥ 50 кг) — реальный дифференциатор.</div></details>
+    </div></div>
+
+    <div class="pain"><span class="pdot" style="background:var(--amber)"></span><div>
+      <div class="ph">Рейтинг ниже топа + брак в доставке</div>
+      <div class="pp">«Алтай» — единственный ниже 4.5★ в ТОП-10.</div>
+      <details><summary></summary><div class="pmore">Видимый отзыв: «угол коробки был порван». Контроль сборки и усиленная упаковка углов = отрыв по рейтингу.</div></details>
+    </div></div>
+
+    <div class="pain"><span class="pdot" style="background:var(--amber)"></span><div>
+      <div class="ph">Тонкая маржа, рынок приучен к скидкам</div>
+      <div class="pp">Медиана 221 ₽/кг, верх выдачи — глубокие скидки.</div>
+      <details><summary></summary><div class="pmore">12000→3412, 24980→4318. В массовом бюджете без демпинга нерентабельно — уходим в маржинальные ниши (компакт, тех-стол, руководитель).</div></details>
+    </div></div>
+
+    <div class="pain"><span class="pdot" style="background:var(--sage)"></span><div>
+      <div class="ph">Цвет-вариации одной модели берут верх</div>
+      <div class="pp">2 модели в 2 цветах занимают 4 из 10 мест ТОП-10.</div>
+      <details><summary></summary><div class="pmore">Кео (белый + сонома) и Аскетик 1400 (белый + чёрный). Размножить наш 120×120 в цветах — занять несколько строк выдачи.</div></details>
+    </div></div>
+
+    <div class="pain"><span class="pdot" style="background:var(--sage)"></span><div>
+      <div class="ph">Надстройка и полки — товар №1 категории</div>
+      <div class="pp">Стол с надстройкой и 5 полками — лидер по обороту.</div>
+      <details><summary></summary><div class="pmore">Вертикальное хранение под малые квартиры и школьников востребовано. Наш стол с надстройкой — премиальнее лидера.</div></details>
+    </div></div>
+
+    <div class="pain-note">Версия болей — по карточкам и рейтингам ТОП-10. Проценты и цитаты добавляются после загрузки CSV отзывов mpstats.</div>
+  </div>
+
+  <div class="sec">
+    <div class="sect-h">Путь покупателя</div>
+    <div class="cj-step"><span class="cj-n">1</span><div><div class="cj-t">Осознание</div><div class="cj-d">Ищет стол по ширине и назначению. <b>Боль:</b> влезет ли, для ребёнка или взрослого.</div></div></div>
+    <div class="cj-step"><span class="cj-n">2</span><div><div class="cj-t">Сравнение</div><div class="cj-d">Сравнивает полки, ящики, цвет, цену. <b>Триггер:</b> полный состав хранения + вилка цветов.</div></div></div>
+    <div class="cj-step"><span class="cj-n">3</span><div><div class="cj-t">Решение</div><div class="cj-d">Смотрит нагрузку и негатив. <b>Боль:</b> выдержит ли технику, придёт ли целым.</div></div></div>
+    <div class="cj-step"><span class="cj-n">4</span><div><div class="cj-t">Покупка</div><div class="cj-d"><b>Боль:</b> хит «нет в наличии» — уходит к конкуренту. <b>Триггер:</b> стабильный сток.</div></div></div>
+    <div class="cj-step"><span class="cj-n">5</span><div><div class="cj-t">Сборка</div><div class="cj-d"><b>Боль:</b> непонятная инструкция, много деталей. <b>Триггер:</b> понятная схема + маркировка.</div></div></div>
+    <div class="cj-step"><span class="cj-n">6</span><div><div class="cj-t">Эксплуатация</div><div class="cj-d"><b>Боль:</b> сколы на кромке, шатается. <b>Триггер:</b> ЛДСП 18 мм + эргономика.</div></div></div>
+  </div>
+
+  <div class="sec">
+    <div class="sect-h">Продуктовые гипотезы</div>
+    <div class="hyp"><div class="hyp-top"><span class="hyp-n">1</span><span class="hyp-t">Держать сток хит-SKU и зайти в «нет в наличии»</span><span class="hyp-p a">A</span></div><div class="hyp-d">2 из ТОП-10 вне наличия. <b>Проверить:</b> наш аналог стола с ящиками и углового.</div></div>
+    <div class="hyp"><div class="hyp-top"><span class="hyp-n">2</span><span class="hyp-t">Наш 120×120 в нескольких цветах</span><span class="hyp-p a">A</span></div><div class="hyp-d">Цвет-вариации держат верх выдачи. <b>Проверить:</b> спрос и маржу по цветам.</div></div>
+    <div class="hyp"><div class="hyp-top"><span class="hyp-n">3</span><span class="hyp-t">Компактная SKU с высоким ₽/кг</span><span class="hyp-p a">A</span></div><div class="hyp-d">Наш 120×120 = ₽/кг 150. <b>Проверить:</b> компакт 110–120 см с ₽/кг ≥ 300.</div></div>
+    <div class="hyp"><div class="hyp-top"><span class="hyp-n">4</span><span class="hyp-t">Прочная столешница как УТП</span><span class="hyp-p b">B</span></div><div class="hyp-d">У лидеров 15–20 кг; Neo Loft (150 кг) в топе. <b>Проверить:</b> 18 мм, нагрузка ≥ 50 кг.</div></div>
+    <div class="hyp"><div class="hyp-top"><span class="hyp-n">5</span><span class="hyp-t">Стол с надстройкой/полками</span><span class="hyp-p b">B</span></div><div class="hyp-d">Топ №1 — стол с надстройкой. <b>Проверить:</b> под школьника и малые комнаты.</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="sect-h">Доказательная база</div>
+    <a class="gallery-link" href="pismennyy_stol_galereya.html">Открыть галерею 10 конкурентов <span class="arw">→</span></a>
+    <div style="font-size:13px;color:var(--text-3);margin-top:8px">Первый слой — скрининг рынка: фото, характеристики и сигнал маржи ₽/кг по каждому лидеру.</div>
+    <details class="jrnl">
+      <summary>Показать журнал доказательств и источники</summary>
+      <table class="dtbl"><thead><tr><th>Вывод</th><th>Источник</th><th>Статус</th></tr></thead><tbody>
+      <tr><td>Рынок 497,5 млн, +22%, раздроблён</td><td>Ozon ЛК · 28 дн</td><td>Подтверждено</td></tr>
+      <tr><td>Наш оборот 10,29 млн (4 акк, июнь), доля ≈2,1%</td><td>Свод 4 акк</td><td>Подтверждено</td></tr>
+      <tr><td>Бренд Mebelson 12,82 млн, 4 продавца = наши 4 акк</td><td>Ozon бренды · 28 дн</td><td>Подтверждено</td></tr>
+      <tr><td>Медиана 221 ₽/кг, K = 0,376</td><td>Скрипт 1</td><td>Подтверждено</td></tr>
+      <tr><td>2 из ТОП-10 «нет в наличии»</td><td>Скриншоты карточек</td><td>Подтверждено</td></tr>
+      <tr><td>Боли: проценты и цитаты</td><td>CSV mpstats</td><td>Ожидает загрузки</td></tr>
+      </tbody></table>
+    </details>
+  </div>
+
+
+
+  <div class="foot">
+    <span class="wordmark">MEBELSON®</span>
+    <span>Спокойно · точно · уверенно</span>
+  </div>
+
+</div>
+</body>
+</html>

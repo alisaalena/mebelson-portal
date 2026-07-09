@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MEBELSON® — Ассортиментные решения (предпросмотр)</title>
+<style>
+:root{
+  --bg:#FAFAFA;--surface:#FFFFFF;--surface-2:#F4F5F7;
+  --text:#111827;--text-2:#6B7280;--text-3:#9CA3AF;
+  --border:#ECEEF2;--accent:#5B5CEB;--accent-hover:#4B4CD6;--accent-weak:#EEF0FE;--oak:#BE8A5A;
+  --sage:#5E7A5B;
+  --font:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --sh-sm:0 1px 2px rgba(15,23,42,.04);--sh:0 2px 8px rgba(15,23,42,.05);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.screen{max-width:880px;margin:0 auto;padding:40px 40px 72px}
+
+.ctx{display:flex;justify-content:space-between;align-items:baseline;
+  font-size:12px;color:var(--text-3);padding-bottom:24px;border-bottom:1px solid var(--border)}
+.ctx .brand{letter-spacing:.5px;text-transform:uppercase;font-weight:600;color:var(--text-2)}
+.ctx .prev{background:var(--accent-weak);color:var(--accent-hover);font-weight:600;
+  padding:3px 9px;border-radius:999px;text-transform:none;letter-spacing:0}
+
+.head{margin-top:36px}
+.head .eyebrow{font-size:13px;color:var(--text-3);letter-spacing:.3px}
+.head h1{font-size:34px;font-weight:700;letter-spacing:-.02em;margin:4px 0 12px}
+.oak-line{width:64px;height:3px;background:var(--oak);border:none;border-radius:3px;margin:0 0 16px}
+.head p{font-size:16px;color:var(--text-2);max-width:560px}
+
+.list{margin-top:36px}
+.list-head{display:grid;grid-template-columns:26px 1fr 132px 96px 132px;gap:16px;
+  padding:0 16px 10px;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--text-3);font-weight:600}
+.row{display:grid;grid-template-columns:26px 1fr 132px 96px 132px;gap:16px;align-items:center;
+  padding:16px;border-radius:12px;background:var(--surface);box-shadow:var(--sh-sm);margin-bottom:8px;
+  text-decoration:none;color:inherit}
+.row.live{box-shadow:var(--sh);position:relative;overflow:hidden}
+.row.live::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--oak)}
+.row.soon{opacity:.72}
+.row .rk{font-size:13px;color:var(--text-3);font-weight:700}
+.row .nm{font-size:15px;font-weight:600;color:var(--text)}
+.row .nm .lvl{display:block;font-size:12px;color:var(--text-3);font-weight:400;margin-top:2px}
+.row .mkt{font-size:16px;font-weight:700;text-align:right}
+.row .mkt .u{font-size:.72em;color:var(--text-3);font-weight:600;margin-left:2px}
+.row .shr{font-size:14px;color:var(--text-2);text-align:right}
+.row .st{text-align:right;font-size:13px;white-space:nowrap}
+.row .st .verdict{display:inline-flex;align-items:center;gap:7px;color:var(--accent);font-weight:600}
+.row .st .verdict .dot{width:8px;height:8px;border-radius:50%;background:var(--sage)}
+.row .st .verdict .arw{transition:transform .15s}
+.row.live:hover .st .verdict .arw{transform:translateX(3px)}
+.row .st .soon-t{color:var(--text-3)}
+.col-h-r{text-align:right}
+
+.note{margin-top:28px;font-size:13px;color:var(--text-3);line-height:1.7}
+.note b{color:var(--text-2)}
+
+.foot{margin-top:44px;padding-top:20px;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-3)}
+.wordmark{font-weight:700;position:relative;padding-bottom:5px;color:var(--text)}
+.wordmark::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--oak);border-radius:2px}
+
+@media(max-width:640px){
+  .list-head{display:none}
+  .row{grid-template-columns:26px 1fr auto;gap:10px}
+  .row .mkt,.row .shr{display:none}
+}
+</style>
+</head>
+<body>
+<div class="screen">
+
+  <div class="ctx">
+    <span class="brand">MEBELSON® · Ассортиментные решения</span>
+    <span class="prev">Предпросмотр нового языка</span>
+  </div>
+
+  <div class="head">
+    <div class="eyebrow">Система принятия ассортиментных решений</div>
+    <h1>Какие категории развивать</h1>
+    <hr class="oak-line">
+    <p>Вердикт по каждой категории на данных маркетплейсов. Начните с приоритетной — решение, уверенность и план действий внутри.</p>
+  </div>
+
+  <div class="list">
+    <div class="list-head">
+      <span>#</span><span>Категория</span><span class="col-h-r">Рынок · 3 мес</span><span class="col-h-r">Наша доля</span><span class="col-h-r">Статус</span>
+    </div>
+
+    <a class="row live" href="reference-screen.html">
+      <span class="rk">4</span>
+      <span class="nm">Письменные столы<span class="lvl">приоритет A · разбор готов</span></span>
+      <span class="mkt">1 410<span class="u"> млн ₽</span></span>
+      <span class="shr">2,08%</span>
+      <span class="st"><span class="verdict"><span class="dot"></span> Расти <span class="arw">→</span></span></span>
+    </a>
+
+    <div class="row soon">
+      <span class="rk">1</span>
+      <span class="nm">Комплект мебели для прихожей<span class="lvl">приоритет A</span></span>
+      <span class="mkt">905<span class="u"> млн ₽</span></span>
+      <span class="shr">6,56%</span>
+      <span class="st"><span class="soon-t">разбор готовится</span></span>
+    </div>
+
+    <div class="row soon">
+      <span class="rk">2</span>
+      <span class="nm">Туалетный столик<span class="lvl">приоритет A</span></span>
+      <span class="mkt">684<span class="u"> млн ₽</span></span>
+      <span class="shr">6,07%</span>
+      <span class="st"><span class="soon-t">разбор готовится</span></span>
+    </div>
+
+    <div class="row soon">
+      <span class="rk">3</span>
+      <span class="nm">Шкаф распашной<span class="lvl">приоритет A</span></span>
+      <span class="mkt">7 139<span class="u"> млн ₽</span></span>
+      <span class="shr">0,50%</span>
+      <span class="st"><span class="soon-t">разбор готовится</span></span>
+    </div>
+
+    <div class="row soon">
+      <span class="rk">5</span>
+      <span class="nm">Тумба<span class="lvl">приоритет A</span></span>
+      <span class="mkt">3 443<span class="u"> млн ₽</span></span>
+      <span class="shr">0,70%</span>
+      <span class="st"><span class="soon-t">разбор готовится</span></span>
+    </div>
+
+    <div class="row soon">
+      <span class="rk">6</span>
+      <span class="nm">Компьютерный стол<span class="lvl">приоритет A</span></span>
+      <span class="mkt">2 153<span class="u"> млн ₽</span></span>
+      <span class="shr">0,87%</span>
+      <span class="st"><span class="soon-t">разбор готовится</span></span>
+    </div>
+
+    <div class="row soon">
+      <span class="rk">7</span>
+      <span class="nm">Комод<span class="lvl">приоритет A</span></span>
+      <span class="mkt">3 331<span class="u"> млн ₽</span></span>
+      <span class="shr">0,38%</span>
+      <span class="st"><span class="soon-t">разбор готовится</span></span>
+    </div>
+
+    <div class="row soon">
+      <span class="rk">8</span>
+      <span class="nm">Обувница<span class="lvl">приоритет A</span></span>
+      <span class="mkt">1 761<span class="u"> млн ₽</span></span>
+      <span class="shr">0,56%</span>
+      <span class="st"><span class="soon-t">разбор готовится</span></span>
+    </div>
+  </div>
+
+  <div class="note">
+    Рынок — аналитика Ozon по категориям за 3 месяца (управленческая очерёдность). Внутри разбора категории период рынка — 28 дней и подписан отдельно. <b>Готов разбор: письменные столы</b> — остальные собираются на этом же языке.
+  </div>
+
+  <div class="foot">
+    <span class="wordmark">MEBELSON®</span>
+    <span>Предпросмотр · параллельно боевому порталу</span>
+  </div>
+
+</div>
+</body>
+</html>
