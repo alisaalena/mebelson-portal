@@ -3,7 +3,7 @@
 Стиль берётся дословно из reference-screen.html — нулевой дрейф.
 Заготовка задачи 4: на вход data-словарь категории -> <кат>_reshenie.html.
 """
-import re, html, pathlib
+import re, html, pathlib, json
 
 REF = pathlib.Path('/mnt/user-data/uploads/reference-screen.html').read_text(encoding='utf-8')
 STYLE = re.search(r'<style>.*?</style>', REF, flags=re.S).group(0)
