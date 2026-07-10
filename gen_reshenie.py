@@ -19,6 +19,8 @@ def esc(s):
 
 
 def build(c):
+    slug = c['file'].replace('_reshenie.html', '')
+    refs = LEADREFS.get(slug, {})
     # --- метрики поддержки ---
     metrics = ''.join(
         f'<div class="metric"><div class="mv">{esc(v)}<span class="u">{esc(u)}</span></div>'
@@ -42,12 +44,18 @@ def build(c):
     </details>
   </div>'''
 
-    # --- что делать ---
+    # --- что делать (со ссылками на лиды галереи) ---
+    def act_refs(i):
+        lst = refs.get(i)
+        if not lst:
+            return ''
+        links = ', '.join(
+            f'<a href="{slug}_galereya.html#lead{n}">{esc(lbl)}</a>' for lbl, n in lst)
+        return f' <span class="lead-refs">· пример: {links}</span>'
     acts = ''.join(
-        f'<div class="act"><span class="n">{i}</span><span class="t">{esc(t)}'
-        + (f' <span class="lead-refs">· {esc(ref)}</span>' if ref else '')
-        + f'</span><span class="when">{esc(w)}</span></div>'
-        for i, (t, w, ref) in enumerate(c['acts'], 1))
+        f'<div class="act"><span class="n">{i}</span><span class="t">{esc(t)}{act_refs(i)}'
+        f'</span><span class="when">{esc(w)}</span></div>'
+        for i, (t, w, _ref) in enumerate(c['acts'], 1))
 
     # --- боли ---
     pains = ''
@@ -139,8 +147,8 @@ def build(c):
 
   <div class="sec">
     <div class="sect-h">Доказательная база</div>
-    <a class="gallery-link" href="{esc(c['gallery'])}">Открыть полный разбор ТОП-10 <span class="arw">→</span></a>
-    <div style="font-size:13px;color:var(--text-3);margin-top:8px">Коммерческий слой: ТОП-10 со скриншотами карточек, характеристиками и сигналом маржи ₽/кг.</div>
+    <a class="gallery-link" href="{slug}_galereya.html">Открыть галерею 10 конкурентов <span class="arw">→</span></a>
+    <div style="font-size:13px;color:var(--text-3);margin-top:8px">Первый слой — скрининг рынка: фото, характеристики и сигнал маржи ₽/кг по каждому лидеру.</div>
     {brand}
     <details class="jrnl">
       <summary>Показать журнал доказательств и источники</summary>
@@ -384,8 +392,128 @@ DATA = [
 },
 ]
 
+# ================= ГАЛЕРЕЯ ПЕРВОГО СЛОЯ (с якорями #leadN) =================
+import json
+LEADS = json.loads(pathlib.Path('/home/claude/leads_full.json').read_text(encoding='utf-8'))
+GAL_STYLE = pathlib.Path('/home/claude/_galereya_style.html').read_text(encoding='utf-8')
+
+# привязка «действие → номер лида» (по бренду/примеру, названному в действии)
+LEADREFS = {
+  'prihozhaya':       {2: [('наш премиум №10', 10)], 3: [('УЮТНАЯ ЛОГИКА', 1), ('120 см', 6)]},
+  'tualetnyy_stolik': {1: [('Сага «под дерево»', 1), ('BlackMirror LED', 4)], 3: [('Гранд Волна 80 см', 5)]},
+  'shkaf_raspashnoy': {1: [('УЮТНАЯ ЛОГИКА', 1), ('пенал 40 см', 9)]},
+  'tumba':            {2: [('ItalDoors', 2), ('Flow', 4)], 3: [('Ridberg 2 шт', 5)], 4: [('Puzzlemebel ротанг', 3), ('реечный МДФ', 9)]},
+  'ks':               {2: [('ARNIKA', 2), ('со шкафом', 4)], 3: [('Олмеко трансформер', 7)]},
+  'krovaty':          {3: [('УЮТНАЯ ЛОГИКА · хранение', 4)]},
+}
+# мета галереи: заголовок, медиана ₽/кг, K
+GALMETA = {
+  'prihozhaya':       ('Комплект мебели для прихожей', '223', '0,255'),
+  'tualetnyy_stolik': ('Туалетный столик', '284', '0,358'),
+  'shkaf_raspashnoy': ('Шкаф распашной', '126', '0,450'),
+  'tumba':            ('Тумба', '315', '0,294 (не валид.)'),
+  'ks':               ('Компьютерный стол', '350', '0,264'),
+  'krovaty':          ('Двуспальная кровать', '150', '0,264 (не валид.)'),
+}
+
+def rkg_color(v):
+    v = int(v)
+    return 'sage' if v >= 300 else ('amber' if v >= 200 else 'brick')
+
+def price_bucket(price):
+    n = int(re.sub(r'\D', '', price) or 0)
+    if not n: return ''
+    return 'budget' if n < 5000 else ('mid' if n <= 15000 else 'premium')
+
+def gcard(l):
+    tags = []
+    b = price_bucket(l['price'])
+    if b: tags.append(b)
+    if l.get('rkg_ok'): tags.append('marzha')
+    tagstr = ' '.join(tags)
+    # метрики
+    met = ''
+    if l['price'] or l['rating']:
+        price = f'<span class="gprice">{esc(l["price"])}<span class="u"> ₽</span></span>' if l['price'] else ''
+        rate = f'<span class="grate">★ {esc(l["rating"])}</span>' if l['rating'] else ''
+        met = f'<div class="gmetrics">{price}{rate}</div>'
+    # ₽/кг
+    kg = ''
+    if l['rkg']:
+        w = f'<span class="u"> · {esc(l["weight"])}</span>' if l['weight'] else ''
+        kg = (f'<div class="gkg"><span class="kgdot" style="background:var(--{rkg_color(l["rkg"])})"></span>'
+              f'{esc(l["rkg"])} ₽/кг{w}</div>')
+    # характеристики
+    spec = (f'<details class="gspec"><summary>характеристики</summary>'
+            f'<img src="{l["img_spec"]}" alt="характеристики" loading="lazy"></details>') if l['img_spec'] else ''
+    return (f'<div class="gcard" id="lead{l["n"]}" data-tags="{tagstr}">'
+            f'<div class="gimg"><img src="{l["img_main"]}" alt="{esc(l["name"])}" loading="lazy"></div>'
+            f'<div class="gbody"><div class="gtop"><span class="grk">{l["n"]}</span>'
+            f'<span class="gbrand">{esc(l["brand"])}</span></div>'
+            f'<div class="gname">{esc(l["name"])}</div>{met}{kg}{spec}</div></div>')
+
+def build_galereya(slug):
+    leads = sorted(LEADS[slug], key=lambda x: x['n'])
+    title, median, K = GALMETA[slug]
+    has_rkg = any(l['rkg'] for l in leads)
+    # фильтры по цене + маржа (если есть ₽/кг)
+    fbtns = ['<button class="fbtn active" data-f="all">Все (10)</button>',
+             '<button class="fbtn" data-f="budget">до 5 000 ₽</button>',
+             '<button class="fbtn" data-f="mid">5 000–15 000 ₽</button>',
+             '<button class="fbtn" data-f="premium">15 000 ₽+</button>']
+    if any(l.get('rkg_ok') for l in leads):
+        fbtns.append('<button class="fbtn" data-f="marzha">маржа ≥ 300</button>')
+    legend = ''
+    if has_rkg:
+        legend = ('<div class="legend">'
+                  '<span><i style="background:var(--sage)"></i> ≥ 300 ₽/кг — маржа проходит</span>'
+                  '<span><i style="background:var(--amber)"></i> 200–299 ₽/кг</span>'
+                  '<span><i style="background:var(--brick)"></i> &lt; 300 ₽/кг</span></div>')
+    note = ('ТОП-10 по обороту · рынок 28 дней · сигнал слева от ₽/кг = маржинальность'
+            if has_rkg else 'ТОП-10 по обороту · рынок 28 дней')
+    cards = ''.join(gcard(l) for l in leads)
+    script = ('<script>(function(){var b=document.querySelectorAll(".fbtn"),'
+              'c=document.querySelectorAll(".gcard");b.forEach(function(x){'
+              'x.addEventListener("click",function(){b.forEach(function(y){y.classList.remove("active")});'
+              'x.classList.add("active");var f=x.getAttribute("data-f");c.forEach(function(k){'
+              'var t=k.getAttribute("data-tags")||"";if(f==="all"||t.indexOf(f)>-1)'
+              'k.classList.remove("hidden");else k.classList.add("hidden");});})});})();</script>')
+    return f'''<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MEBELSON® — {esc(title)} · Галерея конкурентов</title>
+{GAL_STYLE}
+</head>
+<body>
+<div class="screen">
+  <div class="crumbs">
+    <a class="back" href="index2.html">← Все категории</a>
+    <a class="back" href="{slug}_reshenie.html">← к решению по категории</a>
+  </div>
+  <div class="head">
+    <div class="eyebrow">Первый слой · скрининг рынка</div>
+    <h1>{esc(title)} — галерея конкурентов</h1>
+    <div class="note">{note}</div>
+  </div>
+  <div class="filters">{''.join(fbtns)}</div>
+  {legend}
+  <div class="gallery">{cards}</div>
+  <div class="foot">
+    <span class="wordmark">MEBELSON®</span>
+    <span>Медиана категории {median} ₽/кг · порог 300 · K = {K}</span>
+  </div>
+</div>
+{script}
+</body>
+</html>'''
+
 out = pathlib.Path('/home/claude/out'); out.mkdir(exist_ok=True)
 for c in DATA:
+    slug = c['file'].replace('_reshenie.html', '')
     (out / c['file']).write_text(build(c), encoding='utf-8')
+    (out / f'{slug}_galereya.html').write_text(build_galereya(slug), encoding='utf-8')
+    print('GAL', f'{slug}_galereya.html')
     print('OK', c['file'], len((out/c['file']).read_text(encoding='utf-8')), 'bytes')
 print('\nВсего файлов:', len(DATA))
