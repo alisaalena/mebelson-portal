@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MEBELSON® — Вешалка настенная · Анализ категории</title>
+<style>
+:root{
+  --bg:#FAFAFA;--surface:#FFFFFF;--surface-2:#F4F5F7;
+  --text:#111827;--text-2:#6B7280;--text-3:#9CA3AF;
+  --border:#ECEEF2;--accent:#5B5CEB;--accent-hover:#4B4CD6;--oak:#BE8A5A;
+  --sage:#5E7A5B;--amber:#B0812E;--err:#B0443E;
+  --font:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --sh-sm:0 1px 2px rgba(15,23,42,.04);--sh:0 2px 8px rgba(15,23,42,.05);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums}
+.screen{max-width:860px;margin:0 auto;padding:40px 40px 72px}
+.backnav{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-2);
+  text-decoration:none;font-weight:500;margin-bottom:18px;transition:color .15s}
+.backnav:hover{color:var(--accent)}
+
+/* контекст-строка */
+.ctx{display:flex;justify-content:space-between;align-items:baseline;
+  font-size:12px;color:var(--text-3);padding-bottom:24px;border-bottom:1px solid var(--border)}
+.ctx .brand{letter-spacing:.5px;text-transform:uppercase;font-weight:600;color:var(--text-2)}
+
+/* заголовок + вердикт */
+.head{margin-top:32px}
+.cat{font-size:13px;color:var(--text-3);letter-spacing:.3px}
+.head h1{font-size:32px;font-weight:700;letter-spacing:-.02em;margin:4px 0 14px}
+.verdict{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;color:var(--text)}
+.verdict .dot{width:9px;height:9px;border-radius:50%;background:var(--sage)}
+.verdict .sep{color:var(--border)}
+.verdict .prio{color:var(--text-2);font-weight:500}
+
+/* ГЕРОЙ — одно доминирующее число */
+.hero{margin-top:32px}
+.hero-num{font-size:clamp(52px,9vw,76px);font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--text)}
+.hero-num .u{font-size:.32em;font-weight:600;color:var(--text-3);letter-spacing:0}
+.hero-num .up{font-size:.34em;font-weight:700;color:var(--sage);letter-spacing:0;margin-left:8px}
+.oak-line{width:72px;height:3px;background:var(--oak);border:none;border-radius:3px;margin:20px 0 18px}
+.decision{font-size:17px;color:var(--text);max-width:560px;line-height:1.5}
+.decision b{font-weight:600}
+
+/* метрики поддержки — тише героя, табличные */
+.metrics{display:flex;flex-wrap:wrap;gap:36px;margin-top:28px}
+.metric .mv{font-size:26px;font-weight:700;letter-spacing:-.01em;line-height:1}
+.metric .mv .u{font-size:.5em;font-weight:600;color:var(--text-3);margin-left:3px}
+.metric .ml{font-size:12px;color:var(--text-2);margin-top:7px;letter-spacing:.2px}
+
+/* доверие — сдержанно, с раскрытием рядом */
+.conf{margin-top:28px;padding:16px 18px;background:var(--surface);box-shadow:var(--sh-sm);border-radius:12px}
+.conf-top{display:flex;align-items:center;gap:10px}
+.conf-badge{font-size:13px;font-weight:700;color:var(--text);display:inline-flex;align-items:center;gap:8px}
+.conf-badge .tick{width:3px;height:14px;background:var(--oak);border-radius:2px;display:inline-block}
+.conf-label{font-size:13px;color:var(--text-2)}
+details.conf-more{margin-top:0}
+details.conf-more>summary{cursor:pointer;list-style:none;font-size:12px;color:var(--accent);font-weight:600;margin-left:auto}
+details.conf-more>summary::-webkit-details-marker{display:none}
+details.conf-more>summary::before{content:"▸ почему"}
+details.conf-more[open]>summary::before{content:"▾ почему"}
+.conf-body{font-size:13px;color:var(--text-2);line-height:1.8;margin-top:12px}
+.conf-body .ok{color:var(--sage);font-weight:600}
+.conf-body .wait{color:var(--amber);font-weight:600}
+
+/* действия */
+.sect-h{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-3);
+  font-weight:700;margin:44px 0 16px}
+.acts{display:flex;flex-direction:column;gap:8px}
+.act{display:grid;grid-template-columns:24px 1fr auto;gap:14px;align-items:center;
+  background:var(--surface);box-shadow:var(--sh-sm);border-radius:10px;padding:14px 16px}
+.act .n{font-size:13px;font-weight:700;color:var(--text-3);font-variant-numeric:tabular-nums}
+.act .t{font-size:14px;color:var(--text)}
+.act .when{font-size:12px;color:var(--text-3);white-space:nowrap}
+.lead-refs{font-size:12px;color:var(--text-3)}
+.lead-refs a{color:var(--accent);text-decoration:none;font-weight:500}
+.lead-refs a:hover{text-decoration:underline}
+
+/* CTA — следующий шаг исследования, не UI-кнопка */
+.cta{margin-top:28px}
+.cta-link{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;
+  color:var(--accent);text-decoration:none;padding:4px 0;border-bottom:2px solid transparent;
+  transition:border-color .15s}
+.cta-link:hover{border-bottom-color:var(--accent)}
+.cta-link .arw{transition:transform .15s}
+.cta-link:hover .arw{transform:translateX(3px)}
+.hero-label{font-size:12px;letter-spacing:.4px;color:var(--text-2);margin-bottom:10px}
+
+/* доказательная база — тихо, прогрессивное раскрытие */
+.evid{margin-top:44px;padding-top:24px;border-top:1px solid var(--border)}
+.evid-row{display:flex;flex-wrap:wrap;gap:10px}
+.evid-item{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--text-2);
+  background:var(--surface);box-shadow:var(--sh-sm);border-radius:999px;padding:8px 14px}
+.evid-item b{color:var(--text);font-weight:600}
+.evid-note{font-size:12px;color:var(--text-3);margin-top:12px}
+
+.foot{margin-top:48px;padding-top:20px;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-3)}
+.wordmark{font-weight:700;position:relative;padding-bottom:5px;color:var(--text)}
+.wordmark::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--oak);border-radius:2px}
+@media(max-width:560px){.screen{padding:28px 20px 56px}.metrics{gap:24px}}
+
+/* — Второй слой: исследование ниже решения — */
+.sec{margin-top:48px}
+.pain{display:grid;grid-template-columns:auto 1fr;gap:12px;background:var(--surface);
+  box-shadow:var(--sh-sm);border-radius:10px;padding:14px 16px;margin-bottom:8px}
+.pain .pdot{width:9px;height:9px;border-radius:50%;margin-top:6px}
+.pain .ph{font-size:14px;font-weight:600;color:var(--text)}
+.pain .pp{font-size:13px;color:var(--text-2);margin-top:3px}
+.pain details{margin-top:8px}
+.pain summary{cursor:pointer;list-style:none;font-size:12px;color:var(--accent);font-weight:600}
+.pain summary::-webkit-details-marker{display:none}
+.pain summary::before{content:"▸ подробнее"}
+.pain details[open] summary::before{content:"▾ свернуть"}
+.pain .pmore{font-size:13px;color:var(--text-2);line-height:1.6;margin-top:8px}
+.pain-note{font-size:12px;color:var(--text-3);margin-top:10px;font-style:italic}
+.cj-step{display:grid;grid-template-columns:26px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+.cj-step:last-child{border-bottom:none}
+.cj-n{font-size:12px;font-weight:700;color:var(--text-3)}
+.cj-t{font-size:14px;font-weight:600;color:var(--text)}
+.cj-d{font-size:13px;color:var(--text-2);margin-top:3px}
+.cj-d b{color:var(--text);font-weight:600}
+.hyp{background:var(--surface);box-shadow:var(--sh-sm);border-radius:10px;padding:15px 16px;margin-bottom:8px}
+.hyp-top{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.hyp-n{font-size:13px;font-weight:700;color:var(--text-3)}
+.hyp-t{font-size:14px;font-weight:600;color:var(--text);flex:1}
+.hyp-p{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+.hyp-p.a{background:var(--accent-weak);color:var(--accent-hover)}
+.hyp-p.b{background:var(--surface-2);color:var(--text-2)}
+.hyp-d{font-size:13px;color:var(--text-2);line-height:1.55}
+.hyp-d b{color:var(--text)}
+.gallery-link{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;
+  color:var(--accent);text-decoration:none;border-bottom:2px solid transparent;padding:4px 0}
+.gallery-link:hover{border-bottom-color:var(--accent)}
+.gallery-link .arw{transition:transform .15s}
+.gallery-link:hover .arw{transform:translateX(3px)}
+.jrnl{margin-top:16px}
+.jrnl>summary{cursor:pointer;list-style:none;font-size:13px;font-weight:600;color:var(--text-2)}
+.jrnl>summary::-webkit-details-marker{display:none}
+.jrnl>summary::before{content:"▸ "}
+.jrnl[open]>summary::before{content:"▾ "}
+.dtbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.dtbl th{text-align:left;font-size:10px;letter-spacing:.4px;text-transform:uppercase;color:var(--text-2);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--border)}
+.dtbl td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--text-2);vertical-align:top}
+.dtbl td:first-child{color:var(--text)}
+
+</style>
+</head>
+<body>
+<div class="screen">
+
+  <a class="backnav" href="index2.html">← Все категории</a>
+
+  <div class="ctx">
+    <span class="brand">MEBELSON® · Ассортиментные решения</span>
+    <span>Обновлено 08.07 · рынок 28 дней</span>
+  </div>
+
+  <div class="head">
+    <div class="cat">Решение по категории</div>
+    <h1>Вешалка настенная</h1>
+    <span class="verdict"><span class="dot" style="background:var(--amber)"></span> Входить форматом <span class="sep">·</span> <span class="prio">приоритет B</span></span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-label">Рынок категории</div>
+    <div class="hero-num">146,3<span class="u"> млн ₽</span><span class="up">+4%</span></div>
+    <hr class="oak-line">
+    <div class="decision">Рынок дешёвый (чек 1 931 ₽) и низкомаржинальный — <b>ни одна карточка ТОП-10 не проходит порог 300 ₽/кг</b>. Но он и не защищён: топ-5 держат лишь 24,6%, лидер зашёл 102 дня назад. <b>Резерв — форматы: реечная панель 205 см и стойка 182 см с обувницей дают 54% периметра, а у нас 0 SKU выше 144,5 см.</b> Входить не ценой, а форматом и качеством исполнения.</div>
+  </div>
+
+  <div class="metrics"><div class="metric"><div class="mv">2,17<span class="u">млн ₽</span></div><div class="ml">наш оборот · июнь −29%</div></div><div class="metric"><div class="mv">1,48<span class="u">%</span></div><div class="ml">наша доля рынка</div></div><div class="metric"><div class="mv">238<span class="u">₽/кг</span></div><div class="ml">медиана периметра · порог 300</div></div><div class="metric"><div class="mv">2 972<span class="u">₽</span></div><div class="ml">наш чек факт · прайс 7 473</div></div></div>
+
+  <div class="conf">
+    <div class="conf-top">
+      <span class="conf-badge"><span class="tick"></span> Уровень доверия B</span>
+      <span class="conf-label">— порог снижен, K по 3 карточкам</span>
+    </div>
+    <details class="conf-more" style="margin-top:10px">
+      <summary style="margin-left:0"></summary>
+      <div class="conf-body"><span class="ok">✓ Рынок · Ozon 28 дн</span> · <span class="ok">✓ Наш оборот · свод 4 акк</span> · <span class="wait">⧗ Маржа · K=0,372 (n=3)</span> · <span class="ok">✓ Отзывы · 1 468 mpstats</span>. Порог выручки автоснижен 400к → 100к (при 400к группа пустая). K=0,372 выведен по 3 карточкам конкурентов; свод MEBELSON давал 0,460 — завышение на 24%. Вывод «топ низкомаржинальный» устойчив при обоих K → B.</div>
+    </details>
+  </div>
+
+  <div class="sect-h">Что делать</div>
+  <div class="acts"><div class="act"><span class="n">1</span><span class="t">Разобрать разрыв прайс 7 473 ₽ vs факт 2 972 ₽ с коммерцией</span><span class="when">2 нед</span></div><div class="act"><span class="n">2</span><span class="t">Прототип реечной панели 200–205 см <span class="lead-refs">· пример: <a href="veshalka_galereya.html#lead1">Гнездо Урала</a></span></span><span class="when">1–2 мес</span></div><div class="act"><span class="n">3</span><span class="t">Упаковка с торцевыми протекторами + полный крепёж в коробке <span class="lead-refs">· пример: <a href="veshalka_galereya.html#lead3">торцевые протекторы</a></span></span><span class="when">1 мес</span></div><div class="act"><span class="n">4</span><span class="t">Проработать ЛДСП-стойку 180 см с обувницей и полками <span class="lead-refs">· пример: <a href="veshalka_galereya.html#lead2">Галактика Мебель</a></span></span><span class="when">2–3 мес</span></div><div class="act"><span class="n">5</span><span class="t">Добрать K до 10–15 карточек категории</span><span class="when">2 нед</span></div></div>
+
+  <div class="cta">
+    <a class="cta-link" href="#issledovanie">Посмотреть исследование <span class="arw">→</span></a>
+  </div>
+
+  <div class="sec" id="issledovanie">
+    <div class="sect-h">Боли рынка · из отзывов и карточек ТОП-10</div>
+    <div class="pain"><span class="pdot" style="background:var(--err)"></span><div><div class="ph">Сколы и битые рейки</div><div class="pp">32,6% негатива: «рейки со сколами по углам», «пришло с браком».</div><details><summary></summary><div class="pmore">Рейка — хрупкий формат. Торцевые протекторы и жёсткие рёбра в коробке.</div></details></div></div><div class="pain"><span class="pdot" style="background:var(--err)"></span><div><div class="ph">Упаковка не держит доставку</div><div class="pp">27,1%: «в пункте выдачи рейки уже торчали из коробки», «в коробке был совок опилок».</div><details><summary></summary><div class="pmore">Слабость лидеров, а не свойство категории. Прямая площадка для входа.</div></details></div></div><div class="pain"><span class="pdot" style="background:var(--err)"></span><div><div class="ph">Некомплект крепежа и крючков</div><div class="pp">22,5% (крючки 19,4%): «нет ни одного самореза и крепления на стену», «крючков 4, а не 6».</div><details><summary></summary><div class="pmore">Самая дешёвая правка: запечатанный пакет крепежа + 100% контроль комплектности.</div></details></div></div><div class="pain"><span class="pdot" style="background:var(--amber)"></span><div><div class="ph">Монтаж к стене: клей не держит</div><div class="pp">10,9%: «в инструкции написано приклеить на скотч», «Момент Монтаж вообще не держит».</div><details><summary></summary><div class="pmore">Дюбели и саморезы в коробку + инструкция под бетон / гипсокартон / плитку.</div></details></div></div><div class="pain"><span class="pdot" style="background:var(--sage)"></span><div><div class="ph">Внешний вид — главный драйвер</div><div class="pp">5,7% упоминаний, лишь 3% в негативе: «очень украшает прихожую».</div><details><summary></summary><div class="pmore">Покупают декор стены, а не крючок. Интерьерный кадр обязателен.</div></details></div></div>
+    <div class="pain-note">Боли из 1 468 текстовых отзывов ТОП-10 (средняя оценка 4,64 · негатив 1–3★ = 8,8%). Худший — Метрополис рейки (17–20%), лучший — Гнездо Урала (0–3%).</div>
+  </div>
+
+  <div class="sec"><div class="sect-h">Путь покупателя</div><div class="cj-step"><span class="cj-n">1</span><div><div class="cj-t">Осознание</div><div class="cj-d">Закрыть пустую стену красиво. <b>Боль:</b> планка с крючками выглядит дёшево. <b>Триггер:</b> рейка как элемент дизайна в интерьерном кадре.</div></div></div><div class="cj-step"><span class="cj-n">2</span><div><div class="cj-t">Сравнение</div><div class="cj-d">Планка / рейка / стойка с полками. <b>Боль:</b> сколько влезет и выдержит ли. <b>Триггер:</b> честные габариты и макс. нагрузка.</div></div></div><div class="cj-step"><span class="cj-n">3</span><div><div class="cj-t">Решение</div><div class="cj-d">Читает негатив, смотрит фото боя реек. <b>Боль:</b> придёт ли целым, все ли крючки. <b>Триггер:</b> показать упаковку и пакет крепежа.</div></div></div><div class="cj-step"><span class="cj-n">4</span><div><div class="cj-t">Покупка</div><div class="cj-d">Чек 1 900–5 400 ₽, импульс, ПВЗ. <b>Боль:</b> дороже среднего 1 931 ₽ надо обосновать. <b>Триггер:</b> комплект «3 панели», сценарий «на всю стену».</div></div></div><div class="cj-step"><span class="cj-n">5</span><div><div class="cj-t">Монтаж</div><div class="cj-d">Сверлит или клеит. <b>Боль:</b> крепежа нет, клей не держит. <b>Триггер:</b> дюбели+саморезы и инструкция под 3 типа стен.</div></div></div><div class="cj-step"><span class="cj-n">6</span><div><div class="cj-t">Эксплуатация</div><div class="cj-d">Вешает 5–10 кг верхней одежды. <b>Боль:</b> крючки ломаются, рейка отходит. <b>Триггер:</b> металлические крючки вместо ABS.</div></div></div></div>
+
+  <div class="sec">
+    <div class="sect-h">Продуктовые гипотезы</div>
+    <div class="hyp"><div class="hyp-top"><span class="hyp-n">1</span><span class="hyp-t">Реечная панель 200–205 см</span><span class="hyp-p a">A</span></div><div class="hyp-d">Гнездо Урала (5 SKU, 1,12 млн ₽) и WoodHome96 (4 SKU, 0,46 млн ₽) продают одну и ту же панель 50,7×205 — <b>1,58 млн ₽ за 28 дн = 32% периметра</b>. В своде 4 аккаунтов <b>0 SKU выше 144,5 см</b>. <b>Проверить:</b> себестоимость МДФ-панели 205 см и вместимость упаковочной линии.</div></div><div class="hyp"><div class="hyp-top"><span class="hyp-n">2</span><span class="hyp-t">Вешалка-стойка 182 см с обувницей</span><span class="hyp-p a">A</span></div><div class="hyp-d">Галактика Мебель взяла 1,06 млн ₽ пятью цветовыми SKU одной модели за 102 дня, чек 4 271–5 416 ₽ — вдвое выше рынка. Это уже мебель, а не фурнитура. <b>Проверить:</b> возможна ли ЛДСП-версия со стойкой у подрядчика.</div></div><div class="hyp"><div class="hyp-top"><span class="hyp-n">3</span><span class="hyp-t">Упаковка «доезжает целым»</span><span class="hyp-p a">A</span></div><div class="hyp-d">60% негатива категории — бой реек, упаковка и некомплект. Незакрытая слабость обоих лидеров. <b>Проверить:</b> стоимость протекторов vs возвраты и рейтинг.</div></div><div class="hyp"><div class="hyp-top"><span class="hyp-n">4</span><span class="hyp-t">Комплект «вешалка + обувница»</span><span class="hyp-p b">B</span></div><div class="hyp-d">Метрополис берёт 495 695 ₽ тремя SKU комбо-формата. <b>Проверить:</b> каннибализацию с нашей категорией «Обувница» (9,94 млн за 3 мес).</div></div><div class="hyp"><div class="hyp-top"><span class="hyp-n">5</span><span class="hyp-t">Цена: прайс 7 473 vs факт 2 972</span><span class="hyp-p b">B</span></div><div class="hyp-d">Разрыв в 2,5 раза роняет наш ₽/кг с 679 до 270 — ниже порога. <b>Проверить:</b> скидки, акции или ошибка прайса.</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="sect-h">Доказательная база</div>
+    <a class="gallery-link" href="veshalka_galereya.html">Открыть галерею 10 конкурентов <span class="arw">→</span></a>
+    <div style="font-size:13px;color:var(--text-3);margin-top:8px">Первый слой — скрининг рынка: фото, характеристики и сигнал маржи ₽/кг по каждому лидеру.</div>
+    
+    <details class="jrnl">
+      <summary>Показать журнал доказательств и источники</summary>
+      <table class="dtbl"><thead><tr><th>Вывод</th><th>Источник</th><th>Статус</th></tr></thead><tbody>
+      <tr><td>Рынок 146,3 млн ₽ (+4%), топ-5 = 24,6%</td><td>Ozon 28 дн</td><td>Подтверждено</td></tr><tr><td>Наш оборот 2,17 млн (4 акк., июнь), доля 1,48%, −29%</td><td>Свод 4 акк</td><td>Подтверждено</td></tr><tr><td>0 SKU выше 144,5 см · 52 SKU в 6 линейках</td><td>Свод ассортимента</td><td>Подтверждено</td></tr><tr><td>Медиана периметра 238 ₽/кг · 4 из 27 проходят 300</td><td>Скрипт 1</td><td>Подтверждено</td></tr><tr><td>K = 0,372 — карточки конкурентов, n=3 (свод давал 0,460)</td><td>Вес карточек ÷ объём выгрузки</td><td>Частично</td></tr><tr><td>Боль №1 — бой реек и упаковка (32,6% + 27,1%)</td><td>1 468 отзывов mpstats</td><td>Подтверждено</td></tr><tr><td>Порог автоснижен 400к → 100к</td><td>Скрипт 1, «Сводка»</td><td>Зафиксировано</td></tr>
+      </tbody></table>
+    </details>
+  </div>
+
+  <div class="foot">
+    <span class="wordmark">MEBELSON®</span>
+    <span>Спокойно · точно · уверенно</span>
+  </div>
+
+</div>
+</body>
+</html>
