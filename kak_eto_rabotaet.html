@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MEBELSON® — Как устроена аналитика рынка</title>
+<style>
+:root{
+  --bg:#FAFAFA;--surface:#FFFFFF;--surface-2:#F4F5F7;
+  --text:#111827;--text-2:#6B7280;--text-3:#9CA3AF;
+  --border:#ECEEF2;--accent:#5B5CEB;--accent-weak:#EEF0FE;--oak:#BE8A5A;
+  --sage:#5E7A5B;--amber:#B0812E;--brick:#9B4A3A;
+  --font:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --sh-sm:0 1px 2px rgba(15,23,42,.04);--sh:0 2px 8px rgba(15,23,42,.05);--sh-md:0 6px 20px rgba(15,23,42,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);
+  font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.screen{max-width:960px;margin:0 auto;padding:40px 40px 80px}
+
+.ctx{display:flex;justify-content:space-between;align-items:baseline;
+  font-size:12px;color:var(--text-3);padding-bottom:24px;border-bottom:1px solid var(--border)}
+.ctx .brand{letter-spacing:.5px;text-transform:uppercase;font-weight:600;color:var(--text-2)}
+
+.head{margin-top:36px;max-width:640px}
+.head .eyebrow{font-size:13px;color:var(--text-3);letter-spacing:.3px}
+.head h1{font-size:36px;font-weight:700;letter-spacing:-.02em;margin:4px 0 12px;line-height:1.2}
+.oak-line{width:64px;height:3px;background:var(--oak);border:none;border-radius:3px;margin:0 0 18px}
+.head p{font-size:17px;color:var(--text-2)}
+
+.sec{margin-top:52px}
+.sec-n{font-size:12px;font-weight:700;letter-spacing:.6px;color:var(--oak);text-transform:uppercase}
+.sec h2{font-size:24px;font-weight:700;letter-spacing:-.01em;margin:6px 0 8px}
+.sec .lede{font-size:15px;color:var(--text-2);max-width:660px;margin-bottom:24px}
+
+/* поток */
+.flow{background:var(--surface);border-radius:14px;box-shadow:var(--sh);padding:28px 24px;margin-top:24px;overflow-x:auto}
+.flow svg{display:block;min-width:820px;margin:0 auto}
+
+/* источники */
+.srcs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.src{background:var(--surface);border-radius:12px;box-shadow:var(--sh-sm);padding:20px;
+  position:relative;overflow:hidden}
+.src::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px}
+.src.a::before{background:var(--accent)}
+.src.b::before{background:var(--amber)}
+.src.c::before{background:var(--oak)}
+.src h3{font-size:16px;font-weight:700;margin-bottom:2px}
+.src .who{font-size:12px;color:var(--text-3);margin-bottom:12px}
+.src p{font-size:14px;color:var(--text-2)}
+.src .warn{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);
+  font-size:12.5px;color:var(--brick);line-height:1.55}
+
+/* слои */
+.layer{background:var(--surface);border-radius:14px;box-shadow:var(--sh);padding:26px 28px;margin-bottom:14px;
+  position:relative;overflow:hidden}
+.layer::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
+.layer.l1::before{background:var(--sage)}
+.layer.l2::before{background:var(--accent)}
+.layer-top{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;flex-wrap:wrap}
+.layer-top h3{font-size:19px;font-weight:700}
+.tag{font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;letter-spacing:.2px}
+.tag.auto{background:#F2F6F1;color:var(--sage)}
+.tag.hand{background:var(--accent-weak);color:var(--accent)}
+.layer .sub{font-size:14px;color:var(--text-2);margin-bottom:18px}
+.shelves{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.shelf{background:var(--surface-2);border-radius:10px;padding:14px 16px}
+.shelf .st{font-size:14px;font-weight:700;margin-bottom:3px}
+.shelf .sd{font-size:13px;color:var(--text-2);line-height:1.5}
+.outs{display:flex;flex-wrap:wrap;gap:8px}
+.out{font-size:13px;background:var(--surface-2);color:var(--text-2);padding:6px 12px;border-radius:999px;
+  border:1px solid var(--border)}
+.out b{color:var(--text)}
+
+/* фильтр */
+.filter-note{margin-top:16px;padding:14px 16px;background:#FBF7F2;border-left:3px solid var(--oak);
+  border-radius:8px;font-size:14px;color:#7A5C3A;line-height:1.6}
+.filter-note b{color:var(--oak)}
+
+/* как читать */
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rule{background:var(--surface);border-radius:12px;box-shadow:var(--sh-sm);padding:18px 20px}
+.rule h4{font-size:14px;font-weight:700;margin-bottom:5px;display:flex;align-items:center;gap:8px}
+.rule h4 .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.rule p{font-size:13.5px;color:var(--text-2);line-height:1.6}
+
+.conf{margin-top:24px;background:var(--surface);border-radius:12px;box-shadow:var(--sh-sm);padding:20px 22px}
+.conf h4{font-size:15px;font-weight:700;margin-bottom:12px}
+.conf-row{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start;padding:10px 0;
+  border-top:1px solid var(--border)}
+.conf-row:first-of-type{border-top:none}
+.grade{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;color:#fff}
+.grade.a{background:var(--sage)}
+.grade.b{background:var(--amber)}
+.conf-row p{font-size:13.5px;color:var(--text-2)}
+.conf-row b{color:var(--text)}
+
+.foot{margin-top:56px;padding-top:20px;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-3)}
+.wordmark{font-weight:700;position:relative;padding-bottom:5px;color:var(--text)}
+.wordmark::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--oak);border-radius:2px}
+
+@media(max-width:760px){
+  .screen{padding:24px 18px 60px}
+  .head h1{font-size:27px}
+  .srcs,.shelves,.rules{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="screen">
+
+  <div class="ctx">
+    <span class="brand">MEBELSON® · Конкурентный анализ Ozon</span>
+    <span>Июль 2026</span>
+  </div>
+
+  <div class="head">
+    <div class="eyebrow">Как это работает</div>
+    <h1>Откуда мы знаем, что запускать</h1>
+    <hr class="oak-line">
+    <p>Система отвечает на один вопрос: где на Ozon есть деньги, которых мы не забираем. Ниже — что она берёт на вход, что с этим делает и почему её выводам можно верить.</p>
+  </div>
+
+  <!-- ПОТОК -->
+  <div class="sec">
+    <div class="sec-n">Целиком</div>
+    <h2>Путь от выгрузки до решения</h2>
+    <p class="lede">Три источника данных, две ступени обработки, один вывод по категории.</p>
+
+    <div class="flow">
+      <svg viewBox="0 0 840 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Схема: три источника данных, два слоя обработки, вердикт">
+        <defs>
+          <marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <path d="M0,1 L7,4 L0,7" fill="none" stroke="#9CA3AF" stroke-width="1.4"/>
+          </marker>
+        </defs>
+
+        <!-- источники -->
+        <text x="20" y="24" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#9CA3AF" letter-spacing="0.8">ОТКУДА БЕРЁМ</text>
+
+        <rect x="20" y="40" width="150" height="52" rx="9" fill="#EEF0FE"/>
+        <text x="34" y="62" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#111827">Ozon, кабинет</text>
+        <text x="34" y="79" font-family="Inter,sans-serif" font-size="11" fill="#6B7280">обороты, цены, выкуп</text>
+
+        <rect x="20" y="104" width="150" height="52" rx="9" fill="#FDF3E2"/>
+        <text x="34" y="126" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#111827">mpstats</text>
+        <text x="34" y="143" font-family="Inter,sans-serif" font-size="11" fill="#6B7280">фото и отзывы</text>
+
+        <rect x="20" y="168" width="150" height="52" rx="9" fill="#FBF1E7"/>
+        <text x="34" y="190" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#111827">Наш склад</text>
+        <text x="34" y="207" font-family="Inter,sans-serif" font-size="11" fill="#6B7280">4 магазина, 2 418 позиций</text>
+
+        <!-- стрелки к слою 1 -->
+        <path d="M175,66 C210,66 210,120 245,120" fill="none" stroke="#9CA3AF" stroke-width="1.4" marker-end="url(#ar)"/>
+        <path d="M175,194 C210,194 210,140 245,140" fill="none" stroke="#9CA3AF" stroke-width="1.4" marker-end="url(#ar)"/>
+
+        <!-- слой 1 -->
+        <text x="255" y="24" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#9CA3AF" letter-spacing="0.8">СЛОЙ 1 · МАШИНА</text>
+        <rect x="255" y="40" width="180" height="180" rx="11" fill="#FFFFFF" stroke="#ECEEF2"/>
+        <rect x="255" y="40" width="4" height="180" rx="2" fill="#5E7A5B"/>
+        <text x="272" y="66" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#111827">Скрининг рынка</text>
+        <text x="272" y="84" font-family="Inter,sans-serif" font-size="11" fill="#6B7280">Раскладывает тысячу</text>
+        <text x="272" y="99" font-family="Inter,sans-serif" font-size="11" fill="#6B7280">товаров на три полки:</text>
+
+        <rect x="272" y="110" width="148" height="26" rx="6" fill="#F4F5F7"/>
+        <text x="282" y="127" font-family="Inter,sans-serif" font-size="11.5" font-weight="600" fill="#111827">Белые пятна</text>
+
+        <rect x="272" y="142" width="148" height="26" rx="6" fill="#F4F5F7"/>
+        <text x="282" y="159" font-family="Inter,sans-serif" font-size="11.5" font-weight="600" fill="#111827">Новинки</text>
+
+        <rect x="272" y="174" width="148" height="26" rx="6" fill="#F4F5F7"/>
+        <text x="282" y="191" font-family="Inter,sans-serif" font-size="11.5" font-weight="600" fill="#111827">Дойные коровы</text>
+
+        <path d="M440,130 L490,130" fill="none" stroke="#9CA3AF" stroke-width="1.4" marker-end="url(#ar)"/>
+
+        <!-- слой 2 -->
+        <text x="500" y="24" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#9CA3AF" letter-spacing="0.8">СЛОЙ 2 · ЧЕЛОВЕК + ИИ</text>
+        <rect x="500" y="40" width="180" height="180" rx="11" fill="#FFFFFF" stroke="#ECEEF2"/>
+        <rect x="500" y="40" width="4" height="180" rx="2" fill="#5B5CEB"/>
+        <text x="517" y="66" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#111827">Разбор ТОП-10</text>
+        <text x="517" y="84" font-family="Inter,sans-serif" font-size="11" fill="#6B7280">Смотрим карточки</text>
+        <text x="517" y="99" font-family="Inter,sans-serif" font-size="11" fill="#6B7280">и читаем отзывы:</text>
+
+        <rect x="517" y="110" width="148" height="26" rx="6" fill="#F4F5F7"/>
+        <text x="527" y="127" font-family="Inter,sans-serif" font-size="11.5" font-weight="600" fill="#111827">Что бесит покупателя</text>
+
+        <rect x="517" y="142" width="148" height="26" rx="6" fill="#F4F5F7"/>
+        <text x="527" y="159" font-family="Inter,sans-serif" font-size="11.5" font-weight="600" fill="#111827">Чего на рынке нет</text>
+
+        <rect x="517" y="174" width="148" height="26" rx="6" fill="#F4F5F7"/>
+        <text x="527" y="191" font-family="Inter,sans-serif" font-size="11.5" font-weight="600" fill="#111827">Что мы можем дать</text>
+
+        <path d="M685,130 L735,130" fill="none" stroke="#9CA3AF" stroke-width="1.4" marker-end="url(#ar)"/>
+
+        <!-- вердикт -->
+        <text x="745" y="24" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#9CA3AF" letter-spacing="0.8">РЕШЕНИЕ</text>
+        <rect x="745" y="88" width="80" height="84" rx="11" fill="#BE8A5A"/>
+        <text x="785" y="122" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="700" fill="#FFFFFF">Вердикт</text>
+        <text x="785" y="140" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F6E7D8">по категории</text>
+        <text x="785" y="155" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F6E7D8">и что делать</text>
+
+        <text x="255" y="248" font-family="Inter,sans-serif" font-size="11" fill="#9CA3AF">Автоматически, за минуты</text>
+        <text x="500" y="248" font-family="Inter,sans-serif" font-size="11" fill="#9CA3AF">Вручную, один разбор ≈ день</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ИСТОЧНИКИ -->
+  <div class="sec">
+    <div class="sec-n">Шаг 1</div>
+    <h2>Три источника, у каждого своя роль</h2>
+    <p class="lede">Они не взаимозаменяемы. Смешивать их — главная ошибка, которая ломает все дальнейшие цифры.</p>
+
+    <div class="srcs">
+      <div class="src a">
+        <h3>Личный кабинет Ozon</h3>
+        <div class="who">Все цифры — только отсюда</div>
+        <p>Сколько на самом деле продалось у каждого конкурента, по какой цене, сколько выкупили. Это официальная статистика площадки.</p>
+        <div class="warn">Даёт обороты, цены и объём упаковки. Ни одна цифра в отчётах не берётся из другого места.</div>
+      </div>
+      <div class="src b">
+        <h3>mpstats</h3>
+        <div class="who">Только картинки и отзывы</div>
+        <p>Сторонний сервис. Нужен, чтобы показать фотографии карточек и прочитать, что пишут покупатели конкурентов.</p>
+        <div class="warn">Обороты и объёмы отсюда не берём — они расходятся с Ozon. Только фото и тексты отзывов.</div>
+      </div>
+      <div class="src c">
+        <h3>Наш склад</h3>
+        <div class="who">Свод по 4 магазинам</div>
+        <p>Что мы производим: 2 418 позиций, их вес, габариты, цены. Отвечает на вопрос «а у нас такое вообще есть?».</p>
+        <div class="warn">Наш оборот — всегда сумма четырёх магазинов. Один магазин показывает четверть картины.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- СЛОИ -->
+  <div class="sec">
+    <div class="sec-n">Шаг 2</div>
+    <h2>Две ступени обработки</h2>
+    <p class="lede">Первая отсеивает шум и делает это без нас. Вторая требует человека — потому что смотреть карточки и читать отзывы машина пока не умеет достаточно хорошо.</p>
+
+    <div class="layer l1">
+      <div class="layer-top">
+        <h3>Слой 1 — машинный скрининг</h3>
+        <span class="tag auto">автоматически</span>
+      </div>
+      <p class="sub">Берёт тысячу товаров категории и раскладывает на три полки. Работает сам, по всем 27 категориям сразу.</p>
+
+      <div class="shelves">
+        <div class="shelf">
+          <div class="st">Белые пятна</div>
+          <div class="sd">Чужие товары, которые хорошо продаются. Место, где деньги есть, а нас нет.</div>
+        </div>
+        <div class="shelf">
+          <div class="st">Новинки</div>
+          <div class="sd">Карточки моложе 90 дней, уже набравшие оборот. Значит, формат зашёл сразу — без раскрутки.</div>
+        </div>
+        <div class="shelf">
+          <div class="st">Дойные коровы</div>
+          <div class="sd">Старички за год, которые весь месяц в наличии и стабильно продают. Это укоренившиеся конкуренты.</div>
+        </div>
+      </div>
+
+      <div class="filter-note">
+        <b>Плюс два фильтра.</b> Первый отсекает то, что мы физически не производим — металл, массив, шпон. Второй смотрит на выручку с килограмма: мебель занимает место в фуре, и дешёвый объёмный товар может продаваться много, а зарабатывать мало. Остаётся <b>«наш периметр»</b> — то, что мы реально могли бы сделать и продать.
+      </div>
+    </div>
+
+    <div class="layer l2">
+      <div class="layer-top">
+        <h3>Слой 2 — разбор с ИИ</h3>
+        <span class="tag hand">вручную, категория за категорией</span>
+      </div>
+      <p class="sub">Берём десять сильнейших товаров периметра и разбираем их как живые карточки: смотрим фото, характеристики, вес, и читаем всё, что написали покупатели — по полторы тысячи отзывов на категорию.</p>
+
+      <div class="outs">
+        <span class="out">Что <b>бесит покупателя</b> у лидеров</span>
+        <span class="out">Какого <b>формата на рынке нет</b></span>
+        <span class="out">Что мы <b>можем сделать лучше</b></span>
+        <span class="out"><b>Вердикт</b> по категории</span>
+        <span class="out"><b>План действий</b> со сроками</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- КАК ЧИТАТЬ -->
+  <div class="sec">
+    <div class="sec-n">Шаг 3</div>
+    <h2>Как читать цифры в отчётах</h2>
+    <p class="lede">Четыре оговорки, без которых можно неверно понять любой график.</p>
+
+    <div class="rules">
+      <div class="rule">
+        <h4><span class="dot" style="background:var(--accent)"></span> Наш оборот — это четыре магазина</h4>
+        <p>Мы торгуем на Ozon с четырёх аккаунтов. Везде, где написано «наш оборот», — их сумма. Данные одного магазина в отчёты не попадают никогда.</p>
+      </div>
+      <div class="rule">
+        <h4><span class="dot" style="background:var(--amber)"></span> Строка бренда Ozon — не наши продажи</h4>
+        <p>В аналитике Ozon есть строка бренда «Mebelson». Она часто больше наших реальных продаж: под нашим именем торгуют и сторонние продавцы. Свою долю считаем только по своим магазинам.</p>
+      </div>
+      <div class="rule">
+        <h4><span class="dot" style="background:var(--sage)"></span> Периоды разные и подписаны</h4>
+        <p>Рынок Ozon отдаёт данные за 28 дней, наш оборот считается за календарный месяц. Это не ошибка — просто у площадки нет произвольных интервалов. Период всегда указан рядом с цифрой.</p>
+      </div>
+      <div class="rule">
+        <h4><span class="dot" style="background:var(--brick)"></span> Прайс — не то же, что цена продажи</h4>
+        <p>Наша прайсовая цена в каталоге бывает в 2,5 раза выше той, по которой товар реально уходит. Там, где в отчёте стоит прайсовая цена, это подписано отдельно.</p>
+      </div>
+    </div>
+
+    <div class="conf">
+      <h4>Уровень доверия — стоит у каждого вердикта</h4>
+      <div class="conf-row">
+        <span class="grade a">A</span>
+        <p><b>Данных достаточно.</b> Категория крупная, товаров в выборке много, ключевые коэффициенты проверены по карточкам конкурентов. Выводу можно верить как есть.</p>
+      </div>
+      <div class="conf-row">
+        <span class="grade b">B</span>
+        <p><b>Данных мало, но направление видно.</b> Товаров в категории немного, и порог отбора пришлось опустить, либо коэффициент веса проверен всего на нескольких карточках. Направление верное, конкретные числа — рабочая оценка. Перед крупными вложениями лучше добрать данных.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="wordmark">MEBELSON®</span>
+    <span>27 категорий в скрининге · 11 разобрано вручную</span>
+  </div>
+
+</div>
+</body>
+</html>
