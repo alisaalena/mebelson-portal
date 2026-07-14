@@ -75,9 +75,9 @@
     <div class="meta">
       📅 Период: 28 дней &nbsp;·&nbsp;
       📊 Источник: Ozon ЛК + mpstats &nbsp;·&nbsp;
-      📦 Товаров: 1 &nbsp;·&nbsp;
-      ✅ &gt;300 ₽/кг: 1 &nbsp;·&nbsp;
-      🕐 30.06.2026 15:23
+      📦 Товаров: 3 &nbsp;·&nbsp;
+      ✅ &gt;300 ₽/кг: 2 &nbsp;·&nbsp;
+      🕐 14.07.2026 09:39
     </div>
   </div>
   <div style="display:flex;gap:8px;align-items:center">
@@ -102,7 +102,7 @@
 </div>
 <div class="grid" id="grid"></div>
 <script>
-const D=([{"thumb": "https://ir.ozone.ru/s3/multimedia-1-7/7921780315.jpg", "name": "Реечное дно, бескаркасное ортопедическое основание для кровати, ламели для крова", "seller": "MASTER VIDERGOLD", "brand": "MASTER VIDERGOLD", "url": "https://www.ozon.ru/product/2842625693", "revenue": "407т ₽", "price": "1 756 ₽", "formula": "1 756 ₽ ÷ 5.3 кг = 334 ₽/кг", "pkg": "334 ₽/кг", "pkg_val": 334, "margin_ok": true, "days": "285 дн.", "dinamika": "+43%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}]),sel=new Set();let g=0;
+const D=([{"thumb": "", "name": "Реечное дно, бескаркасное ортопедическое основание для кровати, ламели для крова", "seller": "MASTER VIDERGOLD", "brand": "MASTER VIDERGOLD", "url": "https://www.ozon.ru/product/2842625693", "revenue": "407т ₽", "price": "1 756 ₽", "formula": "1 756 ₽ ÷ 6.2 кг = 285 ₽/кг", "pkg": "285 ₽/кг", "pkg_val": 285, "margin_ok": false, "days": "285 дн.", "dinamika": "+43%", "priznak": "Лидер по продажам", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "", "name": "Реечное дно, бескаркасное ортопедическое основание для кровати, ламели для крова", "seller": "MASTER VIDERGOLD", "brand": "MASTER VIDERGOLD", "url": "https://www.ozon.ru/product/2842625990", "revenue": "164т ₽", "price": "1 749 ₽", "formula": "1 749 ₽ ÷ 3.7 кг = 471 ₽/кг", "pkg": "471 ₽/кг", "pkg_val": 471, "margin_ok": true, "days": "285 дн.", "dinamika": "+35%", "priznak": "", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}, {"thumb": "", "name": "Реечное дно, бескаркасное ортопедическое основание для кровати, ламели для крова", "seller": "MASTER VIDERGOLD", "brand": "MASTER VIDERGOLD", "url": "https://www.ozon.ru/product/2842626314", "revenue": "113т ₽", "price": "1 778 ₽", "formula": "1 778 ₽ ÷ 4.8 кг = 372 ₽/кг", "pkg": "372 ₽/кг", "pkg_val": 372, "margin_ok": true, "days": "285 дн.", "dinamika": "+70%", "priznak": "", "group_id": 1, "group_label": "1 — Белые пятна", "color": "#e74c3c"}]),sel=new Set();let g=0;
 function setG(v){g=v;document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.g==v));render()}
 function tog(url){sel.has(url)?sel.delete(url):sel.add(url);updSel();render()}
 function updSel(){
