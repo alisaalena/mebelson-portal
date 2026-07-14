@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MEBELSON® — Комплект детской мебели · Анализ категории</title>
+<style>
+:root{
+  --bg:#FAFAFA;--surface:#FFFFFF;--surface-2:#F4F5F7;
+  --text:#111827;--text-2:#6B7280;--text-3:#9CA3AF;
+  --border:#ECEEF2;--accent:#5B5CEB;--accent-hover:#4B4CD6;--oak:#BE8A5A;
+  --sage:#5E7A5B;--amber:#B0812E;--err:#B0443E;
+  --font:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --sh-sm:0 1px 2px rgba(15,23,42,.04);--sh:0 2px 8px rgba(15,23,42,.05);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums}
+.screen{max-width:860px;margin:0 auto;padding:40px 40px 72px}
+.backnav{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-2);
+  text-decoration:none;font-weight:500;margin-bottom:18px;transition:color .15s}
+.backnav:hover{color:var(--accent)}
+
+/* контекст-строка */
+.ctx{display:flex;justify-content:space-between;align-items:baseline;
+  font-size:12px;color:var(--text-3);padding-bottom:24px;border-bottom:1px solid var(--border)}
+.ctx .brand{letter-spacing:.5px;text-transform:uppercase;font-weight:600;color:var(--text-2)}
+
+/* заголовок + вердикт */
+.head{margin-top:32px}
+.cat{font-size:13px;color:var(--text-3);letter-spacing:.3px}
+.head h1{font-size:32px;font-weight:700;letter-spacing:-.02em;margin:4px 0 14px}
+.verdict{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;color:var(--text)}
+.verdict .dot{width:9px;height:9px;border-radius:50%;background:var(--sage)}
+.verdict .sep{color:var(--border)}
+.verdict .prio{color:var(--text-2);font-weight:500}
+
+/* ГЕРОЙ — одно доминирующее число */
+.hero{margin-top:32px}
+.hero-num{font-size:clamp(52px,9vw,76px);font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--text)}
+.hero-num .u{font-size:.32em;font-weight:600;color:var(--text-3);letter-spacing:0}
+.hero-num .up{font-size:.34em;font-weight:700;color:var(--sage);letter-spacing:0;margin-left:8px}
+.oak-line{width:72px;height:3px;background:var(--oak);border:none;border-radius:3px;margin:20px 0 18px}
+.decision{font-size:17px;color:var(--text);max-width:560px;line-height:1.5}
+.decision b{font-weight:600}
+
+/* метрики поддержки — тише героя, табличные */
+.metrics{display:flex;flex-wrap:wrap;gap:36px;margin-top:28px}
+.metric .mv{font-size:26px;font-weight:700;letter-spacing:-.01em;line-height:1}
+.metric .mv .u{font-size:.5em;font-weight:600;color:var(--text-3);margin-left:3px}
+.metric .ml{font-size:12px;color:var(--text-2);margin-top:7px;letter-spacing:.2px}
+
+/* доверие — сдержанно, с раскрытием рядом */
+.conf{margin-top:28px;padding:16px 18px;background:var(--surface);box-shadow:var(--sh-sm);border-radius:12px}
+.conf-top{display:flex;align-items:center;gap:10px}
+.conf-badge{font-size:13px;font-weight:700;color:var(--text);display:inline-flex;align-items:center;gap:8px}
+.conf-badge .tick{width:3px;height:14px;background:var(--oak);border-radius:2px;display:inline-block}
+.conf-label{font-size:13px;color:var(--text-2)}
+details.conf-more{margin-top:0}
+details.conf-more>summary{cursor:pointer;list-style:none;font-size:12px;color:var(--accent);font-weight:600;margin-left:auto}
+details.conf-more>summary::-webkit-details-marker{display:none}
+details.conf-more>summary::before{content:"▸ почему"}
+details.conf-more[open]>summary::before{content:"▾ почему"}
+.conf-body{font-size:13px;color:var(--text-2);line-height:1.8;margin-top:12px}
+.conf-body .ok{color:var(--sage);font-weight:600}
+.conf-body .wait{color:var(--amber);font-weight:600}
+
+/* действия */
+.sect-h{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-3);
+  font-weight:700;margin:44px 0 16px}
+.acts{display:flex;flex-direction:column;gap:8px}
+.act{display:grid;grid-template-columns:24px 1fr auto;gap:14px;align-items:center;
+  background:var(--surface);box-shadow:var(--sh-sm);border-radius:10px;padding:14px 16px}
+.act .n{font-size:13px;font-weight:700;color:var(--text-3);font-variant-numeric:tabular-nums}
+.act .t{font-size:14px;color:var(--text)}
+.act .when{font-size:12px;color:var(--text-3);white-space:nowrap}
+.lead-refs{font-size:12px;color:var(--text-3)}
+.lead-refs a{color:var(--accent);text-decoration:none;font-weight:500}
+.lead-refs a:hover{text-decoration:underline}
+
+/* CTA — следующий шаг исследования, не UI-кнопка */
+.cta{margin-top:28px}
+.cta-link{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;
+  color:var(--accent);text-decoration:none;padding:4px 0;border-bottom:2px solid transparent;
+  transition:border-color .15s}
+.cta-link:hover{border-bottom-color:var(--accent)}
+.cta-link .arw{transition:transform .15s}
+.cta-link:hover .arw{transform:translateX(3px)}
+.hero-label{font-size:12px;letter-spacing:.4px;color:var(--text-2);margin-bottom:10px}
+
+/* доказательная база — тихо, прогрессивное раскрытие */
+.evid{margin-top:44px;padding-top:24px;border-top:1px solid var(--border)}
+.evid-row{display:flex;flex-wrap:wrap;gap:10px}
+.evid-item{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--text-2);
+  background:var(--surface);box-shadow:var(--sh-sm);border-radius:999px;padding:8px 14px}
+.evid-item b{color:var(--text);font-weight:600}
+.evid-note{font-size:12px;color:var(--text-3);margin-top:12px}
+
+.foot{margin-top:48px;padding-top:20px;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-3)}
+.wordmark{font-weight:700;position:relative;padding-bottom:5px;color:var(--text)}
+.wordmark::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--oak);border-radius:2px}
+@media(max-width:560px){.screen{padding:28px 20px 56px}.metrics{gap:24px}}
+
+/* — Второй слой: исследование ниже решения — */
+.sec{margin-top:48px}
+.pain{display:grid;grid-template-columns:auto 1fr;gap:12px;background:var(--surface);
+  box-shadow:var(--sh-sm);border-radius:10px;padding:14px 16px;margin-bottom:8px}
+.pain .pdot{width:9px;height:9px;border-radius:50%;margin-top:6px}
+.pain .ph{font-size:14px;font-weight:600;color:var(--text)}
+.pain .pp{font-size:13px;color:var(--text-2);margin-top:3px}
+.pain details{margin-top:8px}
+.pain summary{cursor:pointer;list-style:none;font-size:12px;color:var(--accent);font-weight:600}
+.pain summary::-webkit-details-marker{display:none}
+.pain summary::before{content:"▸ подробнее"}
+.pain details[open] summary::before{content:"▾ свернуть"}
+.pain .pmore{font-size:13px;color:var(--text-2);line-height:1.6;margin-top:8px}
+.pain-note{font-size:12px;color:var(--text-3);margin-top:10px;font-style:italic}
+.cj-step{display:grid;grid-template-columns:26px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+.cj-step:last-child{border-bottom:none}
+.cj-n{font-size:12px;font-weight:700;color:var(--text-3)}
+.cj-t{font-size:14px;font-weight:600;color:var(--text)}
+.cj-d{font-size:13px;color:var(--text-2);margin-top:3px}
+.cj-d b{color:var(--text);font-weight:600}
+.hyp{background:var(--surface);box-shadow:var(--sh-sm);border-radius:10px;padding:15px 16px;margin-bottom:8px}
+.hyp-top{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.hyp-n{font-size:13px;font-weight:700;color:var(--text-3)}
+.hyp-t{font-size:14px;font-weight:600;color:var(--text);flex:1}
+.hyp-p{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+.hyp-p.a{background:var(--accent-weak);color:var(--accent-hover)}
+.hyp-p.b{background:var(--surface-2);color:var(--text-2)}
+.hyp-d{font-size:13px;color:var(--text-2);line-height:1.55}
+.hyp-d b{color:var(--text)}
+.gallery-link{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;
+  color:var(--accent);text-decoration:none;border-bottom:2px solid transparent;padding:4px 0}
+.gallery-link:hover{border-bottom-color:var(--accent)}
+.gallery-link .arw{transition:transform .15s}
+.gallery-link:hover .arw{transform:translateX(3px)}
+.jrnl{margin-top:16px}
+.jrnl>summary{cursor:pointer;list-style:none;font-size:13px;font-weight:600;color:var(--text-2)}
+.jrnl>summary::-webkit-details-marker{display:none}
+.jrnl>summary::before{content:"▸ "}
+.jrnl[open]>summary::before{content:"▾ "}
+.dtbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.dtbl th{text-align:left;font-size:10px;letter-spacing:.4px;text-transform:uppercase;color:var(--text-2);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--border)}
+.dtbl td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--text-2);vertical-align:top}
+.dtbl td:first-child{color:var(--text)}
+
+</style>
+</head>
+<body>
+<div class="screen">
+
+  <a class="backnav" href="index2.html">← Все категории</a>
+
+  <div class="ctx">
+    <span class="brand">MEBELSON® · Ассортиментные решения</span>
+    <span>Обновлено 08.07 · рынок 28 дней</span>
+  </div>
+
+  <div class="head">
+    <div class="cat">Решение по категории</div>
+    <h1>Комплект детской мебели</h1>
+    <span class="verdict"><span class="dot" style="background:var(--amber)"></span> Входить форматом парты <span class="sep">·</span> <span class="prio">приоритет B</span></span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-label">Рынок категории</div>
+    <div class="hero-num">147,4<span class="u"> млн ₽</span><span class="up">+16%</span></div>
+    <hr class="oak-line">
+    <div class="decision">Категорийное дерево Ozon «Комплект детской мебели» — это рынок <b>растущих парт и детских столиков со стульчиком</b> со средним чеком 8 213 ₽, а не корпусных детских гарнитуров. Наши 72 SKU — комплексы Зефир / Милана / Хюгге по 48 тыс. ₽ и весом 100–260 кг; «Наш периметр» (чек ≥ 27 114 ₽) — <b>0 SKU</b>: карточек такого чека в категории нет вообще, максимум по рынку 19 366 ₽. <b>Мы держим полку в категории, оборот которой делают другие товары: 72 SKU дают ~7–9 продаж в месяц, 0,05% штучного рынка.</b> Рынок при этом открыт — топ-5 берут 27,6%, лидер всего 1,4%.</div>
+  </div>
+
+  <div class="metrics"><div class="metric"><div class="mv">357<span class="u">тыс ₽</span></div><div class="ml">наш оборот · июнь −55%</div></div><div class="metric"><div class="mv">0,23<span class="u">%</span></div><div class="ml">наша доля рынка</div></div><div class="metric"><div class="mv">497<span class="u">₽/кг</span></div><div class="ml">медиана ТОП-10 · порог не фильтр</div></div><div class="metric"><div class="mv">48,5к<span class="u">₽</span></div><div class="ml">наш чек · рынок 8,2к</div></div></div>
+
+  <div class="conf">
+    <div class="conf-top">
+      <span class="conf-badge"><span class="tick"></span> Уровень доверия B</span>
+      <span class="conf-label">— формат рынка ≠ наш продукт</span>
+    </div>
+    <details class="conf-more" style="margin-top:10px">
+      <summary style="margin-left:0"></summary>
+      <div class="conf-body"><span class="ok">✓ Рынок · Ozon 28 дн</span> · <span class="ok">✓ Наш оборот · свод 4 акк</span> · <span class="ok">✓ Маржа · K=0,157 валидирован (n=10, R²=0,66)</span> · <span class="ok">✓ Отзывы · 6 475 mpstats</span> · <span class="wait">⧗ Периметр · 0 SKU — ТОП-10 взят из белых пятен</span>. Источники подтверждены, но ТОП-10 собран не из «Нашего периметра» (он пуст), а из белых пятен по обороту. Порог новинок снижен 400к → 100к (новинок 0). Квартальная выгрузка рынка не предоставлена → B.</div>
+    </details>
+  </div>
+
+  <div class="sect-h">Что делать</div>
+  <div class="acts"><div class="act"><span class="n">1</span><span class="t">Расчёт себестоимости растущей парты 6–9 тыс. ₽ — решение о входе <span class="lead-refs">· пример: <a href="komplekt_detskoy_galereya.html#lead3">растущей парты</a>, <a href="komplekt_detskoy_galereya.html#lead1">стол+стул</a></span></span><span class="when">2 нед</span></div><div class="act"><span class="n">2</span><span class="t">Выгрузка: где на Ozon лежат корпусные детские конкурентов <span class="lead-refs">· пример: <a href="komplekt_detskoy_galereya.html#lead3">сколы</a></span></span><span class="when">1 нед</span></div><div class="act"><span class="n">3</span><span class="t">Усиленная упаковка углов столешницы — на все корпусные SKU <span class="lead-refs">· пример: <a href="komplekt_detskoy_galereya.html#lead6">Nika</a></span></span><span class="when">1 мес</span></div><div class="act"><span class="n">4</span><span class="t">Крепёж в запайке + 2 запасных болта <span class="lead-refs">· пример: <a href="komplekt_detskoy_galereya.html#lead1">Happy Baby</a></span></span><span class="when">1 мес</span></div><div class="act"><span class="n">5</span><span class="t">Разобрать состав −55%: консолидация vs реальная потеря</span><span class="when">2 нед</span></div></div>
+
+  <div class="cta">
+    <a class="cta-link" href="#issledovanie">Посмотреть исследование <span class="arw">→</span></a>
+  </div>
+
+  <div class="sec" id="issledovanie">
+    <div class="sect-h">Боли рынка · из отзывов и карточек ТОП-10</div>
+    <div class="pain"><span class="pdot" style="background:var(--err)"></span><div><div class="ph">Сколы и брак столешницы при доставке</div><div class="pp">11,3% упоминаний · 87 из 273 негативных: «пришла битая столешница», «коробка вся драная».</div><details><summary></summary><div class="pmore">Боль №1. Углы не защищены. Бьёт всех, включая FunDesk и ONLEAP с чеком 8–12 тыс.</div></details></div></div><div class="pain"><span class="pdot" style="background:var(--err)"></span><div><div class="ph">Некомплект: не доложили крепёж</div><div class="pp">27 из 273 негативных: «в комплекте нету болтов», «пришло 12 деталей вместо 15».</div><details><summary></summary><div class="pmore">Рекордсмен — Nika: 104 негативных отзыва. Запайка фурнитуры + запасные болты закрывают.</div></details></div></div><div class="pain"><span class="pdot" style="background:var(--amber)"></span><div><div class="ph">Шатается и разбалтывается со временем</div><div class="pp">2,8%: «ножки прокручиваются», «сносились резьбы», «шатается от прикосновения».</div><details><summary></summary><div class="pmore">Точечная опора и резьба по ЛДСП не держат нагрузку ребёнка. Футорки + проходные болты.</div></details></div></div><div class="pain"><span class="pdot" style="background:var(--amber)"></span><div><div class="ph">Стул: спинка вылетает из пазов</div><div class="pp">0,9%, но это безопасность: «ребёнок пару раз чуть не упал» — у лидера топа Happy Baby.</div><details><summary></summary><div class="pmore">Единственная боль с риском травмы. Ни один продавец не заявляет безопасность как отличие.</div></details></div></div><div class="pain"><span class="pdot" style="background:var(--sage)"></span><div><div class="ph">Ребёнок доволен — эмоция решает</div><div class="pp">27,1% — топ-позитив: «ребёнок в восторге», «сама садится рисовать».</div><details><summary></summary><div class="pmore">Категория покупается эмоцией родителя. Фото ребёнка за столом важнее чертежа.</div></details></div></div>
+    <div class="pain-note">Боли из 1 993 текстовых отзывов ТОП-10 (всего 6 475 · средняя оценка 4,84 · негатив 1–3★ = 4,2%).</div>
+  </div>
+
+  <div class="sec"><div class="sect-h">Путь покупателя</div><div class="cj-step"><span class="cj-n">1</span><div><div class="cj-t">Осознание</div><div class="cj-d">Организовать место для рисования и уроков. <b>Боль:</b> не понимает, какой размер нужен под рост. <b>Триггер:</b> возраст и рост крупно на первом экране.</div></div></div><div class="cj-step"><span class="cj-n">2</span><div><div class="cj-t">Сравнение</div><div class="cj-d">Выбирает между столиком 2–4 тыс. и растущей партой 7–12 тыс. <b>Боль:</b> перерастёт за год. <b>Триггер:</b> «растёт вместе с ребёнком до 12 лет».</div></div></div><div class="cj-step"><span class="cj-n">3</span><div><div class="cj-t">Решение</div><div class="cj-d">Читает негатив, смотрит фото покупателей. <b>Боль:</b> придёт со сколом, а это подарок на день рождения. <b>Триггер:</b> фото упаковки + замена детали без возврата.</div></div></div><div class="cj-step"><span class="cj-n">4</span><div><div class="cj-t">Покупка</div><div class="cj-d">Смотрит срок: «завтра» у российских, 3 недели у китайских. <b>Боль:</b> не успеет к дате. <b>Триггер:</b> локальный склад — преимущество российского производителя.</div></div></div><div class="cj-step"><span class="cj-n">5</span><div><div class="cj-t">Сборка</div><div class="cj-d">Собирает вечером, ищет шестигранник. <b>Боль:</b> не доложили крепёж, отверстия не совпадают. <b>Триггер:</b> крепёж в запайке + сборка без инструментов.</div></div></div><div class="cj-step"><span class="cj-n">6</span><div><div class="cj-t">Эксплуатация</div><div class="cj-d">Ребёнок рисует, лепит, проливает воду. <b>Боль:</b> столешница вздувается, ножки разбалтываются. <b>Триггер:</b> влагостойкая кромка + футорки.</div></div></div></div>
+
+  <div class="sec">
+    <div class="sect-h">Продуктовые гипотезы</div>
+    <div class="hyp"><div class="hyp-top"><span class="hyp-n">1</span><span class="hyp-t">Войти в формат растущей парты 6–9 тыс. ₽</span><span class="hyp-p a">A</span></div><div class="hyp-d">8 из 10 карточек топа — растущая парта или стол+стул. В своде 4 акк. (72 SKU) ни одной парты. Мы не участвуем в обороте, который делает категория. Рынок открыт: лидер 1,4%, топ-5 = 27,6%. <b>Проверить:</b> себестоимость ЛДСП + металлокаркас при рознице 6–9 тыс.; конверсию на нашем трафике.</div></div><div class="hyp"><div class="hyp-top"><span class="hyp-n">2</span><span class="hyp-t">Усиленная упаковка углов столешницы</span><span class="hyp-p a">A</span></div><div class="hyp-d">Сколы — 11,3% отзывов и 87 из 273 негативных. Единственная боль, которая бьёт всех продавцов топа независимо от чека. <b>Проверить:</b> стоимость уголка и второго слоя гофры vs доля возвратов.</div></div><div class="hyp"><div class="hyp-top"><span class="hyp-n">3</span><span class="hyp-t">Крепёж с запасом, сборка без инструмента</span><span class="hyp-p a">A</span></div><div class="hyp-d">Некомплект — вторая причина 1★ (27 из 273). У Nika 104 негативных отзыва. <b>Проверить:</b> себестоимость запайки + 2 запасных болта vs обращения в поддержку.</div></div><div class="hyp"><div class="hyp-top"><span class="hyp-n">4</span><span class="hyp-t">Безопасность спинки как УТП</span><span class="hyp-p b">B</span></div><div class="hyp-d">У лидера топа (Happy Baby, 2 млн ₽ за 28 дн) спинка стула вылетает из пазов — «ребёнок чуть не упал». Ни один продавец не заявляет безопасность как отличие. <b>Проверить:</b> конструктив сквозного крепления, сертификацию.</div></div><div class="hyp"><div class="hyp-top"><span class="hyp-n">5</span><span class="hyp-t">Не тащить корпусный гарнитур в эту категорию</span><span class="hyp-p b">B</span></div><div class="hyp-d">Наш чек 48 457 ₽ при рынке 8 213 ₽ (в 5,9 раза). Периметр — 0 SKU. Корпусный комплект даёт ~240 ₽/кг против 304–987 у рынка парт. <b>Проверить:</b> в каких категориях дерева Ozon живут корпусные детские конкурентов.</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="sect-h">Доказательная база</div>
+    <a class="gallery-link" href="komplekt_detskoy_galereya.html">Открыть галерею 10 конкурентов <span class="arw">→</span></a>
+    <div style="font-size:13px;color:var(--text-3);margin-top:8px">Первый слой — скрининг рынка: фото, характеристики и сигнал маржи ₽/кг по каждому лидеру.</div>
+    <div class="evid-note">Расхождение «бренд ≠ наши»: строка Mebelson на Ozon — 436 110 ₽ (28 дн, 9 шт), наши 4 акк. — 357 231 ₽ (июнь), разрыв ≈ +79 тыс ₽. Под брендом <b>2 продавца</b> при наших 4 аккаунтах → часть наших магазинов торгует не под именем «Mebelson», и при этом брендовая строка всё равно выше суммы четырёх. Место среди брендов не считаем. Периоды разные, сопоставление приблизительное.</div>
+    <details class="jrnl">
+      <summary>Показать журнал доказательств и источники</summary>
+      <table class="dtbl"><thead><tr><th>Вывод</th><th>Источник</th><th>Статус</th></tr></thead><tbody>
+      <tr><td>Рынок 147,4 млн (+16%), 17 948 шт, топ-5 = 27,6%, выкуп 84,5%</td><td>Ozon аналитика категории · 28 дн</td><td>Подтверждено</td></tr><tr><td>Наш оборот 357 231 ₽ (4 акк., июнь), доля ≈0,23%</td><td>Свод 4 акк. + рынок 28 дн</td><td>Подтверждено</td></tr><tr><td>72 наших SKU в категории — корпусные комплексы, парт нет</td><td>Свод товары_с_категориями_3_уровня (2 418 SKU)</td><td>Подтверждено</td></tr><tr><td>72 SKU дают ~7–9 продаж в месяц = 0,05% штучного рынка</td><td>Оборот 4 акк. ÷ чек 48 457 ₽</td><td>Подтверждено (оценка)</td></tr><tr><td>«Наш периметр» = 0 SKU: макс. чек рынка 19 366 ₽ &lt; порога 27 114 ₽</td><td>Скрипт 1 · лист «Наш периметр»</td><td>Подтверждено</td></tr><tr><td>K = 0,157 · R² = 0,66; с константой 0,69 → нелинейности нет</td><td>10 карточек: вес ÷ объём из выгрузки Ozon</td><td>Подтверждено (n=10)</td></tr><tr><td>₽/кг не фильтр: 22 из 24 карточек ≥ 300 ₽/кг</td><td>Скрипт 1, пересчёт по K = 0,157</td><td>Подтверждено</td></tr><tr><td>Боли: сколы 11,3%, некомплект, разбалтывание узлов</td><td>6 475 отзывов ТОП-10 · mpstats</td><td>Подтверждено</td></tr><tr><td>Наш оборот −55% июнь к маю (792 → 357 тыс ₽)</td><td>Выручка 4 акк. по месяцам</td><td>Факт подтверждён · причина не разделена</td></tr><tr><td>Корпусные детские конкурентов лежат в других категориях</td><td>Косвенно: в категории нет карточек &gt; 19 366 ₽</td><td>Не проверено</td></tr>
+      </tbody></table>
+    </details>
+  </div>
+
+  <div class="foot">
+    <span class="wordmark">MEBELSON®</span>
+    <span>Спокойно · точно · уверенно</span>
+  </div>
+
+</div>
+</body>
+</html>
