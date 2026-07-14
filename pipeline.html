@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MEBELSON® — Карта процесса категории</title>
+<style>
+:root{
+  --bg:#FAFAFA;--surface:#FFFFFF;--surface-2:#F4F5F7;
+  --text:#111827;--text-2:#6B7280;--text-3:#9CA3AF;
+  --border:#ECEEF2;--accent:#5B5CEB;--accent-hover:#4B4CD6;--accent-weak:#EEF0FE;--oak:#BE8A5A;
+  --sage:#5E7A5B;--amber:#B0812E;--brick:#9B4A3A;
+  --font:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"SF Mono",ui-monospace,"Cascadia Mono","Consolas",monospace;
+  --sh-sm:0 1px 2px rgba(15,23,42,.04);--sh:0 2px 8px rgba(15,23,42,.05);--sh-md:0 6px 20px rgba(15,23,42,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.screen{max-width:920px;margin:0 auto;padding:40px 40px 80px}
+
+.ctx{display:flex;justify-content:space-between;align-items:baseline;
+  font-size:12px;color:var(--text-3);padding-bottom:24px;border-bottom:1px solid var(--border)}
+.ctx .brand{letter-spacing:.5px;text-transform:uppercase;font-weight:600;color:var(--text-2)}
+.ctx .ver{background:var(--accent-weak);color:var(--accent-hover);font-weight:600;
+  padding:3px 9px;border-radius:999px}
+
+.head{margin-top:36px}
+.head .eyebrow{font-size:13px;color:var(--text-3);letter-spacing:.3px}
+.head h1{font-size:34px;font-weight:700;letter-spacing:-.02em;margin:4px 0 12px}
+.oak-line{width:64px;height:3px;background:var(--oak);border:none;border-radius:3px;margin:0 0 16px}
+.head p{font-size:16px;color:var(--text-2);max-width:600px}
+
+/* прогресс */
+.prog-wrap{margin-top:28px;padding:18px 20px;background:var(--surface);border-radius:12px;box-shadow:var(--sh-sm)}
+.prog-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.prog-label{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-3);font-weight:600}
+.prog-count{font-size:15px;font-weight:700}
+.prog-bar{height:6px;background:var(--surface-2);border-radius:999px;overflow:hidden}
+.prog-fill{height:100%;background:var(--oak);border-radius:999px;width:0;transition:width .3s ease}
+.prog-actions{margin-top:12px;display:flex;gap:8px}
+.mini{font-family:inherit;font-size:12px;color:var(--text-2);background:var(--surface);
+  border:1px solid var(--border);border-radius:999px;padding:5px 12px;cursor:pointer;transition:all .15s}
+.mini:hover{color:var(--text);border-color:var(--text-3)}
+
+/* этапы */
+.stages{margin-top:32px}
+.stage{background:var(--surface);border-radius:12px;box-shadow:var(--sh-sm);margin-bottom:10px;
+  overflow:hidden;transition:box-shadow .18s}
+.stage:hover{box-shadow:var(--sh)}
+.stage.done{opacity:.62}
+.stage.open{box-shadow:var(--sh-md)}
+.stage-head{display:grid;grid-template-columns:24px 34px 1fr auto;gap:14px;align-items:center;
+  padding:16px 18px;cursor:pointer;position:relative;width:100%;background:none;border:none;
+  font-family:inherit;text-align:left;color:inherit}
+.stage-head:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.stage.local::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--oak)}
+.stage.chat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.stage.deploy::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--sage)}
+.stage-head{position:relative}
+.chk{width:20px;height:20px;border:1.5px solid var(--border);border-radius:6px;background:var(--surface);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:all .15s}
+.chk:hover{border-color:var(--oak)}
+.chk.on{background:var(--oak);border-color:var(--oak)}
+.chk.on::after{content:"✓";color:#fff;font-size:13px;font-weight:700;line-height:1}
+.st-n{font-size:12px;font-weight:700;color:var(--text-3);letter-spacing:.5px}
+.st-t{font-size:15px;font-weight:600}
+.st-t .where{display:block;font-size:12px;color:var(--text-3);font-weight:400;margin-top:1px}
+.st-arw{font-size:13px;color:var(--text-3);transition:transform .18s}
+.stage.open .st-arw{transform:rotate(90deg)}
+
+.stage-body{display:none;padding:2px 18px 20px 72px;border-top:1px solid var(--border)}
+.stage.open .stage-body{display:block}
+.stage-body h4{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-3);
+  font-weight:600;margin:16px 0 8px}
+.stage-body p{font-size:14px;color:var(--text-2);margin-bottom:8px}
+.stage-body ul{margin:0 0 8px 18px;font-size:14px;color:var(--text-2)}
+.stage-body li{margin-bottom:4px}
+.stage-body b{color:var(--text)}
+
+.cmd{position:relative;background:#1B1F27;color:#E6E9EF;border-radius:8px;padding:11px 44px 11px 14px;
+  font-family:var(--mono);font-size:12.5px;line-height:1.7;margin-bottom:6px;overflow-x:auto;white-space:pre}
+.cmd-copy{position:absolute;top:6px;right:6px;background:rgba(255,255,255,.08);color:#C9CFDA;
+  border:none;border-radius:6px;padding:4px 8px;font-size:11px;font-family:inherit;cursor:pointer;transition:.15s}
+.cmd-copy:hover{background:rgba(255,255,255,.16);color:#fff}
+.cmd-copy.ok{background:var(--sage);color:#fff}
+
+.trap{background:#FDF6F4;border-left:3px solid var(--brick);border-radius:8px;padding:11px 14px;
+  font-size:13px;color:#7A3B2E;margin-bottom:6px;line-height:1.6}
+.trap b{color:var(--brick)}
+.out{background:#F2F6F1;border-left:3px solid var(--sage);border-radius:8px;padding:11px 14px;
+  font-size:13px;color:#3F5A3C;margin-bottom:6px}
+.out b{color:var(--sage)}
+
+.files{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.file{font-family:var(--mono);font-size:11.5px;background:var(--surface-2);color:var(--text-2);
+  padding:4px 9px;border-radius:6px;border:1px solid var(--border)}
+
+.legend{margin-top:28px;display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--text-3)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:3px;height:14px;border-radius:2px;display:inline-block}
+
+.foot{margin-top:44px;padding-top:20px;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-3)}
+.wordmark{font-weight:700;position:relative;padding-bottom:5px;color:var(--text)}
+.wordmark::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--oak);border-radius:2px}
+
+@media(max-width:640px){
+  .screen{padding:24px 18px 60px}
+  .stage-head{grid-template-columns:22px 1fr auto;gap:10px}
+  .st-n{display:none}
+  .stage-body{padding-left:20px}
+  .head h1{font-size:26px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="screen">
+
+  <div class="ctx">
+    <span class="brand">MEBELSON® · Конкурентный анализ Ozon</span>
+    <span class="ver">промт v22</span>
+  </div>
+
+  <div class="head">
+    <div class="eyebrow">Сквозной процесс: от выгрузки Ozon до живой панели</div>
+    <h1>Карта процесса категории</h1>
+    <hr class="oak-line">
+    <p>Восемь шагов, порядок жёсткий. Нажмите на шаг — откроются команды, что должно получиться на выходе и грабли, на которые уже наступали.</p>
+  </div>
+
+  <div class="prog-wrap">
+    <div class="prog-top">
+      <span class="prog-label">Пройдено шагов</span>
+      <span class="prog-count"><span id="pc">0</span> / 8</span>
+    </div>
+    <div class="prog-bar"><div class="prog-fill" id="pf"></div></div>
+    <div class="prog-actions">
+      <button class="mini" id="reset">Начать новую категорию</button>
+      <button class="mini" id="expand">Развернуть все</button>
+    </div>
+  </div>
+
+  <div class="stages" id="stages"></div>
+
+  <div class="legend">
+    <span><i style="background:var(--oak)"></i> Локально, на вашей машине</span>
+    <span><i style="background:var(--accent)"></i> В чате с Claude</span>
+    <span><i style="background:var(--sage)"></i> Деплой и проверка</span>
+  </div>
+
+  <div class="foot">
+    <span class="wordmark">MEBELSON®</span>
+    <span>Прогресс сохраняется в браузере</span>
+  </div>
+
+</div>
+
+<script>
+const STAGES = [
+{
+  n:'00', kind:'local', title:'Выгрузки из Ozon ЛК',
+  where:'Локально · до чата',
+  body:`
+  <h4>Что выгрузить</h4>
+  <ul>
+    <li>Аналитика → Товары на Ozon → XLSX, период <b>28 дней</b> — по категории</li>
+    <li>Аналитика <b>категории</b> (28 дн) — даёт оборот рынка, среднюю цену, выкуп</li>
+    <li>Аналитика <b>брендов</b> Mebelson (28 дн) — и обязательно <b>число продавцов под брендом</b></li>
+    <li>Наш оборот <b>4 аккаунтов</b> за последний полный месяц</li>
+  </ul>
+  <div class="trap"><b>Имена выгрузок обезличены.</b> Категория лежит внутри файла. Разметить все разом:</div>
+  <div class="cmd">python -c "import pandas as pd,glob;[print(f,'|',pd.read_excel(f,header=None,nrows=8).iloc[6,0]) for f in glob.glob('analytics_report_*.xlsx')]"</div>
+  <div class="trap"><b>Нет свежей выгрузки — чат не начинаем.</b> Claude не создаёт эти данные и без них считать нечего.</div>`
+},
+{
+  n:'01', kind:'local', title:'Скрипт 1 — анализ и группы',
+  where:'ozon_lk_analysis.py',
+  body:`
+  <div class="cmd">python ozon_lk_analysis.py analytics_report_*.xlsx</div>
+  <p>Маску раскрывает сам. Пауза 15 сек между категориями.</p>
+  <h4>Что получится</h4>
+  <div class="out">Папка по дате прогона → папка на категорию → Excel с листами: <b>Все товары · Сводка · 1 Белые пятна · Наш периметр · 2 Новинки · 3 Дойные коровы · Изменения</b>. Плюс <b>КАРТА_КАТЕГОРИЙ_ДАТА.xlsx</b> — по строке на категорию.</div>
+  <h4>Проверить сразу</h4>
+  <ul>
+    <li><b>Дойные коровы ≠ 0.</b> Сплошные нули = условие группы 3 снова инвертировано</li>
+    <li>В «Сводке» — не снижен ли порог. Снижен → доверие в скине 2 не выше <b>B</b></li>
+    <li>Медиана нашей цены: если наших SKU в выгрузке < 3, она считается <b>по прайсу</b>, а прайс завышен в 2,5 раза</li>
+  </ul>`
+},
+{
+  n:'02', kind:'local', title:'Скрипт 2 — галереи первого слоя',
+  where:'ozon_mpstats_gallery.py',
+  body:`
+  <div class="cmd">python ozon_mpstats_gallery.py &lt;файл_ozon&gt;.xlsx &lt;категория&gt;_mpstats.csv</div>
+  <p>Маску <b>не раскрывает</b> — по одному файлу за раз. CSV необязателен: без него галерея соберётся без фото.</p>
+  <div class="trap"><b>Скрипт 2 обязан быть синхронен со Скриптом 1</b> по: CATEGORY_K, автоподбору порога, источнику объёма, условиям групп. Расхождение = разные числа в Excel и на портале. Так уже было — Скрипт 2 отставал на семь багов.</div>
+  <div class="out">Пишет в <b>ДАТА/КАТЕГОРИЯ/галерея/</b>. Числа групп в консоли должны совпасть с КАРТА_КАТЕГОРИЙ.</div>`
+},
+{
+  n:'03', kind:'local', title:'Скрипт 4 — сборка портала',
+  where:'build_portal_index.py · без него портал не обновится',
+  body:`
+  <div class="cmd">python build_portal_index.py</div>
+  <p>Запускать из папки с данными — там, где лежат папки <b>ДАТА/</b>.</p>
+  <h4>Что делает</h4>
+  <ul>
+    <li>Сканирует галереи, по категории берёт <b>самую свежую дату</b></li>
+    <li><b>Сам копирует</b> их в <b>portal/galleries/</b> под правильным именем</li>
+    <li>Пересобирает <b>categories.json</b> со свежими цифрами групп</li>
+  </ul>
+  <div class="trap"><b>Цифры в шапке галереи портал читает из categories.json, а не из HTML.</b> Пока JSON не пересобран, на портале будут старые числа — даже если файл галереи новый и лежит на месте.</div>
+  <div class="trap"><b>Галереи руками не копировать и не переименовывать.</b> В papке galleries лежат оба слоя: <b>krovaty_analysis.html</b> — панель, <b>Двуспальная_кровать.html</b> — галерея. Перепутать легко, панель затирается молча.</div>`
+},
+{
+  n:'04', kind:'chat', title:'Второй слой — карта категории',
+  where:'Новый чат с Claude · Этап 1',
+  body:`
+  <h4>Загрузить в чат</h4>
+  <div class="files">
+    <span class="file">Excel Скрипта 1</span><span class="file">аналитика категории 28 дн</span>
+    <span class="file">аналитика брендов 28 дн</span><span class="file">выручка_по_категориям_3ур_4аккаунта</span>
+    <span class="file">товары_с_категориями_3_уровня</span>
+  </div>
+  <h4>Плюс 6 служебных файлов — без них стиль дрейфует</h4>
+  <div class="files">
+    <span class="file">prihozhaya_panel.html</span><span class="file">index.html</span><span class="file">index2.html</span>
+    <span class="file">reference-screen.html</span><span class="file">_galereya_style.html</span><span class="file">gen_reshenie.py</span>
+  </div>
+  <div class="out">На выходе: KPI-лента, блок MEBELSON, серый блок расхождения бренда.</div>
+  <div class="trap"><b>Один чат = одна категория.</b> И про ассортимент MEBELSON — только по своду 4 аккаунтов, никогда по памяти.</div>`
+},
+{
+  n:'05', kind:'chat', title:'Второй слой — ТОП-10, боли, гипотезы',
+  where:'Тот же чат · Этап 2',
+  body:`
+  <h4>Что принести</h4>
+  <ul>
+    <li>По каждому товару ТОП-10: <b>2 скриншота</b> — фото и характеристики</li>
+    <li><b>CSV отзывов</b> mpstats по каждому артикулу</li>
+  </ul>
+  <div class="trap"><b>ТОП-10 берётся из листа «Наш периметр», а не из «Белых пятен».</b> Периметр = белые пятна с чеком ≥ 50% нашей медианной цены.</div>
+  <div class="trap"><b>Данные из одного прогона.</b> Excel, скрины и отзывы обязаны относиться к одной выгрузке. Сверять по артикулам: если карточек со скринов нет в «Нашем периметре» — данные разъехались, останавливаемся. На вешалке так потеряли 4 карточки из 10.</div>
+  <div class="out">Со скринов <b>снимать фактический вес</b> — это единственный способ проверить K. K = вес с карточки ÷ «Объём товара, л» <b>из выгрузки</b>, не из габаритов.</div>
+  <div class="out">Панель собирается по <b>канону 9 блоков</b> поверх эталона. Дойные коровы в канон не входят — только если меняют вывод.</div>`
+},
+{
+  n:'06', kind:'chat', title:'Скин 2 — экран решения',
+  where:'gen_reshenie.py в papке portal',
+  body:`
+  <p>Каждая категория во втором скине — <b>пара файлов</b>: <b>&lt;кат&gt;_reshenie.html</b> и <b>&lt;кат&gt;_galereya.html</b>.</p>
+  <h4>Зависимости — 4 файла в одной папке</h4>
+  <div class="files">
+    <span class="file">gen_reshenie.py</span><span class="file">reference-screen.html</span>
+    <span class="file">_galereya_style.html</span><span class="file">leads_full.json</span>
+  </div>
+  <div class="trap"><b>Активация кнопки = два поля вместе:</b> ready: false→true <b>и</b> file: '' → путь из plannedFile. Одного мало.</div>
+  <p>В <b>index2.html</b> строку категории перевести из <b>.row soon</b> в <b>.row live</b>. Рынок в строке — 3 месяца, внутри разбора — 28 дней.</p>`
+},
+{
+  n:'07', kind:'deploy', title:'Деплой',
+  where:'Git — бэкап · scp — боевой сайт',
+  body:`
+  <div class="trap"><b>Всегда cd portal перед git и scp.</b> Иначе git не найдёт репозиторий, а scp зальёт не тот index.html.</div>
+  <h4>Бэкап на GitHub — боевой сайт не меняет</h4>
+  <div class="cmd">cd portal</div>
+  <div class="cmd">git add -A</div>
+  <div class="cmd">git diff --cached --stat</div>
+  <div class="cmd">git commit -m "..."</div>
+  <div class="cmd">git push</div>
+  <h4>Боевой сайт — VPS</h4>
+  <div class="cmd">scp index.html index2.html categories.json &lt;кат&gt;_reshenie.html &lt;кат&gt;_galereya.html root@217.198.6.209:/var/www/mebelson-portal/</div>
+  <div class="cmd">scp galleries\\&lt;кат&gt;_panel.html root@217.198.6.209:/var/www/mebelson-portal/galleries/</div>
+  <div class="trap"><b>git push ≠ деплой.</b> Пока не сделан scp, на портале старые данные. На это уже наступали.</div>`
+},
+{
+  n:'08', kind:'deploy', title:'Проверка',
+  where:'Портал и мониторинг',
+  body:`
+  <ul>
+    <li>Открыть <b>api.mebelson.ru/portal/</b> с <b>Ctrl+F5</b></li>
+    <li>Добавить панель в <b>Uptime Robot</b></li>
+  </ul>
+  <div class="trap"><b>Старый дизайн после деплоя = кэш.</b> Инкогнито, ?v=N или Ctrl+F5. Iframe кэшируется агрессивнее обычной страницы. А вот «простыня текста без стилей» — это битый HTML, не кэш.</div>
+  <div class="trap"><b>GitHub Pages отдаёт вторую, устаревшую сборку.</b> Проверьте, что смотрите именно api.mebelson.ru, а не alisaalena.github.io — по старым цифрам легко принять неверное решение.</div>
+  <div class="out">Сошлось: числа групп в галерее = числа в Excel = числа в шапке портала.</div>`
+},
+];
+
+const KEY = 'mebelson_pipeline_v22';
+const wrap = document.getElementById('stages');
+let done = {};
+
+function render(){
+  wrap.innerHTML = '';
+  STAGES.forEach((s,i)=>{
+    const el = document.createElement('div');
+    el.className = 'stage ' + s.kind + (done[i] ? ' done' : '');
+    el.innerHTML = `
+      <button class="stage-head" aria-expanded="false">
+        <span class="chk ${done[i]?'on':''}" role="checkbox" aria-checked="${!!done[i]}" tabindex="0"></span>
+        <span class="st-n">${s.n}</span>
+        <span class="st-t">${s.title}<span class="where">${s.where}</span></span>
+        <span class="st-arw">›</span>
+      </button>
+      <div class="stage-body">${s.body}</div>`;
+
+    el.querySelector('.stage-head').addEventListener('click', e=>{
+      if(e.target.closest('.chk')) return;
+      const open = el.classList.toggle('open');
+      el.querySelector('.stage-head').setAttribute('aria-expanded', open);
+    });
+    el.querySelector('.chk').addEventListener('click', e=>{
+      e.stopPropagation();
+      done[i] = !done[i];
+      save(); render();
+    });
+    wrap.appendChild(el);
+  });
+  addCopy();
+  const n = Object.values(done).filter(Boolean).length;
+  document.getElementById('pc').textContent = n;
+  document.getElementById('pf').style.width = (n/STAGES.length*100) + '%';
+}
+
+function addCopy(){
+  document.querySelectorAll('.cmd').forEach(c=>{
+    if(c.querySelector('.cmd-copy')) return;
+    const b = document.createElement('button');
+    b.className = 'cmd-copy'; b.textContent = 'Копировать';
+    b.addEventListener('click', async ()=>{
+      const t = c.childNodes[0].textContent.trim();
+      try{ await navigator.clipboard.writeText(t); }catch(_){
+        const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta);
+        ta.select(); document.execCommand('copy'); ta.remove();
+      }
+      b.textContent='Скопировано'; b.classList.add('ok');
+      setTimeout(()=>{b.textContent='Копировать'; b.classList.remove('ok');},1400);
+    });
+    c.appendChild(b);
+  });
+}
+
+async function save(){
+  try{ await window.storage.set(KEY, JSON.stringify(done)); }catch(_){}
+}
+async function load(){
+  try{
+    const r = await window.storage.get(KEY);
+    if(r && r.value) done = JSON.parse(r.value);
+  }catch(_){ done = {}; }
+  render();
+}
+
+document.getElementById('reset').addEventListener('click', ()=>{
+  done = {}; save(); render();
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+document.getElementById('expand').addEventListener('click', e=>{
+  const any = document.querySelector('.stage:not(.open)');
+  document.querySelectorAll('.stage').forEach(s=>s.classList.toggle('open', !!any));
+  e.target.textContent = any ? 'Свернуть все' : 'Развернуть все';
+});
+
+load();
+</script>
+</body>
+</html>
