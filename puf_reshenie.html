@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MEBELSON® — Пуф · Анализ категории</title>
+<style>
+:root{
+  --bg:#FAFAFA;--surface:#FFFFFF;--surface-2:#F4F5F7;
+  --text:#111827;--text-2:#6B7280;--text-3:#9CA3AF;
+  --border:#ECEEF2;--accent:#5B5CEB;--accent-hover:#4B4CD6;--oak:#BE8A5A;
+  --sage:#5E7A5B;--amber:#B0812E;--err:#B0443E;
+  --font:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --sh-sm:0 1px 2px rgba(15,23,42,.04);--sh:0 2px 8px rgba(15,23,42,.05);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  font-variant-numeric:tabular-nums}
+.screen{max-width:860px;margin:0 auto;padding:40px 40px 72px}
+.backnav{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text-2);
+  text-decoration:none;font-weight:500;margin-bottom:18px;transition:color .15s}
+.backnav:hover{color:var(--accent)}
+
+/* контекст-строка */
+.ctx{display:flex;justify-content:space-between;align-items:baseline;
+  font-size:12px;color:var(--text-3);padding-bottom:24px;border-bottom:1px solid var(--border)}
+.ctx .brand{letter-spacing:.5px;text-transform:uppercase;font-weight:600;color:var(--text-2)}
+
+/* заголовок + вердикт */
+.head{margin-top:32px}
+.cat{font-size:13px;color:var(--text-3);letter-spacing:.3px}
+.head h1{font-size:32px;font-weight:700;letter-spacing:-.02em;margin:4px 0 14px}
+.verdict{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;color:var(--text)}
+.verdict .dot{width:9px;height:9px;border-radius:50%;background:var(--sage)}
+.verdict .sep{color:var(--border)}
+.verdict .prio{color:var(--text-2);font-weight:500}
+
+/* ГЕРОЙ — одно доминирующее число */
+.hero{margin-top:32px}
+.hero-num{font-size:clamp(52px,9vw,76px);font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--text)}
+.hero-num .u{font-size:.32em;font-weight:600;color:var(--text-3);letter-spacing:0}
+.hero-num .up{font-size:.34em;font-weight:700;color:var(--sage);letter-spacing:0;margin-left:8px}
+.oak-line{width:72px;height:3px;background:var(--oak);border:none;border-radius:3px;margin:20px 0 18px}
+.decision{font-size:17px;color:var(--text);max-width:560px;line-height:1.5}
+.decision b{font-weight:600}
+
+/* метрики поддержки — тише героя, табличные */
+.metrics{display:flex;flex-wrap:wrap;gap:36px;margin-top:28px}
+.metric .mv{font-size:26px;font-weight:700;letter-spacing:-.01em;line-height:1}
+.metric .mv .u{font-size:.5em;font-weight:600;color:var(--text-3);margin-left:3px}
+.metric .ml{font-size:12px;color:var(--text-2);margin-top:7px;letter-spacing:.2px}
+
+/* доверие — сдержанно, с раскрытием рядом */
+.conf{margin-top:28px;padding:16px 18px;background:var(--surface);box-shadow:var(--sh-sm);border-radius:12px}
+.conf-top{display:flex;align-items:center;gap:10px}
+.conf-badge{font-size:13px;font-weight:700;color:var(--text);display:inline-flex;align-items:center;gap:8px}
+.conf-badge .tick{width:3px;height:14px;background:var(--oak);border-radius:2px;display:inline-block}
+.conf-label{font-size:13px;color:var(--text-2)}
+details.conf-more{margin-top:0}
+details.conf-more>summary{cursor:pointer;list-style:none;font-size:12px;color:var(--accent);font-weight:600;margin-left:auto}
+details.conf-more>summary::-webkit-details-marker{display:none}
+details.conf-more>summary::before{content:"▸ почему"}
+details.conf-more[open]>summary::before{content:"▾ почему"}
+.conf-body{font-size:13px;color:var(--text-2);line-height:1.8;margin-top:12px}
+.conf-body .ok{color:var(--sage);font-weight:600}
+.conf-body .wait{color:var(--amber);font-weight:600}
+
+/* действия */
+.sect-h{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-3);
+  font-weight:700;margin:44px 0 16px}
+.acts{display:flex;flex-direction:column;gap:8px}
+.act{display:grid;grid-template-columns:24px 1fr auto;gap:14px;align-items:center;
+  background:var(--surface);box-shadow:var(--sh-sm);border-radius:10px;padding:14px 16px}
+.act .n{font-size:13px;font-weight:700;color:var(--text-3);font-variant-numeric:tabular-nums}
+.act .t{font-size:14px;color:var(--text)}
+.act .when{font-size:12px;color:var(--text-3);white-space:nowrap}
+.lead-refs{font-size:12px;color:var(--text-3)}
+.lead-refs a{color:var(--accent);text-decoration:none;font-weight:500}
+.lead-refs a:hover{text-decoration:underline}
+
+/* CTA — следующий шаг исследования, не UI-кнопка */
+.cta{margin-top:28px}
+.cta-link{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;
+  color:var(--accent);text-decoration:none;padding:4px 0;border-bottom:2px solid transparent;
+  transition:border-color .15s}
+.cta-link:hover{border-bottom-color:var(--accent)}
+.cta-link .arw{transition:transform .15s}
+.cta-link:hover .arw{transform:translateX(3px)}
+.hero-label{font-size:12px;letter-spacing:.4px;color:var(--text-2);margin-bottom:10px}
+
+/* доказательная база — тихо, прогрессивное раскрытие */
+.evid{margin-top:44px;padding-top:24px;border-top:1px solid var(--border)}
+.evid-row{display:flex;flex-wrap:wrap;gap:10px}
+.evid-item{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--text-2);
+  background:var(--surface);box-shadow:var(--sh-sm);border-radius:999px;padding:8px 14px}
+.evid-item b{color:var(--text);font-weight:600}
+.evid-note{font-size:12px;color:var(--text-3);margin-top:12px}
+
+.foot{margin-top:48px;padding-top:20px;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-3)}
+.wordmark{font-weight:700;position:relative;padding-bottom:5px;color:var(--text)}
+.wordmark::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--oak);border-radius:2px}
+@media(max-width:560px){.screen{padding:28px 20px 56px}.metrics{gap:24px}}
+
+/* — Второй слой: исследование ниже решения — */
+.sec{margin-top:48px}
+.pain{display:grid;grid-template-columns:auto 1fr;gap:12px;background:var(--surface);
+  box-shadow:var(--sh-sm);border-radius:10px;padding:14px 16px;margin-bottom:8px}
+.pain .pdot{width:9px;height:9px;border-radius:50%;margin-top:6px}
+.pain .ph{font-size:14px;font-weight:600;color:var(--text)}
+.pain .pp{font-size:13px;color:var(--text-2);margin-top:3px}
+.pain details{margin-top:8px}
+.pain summary{cursor:pointer;list-style:none;font-size:12px;color:var(--accent);font-weight:600}
+.pain summary::-webkit-details-marker{display:none}
+.pain summary::before{content:"▸ подробнее"}
+.pain details[open] summary::before{content:"▾ свернуть"}
+.pain .pmore{font-size:13px;color:var(--text-2);line-height:1.6;margin-top:8px}
+.pain-note{font-size:12px;color:var(--text-3);margin-top:10px;font-style:italic}
+.cj-step{display:grid;grid-template-columns:26px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--border)}
+.cj-step:last-child{border-bottom:none}
+.cj-n{font-size:12px;font-weight:700;color:var(--text-3)}
+.cj-t{font-size:14px;font-weight:600;color:var(--text)}
+.cj-d{font-size:13px;color:var(--text-2);margin-top:3px}
+.cj-d b{color:var(--text);font-weight:600}
+.hyp{background:var(--surface);box-shadow:var(--sh-sm);border-radius:10px;padding:15px 16px;margin-bottom:8px}
+.hyp-top{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.hyp-n{font-size:13px;font-weight:700;color:var(--text-3)}
+.hyp-t{font-size:14px;font-weight:600;color:var(--text);flex:1}
+.hyp-p{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+.hyp-p.a{background:var(--accent-weak);color:var(--accent-hover)}
+.hyp-p.b{background:var(--surface-2);color:var(--text-2)}
+.hyp-d{font-size:13px;color:var(--text-2);line-height:1.55}
+.hyp-d b{color:var(--text)}
+.gallery-link{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;
+  color:var(--accent);text-decoration:none;border-bottom:2px solid transparent;padding:4px 0}
+.gallery-link:hover{border-bottom-color:var(--accent)}
+.gallery-link .arw{transition:transform .15s}
+.gallery-link:hover .arw{transform:translateX(3px)}
+.jrnl{margin-top:16px}
+.jrnl>summary{cursor:pointer;list-style:none;font-size:13px;font-weight:600;color:var(--text-2)}
+.jrnl>summary::-webkit-details-marker{display:none}
+.jrnl>summary::before{content:"▸ "}
+.jrnl[open]>summary::before{content:"▾ "}
+.dtbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.dtbl th{text-align:left;font-size:10px;letter-spacing:.4px;text-transform:uppercase;color:var(--text-2);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--border)}
+.dtbl td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--text-2);vertical-align:top}
+.dtbl td:first-child{color:var(--text)}
+
+</style>
+</head>
+<body>
+<div class="screen">
+
+  <a class="backnav" href="index2.html">← Все категории</a>
+
+  <div class="ctx">
+    <span class="brand">MEBELSON® · Ассортиментные решения</span>
+    <span>Обновлено 08.07 · рынок 28 дней</span>
+  </div>
+
+  <div class="head">
+    <div class="cat">Решение по категории</div>
+    <h1>Пуф</h1>
+    <span class="verdict"><span class="dot" style="background:var(--amber)"></span> Входить функцией <span class="sep">·</span> <span class="prio">приоритет B</span></span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-label">Рынок категории</div>
+    <div class="hero-num">301,2<span class="u"> млн ₽</span><span class="up">+11%</span></div>
+    <hr class="oak-line">
+    <div class="decision">Рынок без хозяина: топ-5 держат 24,4%, крупнейшая строка в аналитике брендов — «Бренд отсутствует» (81,4 млн, 27%), первый настоящий бренд берёт 6,2%. Категория самая маржинальная в портфеле — 622 ₽/кг, порог проходит 91%. Мы в ней пятый месяц, доля 0,66%. <b>Главный разрыв: наши 66 SKU — это 12 моделей мягких пуфов, размноженных по цветам, а 8 из 10 лидеров ТОП имеют ящик, короб или полку. Мы продаём внешний вид там, где отбор идёт по функции.</b></div>
+  </div>
+
+  <div class="metrics"><div class="metric"><div class="mv">2,14<span class="u">млн ₽</span></div><div class="ml">наш оборот · июнь · +22% к апрелю</div></div><div class="metric"><div class="mv">0,66<span class="u">%</span></div><div class="ml">наша доля рынка</div></div><div class="metric"><div class="mv">622<span class="u">₽/кг</span></div><div class="ml">медиана · порог 300 · проходят 91%</div></div><div class="metric"><div class="mv">5,3к<span class="u">₽</span></div><div class="ml">наша медиана · рынок 6,7к</div></div></div>
+
+  <div class="conf">
+    <div class="conf-top">
+      <span class="conf-badge"><span class="tick"></span> Уровень доверия B</span>
+      <span class="conf-label">— порог выручки снижен</span>
+    </div>
+    <details class="conf-more" style="margin-top:10px">
+      <summary style="margin-left:0"></summary>
+      <div class="conf-body"><span class="ok">✓ Рынок · Ozon 28 дн</span> · <span class="ok">✓ Наш оборот · свод 4 акк</span> · <span class="ok">✓ Маржа · K=0,107 валидирован</span> · <span class="ok">✓ Отзывы · 550 mpstats</span>. Все четыре источника подтверждены, скрины и отзывы сверены с листом «Наш периметр» — 10 из 10. Уровень B по другой причине: автоподбор снизил порог выручки с 400к до 100к, потому что при 400к в белых пятнах остаётся один товар. Топ-карточка делает 562 тыс ₽ при рынке 301 млн — оборот размазан по 1 525 продавцам, выводы опираются на меньшие обороты, чем в зрелых категориях.</div>
+    </details>
+  </div>
+
+  <div class="sect-h">Что делать</div>
+  <div class="acts"><div class="act"><span class="n">1</span><span class="t">Аудит 66 карточек: честные размеры и цвет</span><span class="when">2 нед</span></div><div class="act"><span class="n">2</span><span class="t">Короб хранения в существующие модели — Рубик, Рони, Чарли <span class="lead-refs">· пример: <a href="puf_galereya.html#lead4">Рубик, Рони, Чарли</a></span></span><span class="when">1–2 мес</span></div><div class="act"><span class="n">3</span><span class="t">Новый пуф с ящиком на честном каркасе: ЛДСП/фанера, футорки <span class="lead-refs">· пример: <a href="puf_galereya.html#lead4">Bam Decor</a></span></span><span class="when">2–3 мес</span></div><div class="act"><span class="n">4</span><span class="t">Пуф с полкой для обуви — проверить каннибализацию с обувницей <span class="lead-refs">· пример: <a href="puf_galereya.html#lead1">SLA Мебель</a></span></span><span class="when">3 мес</span></div><div class="act"><span class="n">5</span><span class="t">Установить пятого продавца под брендом Mebelson</span><span class="when">1 мес</span></div></div>
+
+  <div class="cta">
+    <a class="cta-link" href="#issledovanie">Посмотреть исследование <span class="arw">→</span></a>
+  </div>
+
+  <div class="sec" id="issledovanie">
+    <div class="sect-h">Боли рынка · из отзывов и карточек ТОП-10</div>
+    <div class="pain"><span class="pdot" style="background:var(--err)"></span><div><div class="ph">Трансформер не собирается обратно</div><div class="pp">Треть всего негатива: «второй час не получается вставить последний 5-й стул — там прям до 0,1 мм», «заедает при складывании».</div><details><summary></summary><div class="pmore">Не брак, а допуски посадки. Люди покупают ради трансформации и не могут ею пользоваться.</div></details></div></div><div class="pain"><span class="pdot" style="background:var(--err)"></span><div><div class="ph">Размер в карточке ≠ фактический</div><div class="pp">3%, но это прямая причина возвратов: «даже 40 см высоты нет — наглая ложь», «высота 38, а не 44, измените карточку».</div><details><summary></summary><div class="pmore">Заявлять фактический размер и показывать рулетку на фото. Стоит ноль, снимает возвраты у трёх из десяти лидеров.</div></details></div></div><div class="pain"><span class="pdot" style="background:var(--err)"></span><div><div class="ph">Каркас и крепёж дешевле обивки</div><div class="pp">«Винты не держали петли, отверстия раздолбаны, рама слеплена из опилок» (Prostonova); «саморезы прощупываются сквозь обивку» (Pavlov); «за 2 500 можно было корпус из фанеры, не из картона» (Bean-Bag).</div><details><summary></summary><div class="pmore">Наша прямая возможность: корпусная фабрика с ЛДСП и фанерой бьёт ровно в слабое место всех трёх лидеров формата.</div></details></div></div><div class="pain"><span class="pdot" style="background:var(--amber)"></span><div><div class="ph">Жёсткость сиденья</div><div class="pp">8%: «жёсткий, особенно углы — впиваются в ноги», «ткань не букле, а лысоватая пародия».</div><details><summary></summary><div class="pmore">ППУ нужной плотности + скругление углов. Заявленная ткань должна быть той тканью.</div></details></div></div><div class="pain"><span class="pdot" style="background:var(--sage)"></span><div><div class="ph">Внешний вид — топ-позитив</div><div class="pp">8%: «красивый», «стильно смотрится», «вписался в интерьер».</div><details><summary></summary><div class="pmore">Категория покупается глазами — интерьерные фото на первом экране. Это наша сильная сторона, её не терять.</div></details></div></div>
+    <div class="pain-note">Боли из 550 текстовых отзывов ТОП-10 (средняя оценка 4,82 · негатив 1–3★ = 3,5%).</div>
+  </div>
+
+  <div class="sec"><div class="sect-h">Путь покупателя</div><div class="cj-step"><span class="cj-n">1</span><div><div class="cj-t">Осознание</div><div class="cj-d">Некуда сесть в прихожей и некуда убрать вещи. <b>Боль:</b> прихожая узкая, обычная мебель не встанет. <b>Триггер:</b> габариты и фото в узкой прихожей на первом экране.</div></div></div><div class="cj-step"><span class="cj-n">2</span><div><div class="cj-t">Сравнение</div><div class="cj-d">Отбирает по признаку «есть ящик / полка / трансформация». <b>Боль:</b> сотни похожих карточек, отличаются только цветом. <b>Триггер:</b> функция вынесена на обложку — «с ящиком», «5 в 1», «~200 л».</div></div></div><div class="cj-step"><span class="cj-n">3</span><div><div class="cj-t">Решение</div><div class="cj-d">Ищет в отзывах реальные фото и споры о размерах. <b>Боль:</b> размеры врут, цвет вживую другой. <b>Триггер:</b> честные размеры + макро-фото ткани.</div></div></div><div class="cj-step"><span class="cj-n">4</span><div><div class="cj-t">Покупка</div><div class="cj-d">Вскрывает коробку на ПВЗ. <b>Боль:</b> режут ткань ножом при вскрытии. <b>Триггер:</b> мягкая часть не под линией вскрытия.</div></div></div><div class="cj-step"><span class="cj-n">5</span><div><div class="cj-t">Первое использование</div><div class="cj-d">Открывает ящик, складывает трансформер. <b>Боль:</b> петли вырываются, табуреты не входят обратно. <b>Триггер:</b> механизм на футорках, а не на саморезах в фанеру.</div></div></div><div class="cj-step"><span class="cj-n">6</span><div><div class="cj-t">Эксплуатация</div><div class="cj-d">Садится, ставит сумки, открывает ящик каждый день. <b>Боль:</b> жёсткие углы, обивка марается. <b>Триггер:</b> ППУ нужной плотности + антивандальная ткань.</div></div></div></div>
+
+  <div class="sec">
+    <div class="sect-h">Продуктовые гипотезы</div>
+    <div class="hyp"><div class="hyp-top"><span class="hyp-n">1</span><span class="hyp-t">Пуф с коробом хранения на честном каркасе</span><span class="hyp-p a">A</span></div><div class="hyp-d">8 из 10 карточек ТОП имеют хранение — это входной билет, а не фича. При этом все три лидера формата валятся на одном: каркас и крепёж не держат. Мы — корпусная фабрика: ЛДСП, фанера, футорки. Наша сильная сторона бьёт в их слабую. <b>Проверить:</b> себестоимость короба, нагрузка на петли, ₽/кг в диапазоне 3 300–5 000 ₽.</div></div><div class="hyp"><div class="hyp-top"><span class="hyp-n">2</span><span class="hyp-t">Достроить хранение в существующие модели</span><span class="hyp-p a">A</span></div><div class="hyp-d">У нас уже 66 SKU и 12 моделей: Рубик (15), Рони (13), Чарли (10), Рондо 2 (7) — цветовые вариации мягких пуфов без функции. Добавить съёмную крышку и короб к существующей модели дешевле, чем запускать новую, а карточка получает признак, по которому её вообще отбирают. <b>Проверить:</b> какие модели конструктивно принимают короб.</div></div><div class="hyp"><div class="hyp-top"><span class="hyp-n">3</span><span class="hyp-t">Честные размеры и цвет в карточке</span><span class="hyp-p a">A</span></div><div class="hyp-d">Расхождение заявленных и фактических размеров — прямая причина возвратов у трёх из десяти лидеров. Мы продаём цветовыми вариациями, значит цена ошибки в цвете для нас выше, чем для рынка. <b>Проверить:</b> аудит 66 карточек, срок 2 недели, стоимость близка к нулю.</div></div><div class="hyp"><div class="hyp-top"><span class="hyp-n">4</span><span class="hyp-t">Пуф с полкой для обуви</span><span class="hyp-p b">B</span></div><div class="hyp-d">ТОП-1 периметра (SLA Мебель, 562 тыс ₽ за 28 дн) и рекордный 1 458 ₽/кг — втрое выше медианы. Формат решает две задачи одним предметом: сесть обуться и поставить обувь. В нашем своде такого формата нет. <b>Проверить:</b> каннибализацию с обувницей (9,94 млн за 3 мес).</div></div><div class="hyp"><div class="hyp-top"><span class="hyp-n">5</span><span class="hyp-t">Трансформер 5 в 1 — не копировать</span><span class="hyp-p c">C</span></div><div class="hyp-d">Формат даёт 598 тыс ₽ в периметре при ₽/кг ≈ 713, но у обоих продавцов металлокаркас — материал, который мы не производим. Главная боль формата решаема, но входить в чужой материал ради неё нерентабельно. <b>Только</b> если появится конструкция на фанере с сопоставимой прочностью.</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="sect-h">Доказательная база</div>
+    <a class="gallery-link" href="puf_galereya.html">Открыть галерею 10 конкурентов <span class="arw">→</span></a>
+    <div style="font-size:13px;color:var(--text-3);margin-top:8px">Первый слой — скрининг рынка: фото, характеристики и сигнал маржи ₽/кг по каждому лидеру.</div>
+    <div class="evid-note">Расхождение «бренд ≠ наши»: строка Mebelson на Ozon — 3,28 млн ₽ (28 дн, +12%, средний чек 12 489 ₽), а наши 4 акк. — 2,14 млн ₽ (июнь). Разрыв ≈ 1,14 млн. Под брендом <b>5 продавцов при наших 4 аккаунтах</b> → под нашим именем торгует сторонний. Средний чек бренда вдвое выше нашей медианы (5 342 ₽) — ещё один признак чужих продаж. Место среди брендов не считаем. Периоды разные, сопоставление приблизительное.</div>
+    <details class="jrnl">
+      <summary>Показать журнал доказательств и источники</summary>
+      <table class="dtbl"><thead><tr><th>Вывод</th><th>Источник</th><th>Статус</th></tr></thead><tbody>
+      <tr><td>Рынок 301,2 млн (+11%), топ-5 = 24,4%, выкуп 82%</td><td>Ozon аналитика категории · 28 дн</td><td>Подтверждено</td></tr><tr><td>Лидер — «Бренд отсутствует» 81,4 млн (27%); первый бренд 6,2%</td><td>Ozon аналитика брендов · 28 дн</td><td>Подтверждено</td></tr><tr><td>Наш оборот 2,14 млн (4 акк), доля ≈0,66%</td><td>Свод 4 акк. июнь + рынок 28 дн</td><td>Подтверждено</td></tr><tr><td>Категория запущена нами в 2026: 0 → 2,14 млн за 5 мес</td><td>Помесячная выручка 4 акк.</td><td>Подтверждено</td></tr><tr><td>66 SKU / 12 моделей, все без функции хранения</td><td>Свод 4 акк. (2 418 SKU)</td><td>Подтверждено</td></tr><tr><td>8 из 10 карточек ТОП имеют ящик, короб или полку</td><td>20 скриншотов карточек Ozon</td><td>Подтверждено</td></tr><tr><td>Боли: трансформер не складывается, размер врёт, каркас не держит</td><td>550 отзывов ТОП-10 · mpstats</td><td>Подтверждено</td></tr><tr><td>Медиана 622 ₽/кг, проходят 31 из 34 (91%)</td><td>Скрипт 1, лист «Наш периметр», K=0,107</td><td>Подтверждено</td></tr><tr><td>K по фактическим весам = 0,148 (разброс 0,041–0,171)</td><td>10 скриншотов: вес ÷ объём выгрузки</td><td>Учтено, расчёт на 0,107</td></tr><tr><td>Порог снижен 400к → 100к</td><td>Автоподбор Скрипта 1</td><td>Зафиксировано → доверие B</td></tr><tr><td>Под брендом Mebelson 5 продавцов при наших 4</td><td>Ozon аналитика брендов · 28 дн</td><td>Требует проверки</td></tr>
+      </tbody></table>
+    </details>
+  </div>
+
+  <div class="foot">
+    <span class="wordmark">MEBELSON®</span>
+    <span>Спокойно · точно · уверенно</span>
+  </div>
+
+</div>
+</body>
+</html>
