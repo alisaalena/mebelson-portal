@@ -29,6 +29,14 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);
 .head h1{font-size:34px;font-weight:700;letter-spacing:-.02em;margin:4px 0 12px}
 .oak-line{width:64px;height:3px;background:var(--oak);border:none;border-radius:3px;margin:0 0 16px}
 .head p{font-size:16px;color:var(--text-2);max-width:560px}
+.how{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:8px 14px;
+  background:var(--surface);border:1px solid var(--border);border-radius:999px;
+  font-size:13px;font-weight:600;color:var(--text-2);text-decoration:none;
+  box-shadow:var(--sh-sm);transition:all .15s}
+.how:hover{color:var(--text);border-color:var(--oak);box-shadow:var(--sh)}
+.how .ic{width:7px;height:7px;border-radius:50%;background:var(--oak);flex-shrink:0}
+.how .arw{color:var(--text-3);transition:transform .15s}
+.how:hover .arw{transform:translateX(2px)}
 
 .list{margin-top:36px}
 .list-head{display:grid;grid-template-columns:26px 1fr 132px 96px 132px;gap:16px;
@@ -81,6 +89,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);
     <h1>Какие категории развивать</h1>
     <hr class="oak-line">
     <p>Вердикт по каждой категории на данных маркетплейсов. Начните с приоритетной — решение, уверенность и план действий внутри.</p>
+    <a class="how" href="kak_eto_rabotaet.html" target="_blank"><span class="ic"></span>Как это работает <span class="arw">→</span></a>
   </div>
 
   <div class="list">
